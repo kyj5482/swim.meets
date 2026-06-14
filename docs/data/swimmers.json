@@ -1,0 +1,697 @@
+{
+  "generated_at": "2026-06-14T23:59:38+00:00",
+  "swimmer_count": 3,
+  "swimmers": [
+    {
+      "id": "arnold-maddie",
+      "display_name": "Maddie Arnold",
+      "last": "Arnold",
+      "first": "Maddie",
+      "swimmerid": null,
+      "events": [
+        {
+          "key": "100|butterfly|lc meter",
+          "label": "100 LC Meter Butterfly",
+          "best_seconds": 69.25,
+          "best_time": "1:09.25",
+          "history": [
+            {
+              "meet_slug": "2026-scs-june-ag-invite",
+              "meet_name": "2026 SCS June AG Invite",
+              "date_iso": "2026-06-11",
+              "dates": "6/11/2026 ~ 6/14/2026",
+              "seconds": 69.25,
+              "time": "1:09.25",
+              "label": "100 LC Meter Butterfly",
+              "standards": [
+                {
+                  "label": "13-14 &JAG",
+                  "time": "1:16.00",
+                  "seconds": 76.0,
+                  "applies_to_age": true,
+                  "achieved": true,
+                  "delta_seconds": -6.75
+                },
+                {
+                  "label": "13-14 BB",
+                  "time": "1:20.99",
+                  "seconds": 80.99,
+                  "applies_to_age": true,
+                  "achieved": true,
+                  "delta_seconds": -11.74
+                },
+                {
+                  "label": "15&O &JAG",
+                  "time": "1:12.50",
+                  "seconds": 72.5,
+                  "applies_to_age": false,
+                  "achieved": true,
+                  "delta_seconds": -3.25
+                },
+                {
+                  "label": "15&O BB",
+                  "time": "1:18.29",
+                  "seconds": 78.29,
+                  "applies_to_age": false,
+                  "achieved": true,
+                  "delta_seconds": -9.04
+                }
+              ],
+              "age": 14,
+              "is_pb": true,
+              "delta_prev": null,
+              "delta_first": 0.0
+            }
+          ],
+          "meets": 1
+        },
+        {
+          "key": "100|freestyle|lc meter",
+          "label": "100 LC Meter Freestyle",
+          "best_seconds": 62.5,
+          "best_time": "1:02.50",
+          "history": [
+            {
+              "meet_slug": "2026-scs-june-ag-invite",
+              "meet_name": "2026 SCS June AG Invite",
+              "date_iso": "2026-06-11",
+              "dates": "6/11/2026 ~ 6/14/2026",
+              "seconds": 62.5,
+              "time": "1:02.50",
+              "label": "100 LC Meter Freestyle",
+              "standards": [
+                {
+                  "label": "13-14 &JAG",
+                  "time": "1:06.70",
+                  "seconds": 66.7,
+                  "applies_to_age": true,
+                  "achieved": true,
+                  "delta_seconds": -4.2
+                },
+                {
+                  "label": "13-14 BB",
+                  "time": "1:15.39",
+                  "seconds": 75.39,
+                  "applies_to_age": true,
+                  "achieved": true,
+                  "delta_seconds": -12.89
+                },
+                {
+                  "label": "15&O &JAG",
+                  "time": "1:04.10",
+                  "seconds": 64.1,
+                  "applies_to_age": false,
+                  "achieved": true,
+                  "delta_seconds": -1.6
+                },
+                {
+                  "label": "15&O BB",
+                  "time": "1:12.79",
+                  "seconds": 72.79,
+                  "applies_to_age": false,
+                  "achieved": true,
+                  "delta_seconds": -10.29
+                }
+              ],
+              "age": 14,
+              "is_pb": true,
+              "delta_prev": null,
+              "delta_first": 0.0
+            }
+          ],
+          "meets": 1
+        },
+        {
+          "key": "200|butterfly|lc meter",
+          "label": "200 LC Meter Butterfly",
+          "best_seconds": 156.27,
+          "best_time": "2:36.27",
+          "history": [
+            {
+              "meet_slug": "2026-scs-june-ag-invite",
+              "meet_name": "2026 SCS June AG Invite",
+              "date_iso": "2026-06-11",
+              "dates": "6/11/2026 ~ 6/14/2026",
+              "seconds": 156.27,
+              "time": "2:36.27",
+              "label": "200 LC Meter Butterfly",
+              "standards": [
+                {
+                  "label": "&JAG",
+                  "time": "3:00.80",
+                  "seconds": 180.8,
+                  "applies_to_age": true,
+                  "achieved": true,
+                  "delta_seconds": -24.53
+                },
+                {
+                  "label": "BB",
+                  "time": "3:01.69",
+                  "seconds": 181.69,
+                  "applies_to_age": true,
+                  "achieved": true,
+                  "delta_seconds": -25.42
+                }
+              ],
+              "age": 14,
+              "is_pb": true,
+              "delta_prev": null,
+              "delta_first": 0.0
+            }
+          ],
+          "meets": 1
+        },
+        {
+          "key": "200|freestyle|lc meter",
+          "label": "200 LC Meter Freestyle",
+          "best_seconds": 135.95,
+          "best_time": "2:15.95",
+          "history": [
+            {
+              "meet_slug": "2026-scs-june-ag-invite",
+              "meet_name": "2026 SCS June AG Invite",
+              "date_iso": "2026-06-11",
+              "dates": "6/11/2026 ~ 6/14/2026",
+              "seconds": 135.95,
+              "time": "2:15.95",
+              "label": "200 LC Meter Freestyle",
+              "standards": [
+                {
+                  "label": "13-14 &JAG",
+                  "time": "2:26.30",
+                  "seconds": 146.3,
+                  "applies_to_age": true,
+                  "achieved": true,
+                  "delta_seconds": -10.35
+                },
+                {
+                  "label": "13-14 BB",
+                  "time": "2:42.79",
+                  "seconds": 162.79,
+                  "applies_to_age": true,
+                  "achieved": true,
+                  "delta_seconds": -26.84
+                },
+                {
+                  "label": "15&O &JAG",
+                  "time": "2:20.60",
+                  "seconds": 140.6,
+                  "applies_to_age": false,
+                  "achieved": true,
+                  "delta_seconds": -4.65
+                },
+                {
+                  "label": "15&O BB",
+                  "time": "2:37.09",
+                  "seconds": 157.09,
+                  "applies_to_age": false,
+                  "achieved": true,
+                  "delta_seconds": -21.14
+                }
+              ],
+              "age": 14,
+              "is_pb": true,
+              "delta_prev": null,
+              "delta_first": 0.0
+            }
+          ],
+          "meets": 1
+        },
+        {
+          "key": "50|butterfly|lc meter",
+          "label": "50 LC Meter Butterfly",
+          "best_seconds": 32.12,
+          "best_time": "32.12",
+          "history": [
+            {
+              "meet_slug": "2026-scs-june-ag-invite",
+              "meet_name": "2026 SCS June AG Invite",
+              "date_iso": "2026-06-11",
+              "dates": "6/11/2026 ~ 6/14/2026",
+              "seconds": 32.12,
+              "time": "32.12",
+              "label": "50 LC Meter Butterfly",
+              "standards": [
+                {
+                  "label": "13-14 &JAG",
+                  "time": "34.39",
+                  "seconds": 34.39,
+                  "applies_to_age": true,
+                  "achieved": true,
+                  "delta_seconds": -2.27
+                },
+                {
+                  "label": "15&O &JAG",
+                  "time": "33.49",
+                  "seconds": 33.49,
+                  "applies_to_age": false,
+                  "achieved": true,
+                  "delta_seconds": -1.37
+                }
+              ],
+              "age": 14,
+              "is_pb": true,
+              "delta_prev": null,
+              "delta_first": 0.0
+            }
+          ],
+          "meets": 1
+        },
+        {
+          "key": "50|freestyle|lc meter",
+          "label": "50 LC Meter Freestyle",
+          "best_seconds": 28.6,
+          "best_time": "28.60",
+          "history": [
+            {
+              "meet_slug": "2026-scs-june-ag-invite",
+              "meet_name": "2026 SCS June AG Invite",
+              "date_iso": "2026-06-11",
+              "dates": "6/11/2026 ~ 6/14/2026",
+              "seconds": 28.6,
+              "time": "28.60",
+              "label": "50 LC Meter Freestyle",
+              "standards": [
+                {
+                  "label": "13-14 &JAG",
+                  "time": "30.70",
+                  "seconds": 30.7,
+                  "applies_to_age": true,
+                  "achieved": true,
+                  "delta_seconds": -2.1
+                },
+                {
+                  "label": "13-14 BB",
+                  "time": "34.59",
+                  "seconds": 34.59,
+                  "applies_to_age": true,
+                  "achieved": true,
+                  "delta_seconds": -5.99
+                },
+                {
+                  "label": "15&O &JAG",
+                  "time": "29.60",
+                  "seconds": 29.6,
+                  "applies_to_age": false,
+                  "achieved": true,
+                  "delta_seconds": -1.0
+                },
+                {
+                  "label": "15&O BB",
+                  "time": "33.49",
+                  "seconds": 33.49,
+                  "applies_to_age": false,
+                  "achieved": true,
+                  "delta_seconds": -4.89
+                }
+              ],
+              "age": 14,
+              "is_pb": true,
+              "delta_prev": null,
+              "delta_first": 0.0
+            }
+          ],
+          "meets": 1
+        }
+      ]
+    },
+    {
+      "id": "mu-maggie",
+      "display_name": "Maggie Mu",
+      "last": "Mu",
+      "first": "Maggie",
+      "swimmerid": null,
+      "events": [
+        {
+          "key": "100|freestyle|lc meter",
+          "label": "100 LC Meter Freestyle",
+          "best_seconds": 60.17,
+          "best_time": "1:00.17",
+          "history": [
+            {
+              "meet_slug": "2026-scs-june-ag-invite",
+              "meet_name": "2026 SCS June AG Invite",
+              "date_iso": "2026-06-11",
+              "dates": "6/11/2026 ~ 6/14/2026",
+              "seconds": 60.17,
+              "time": "1:00.17",
+              "label": "100 LC Meter Freestyle",
+              "standards": [
+                {
+                  "label": "15&O &JAG",
+                  "time": "1:04.10",
+                  "seconds": 64.1,
+                  "applies_to_age": true,
+                  "achieved": true,
+                  "delta_seconds": -3.93
+                },
+                {
+                  "label": "15&O BB",
+                  "time": "1:12.79",
+                  "seconds": 72.79,
+                  "applies_to_age": true,
+                  "achieved": true,
+                  "delta_seconds": -12.62
+                },
+                {
+                  "label": "13-14 &JAG",
+                  "time": "1:06.70",
+                  "seconds": 66.7,
+                  "applies_to_age": false,
+                  "achieved": true,
+                  "delta_seconds": -6.53
+                },
+                {
+                  "label": "13-14 BB",
+                  "time": "1:15.39",
+                  "seconds": 75.39,
+                  "applies_to_age": false,
+                  "achieved": true,
+                  "delta_seconds": -15.22
+                }
+              ],
+              "age": 15,
+              "is_pb": true,
+              "delta_prev": null,
+              "delta_first": 0.0
+            }
+          ],
+          "meets": 1
+        },
+        {
+          "key": "200|freestyle|lc meter",
+          "label": "200 LC Meter Freestyle",
+          "best_seconds": 130.44,
+          "best_time": "2:10.44",
+          "history": [
+            {
+              "meet_slug": "2026-scs-june-ag-invite",
+              "meet_name": "2026 SCS June AG Invite",
+              "date_iso": "2026-06-11",
+              "dates": "6/11/2026 ~ 6/14/2026",
+              "seconds": 130.44,
+              "time": "2:10.44",
+              "label": "200 LC Meter Freestyle",
+              "standards": [
+                {
+                  "label": "15&O &JAG",
+                  "time": "2:20.60",
+                  "seconds": 140.6,
+                  "applies_to_age": true,
+                  "achieved": true,
+                  "delta_seconds": -10.16
+                },
+                {
+                  "label": "15&O BB",
+                  "time": "2:37.09",
+                  "seconds": 157.09,
+                  "applies_to_age": true,
+                  "achieved": true,
+                  "delta_seconds": -26.65
+                },
+                {
+                  "label": "13-14 &JAG",
+                  "time": "2:26.30",
+                  "seconds": 146.3,
+                  "applies_to_age": false,
+                  "achieved": true,
+                  "delta_seconds": -15.86
+                },
+                {
+                  "label": "13-14 BB",
+                  "time": "2:42.79",
+                  "seconds": 162.79,
+                  "applies_to_age": false,
+                  "achieved": true,
+                  "delta_seconds": -32.35
+                }
+              ],
+              "age": 15,
+              "is_pb": true,
+              "delta_prev": null,
+              "delta_first": 0.0
+            }
+          ],
+          "meets": 1
+        }
+      ]
+    },
+    {
+      "id": "radke-lyric",
+      "display_name": "Lyric Radke",
+      "last": "Radke",
+      "first": "Lyric",
+      "swimmerid": null,
+      "events": [
+        {
+          "key": "100|breaststroke|lc meter",
+          "label": "100 LC Meter Breaststroke",
+          "best_seconds": 84.76,
+          "best_time": "1:24.76",
+          "history": [
+            {
+              "meet_slug": "2026-scs-june-ag-invite",
+              "meet_name": "2026 SCS June AG Invite",
+              "date_iso": "2026-06-11",
+              "dates": "6/11/2026 ~ 6/14/2026",
+              "seconds": 84.76,
+              "time": "1:24.76",
+              "label": "100 LC Meter Breaststroke",
+              "standards": [
+                {
+                  "label": "13-14 &JAG",
+                  "time": "1:28.50",
+                  "seconds": 88.5,
+                  "applies_to_age": true,
+                  "achieved": true,
+                  "delta_seconds": -3.74
+                },
+                {
+                  "label": "13-14 BB",
+                  "time": "1:34.99",
+                  "seconds": 94.99,
+                  "applies_to_age": true,
+                  "achieved": true,
+                  "delta_seconds": -10.23
+                },
+                {
+                  "label": "15&O &JAG",
+                  "time": "1:25.10",
+                  "seconds": 85.1,
+                  "applies_to_age": false,
+                  "achieved": true,
+                  "delta_seconds": -0.34
+                },
+                {
+                  "label": "15&O BB",
+                  "time": "1:31.59",
+                  "seconds": 91.59,
+                  "applies_to_age": false,
+                  "achieved": true,
+                  "delta_seconds": -6.83
+                }
+              ],
+              "age": 13,
+              "is_pb": true,
+              "delta_prev": null,
+              "delta_first": 0.0
+            }
+          ],
+          "meets": 1
+        },
+        {
+          "key": "100|butterfly|lc meter",
+          "label": "100 LC Meter Butterfly",
+          "best_seconds": 67.7,
+          "best_time": "1:07.70",
+          "history": [
+            {
+              "meet_slug": "2026-scs-june-ag-invite",
+              "meet_name": "2026 SCS June AG Invite",
+              "date_iso": "2026-06-11",
+              "dates": "6/11/2026 ~ 6/14/2026",
+              "seconds": 67.7,
+              "time": "1:07.70",
+              "label": "100 LC Meter Butterfly",
+              "standards": [
+                {
+                  "label": "13-14 &JAG",
+                  "time": "1:16.00",
+                  "seconds": 76.0,
+                  "applies_to_age": true,
+                  "achieved": true,
+                  "delta_seconds": -8.3
+                },
+                {
+                  "label": "13-14 BB",
+                  "time": "1:20.99",
+                  "seconds": 80.99,
+                  "applies_to_age": true,
+                  "achieved": true,
+                  "delta_seconds": -13.29
+                },
+                {
+                  "label": "15&O &JAG",
+                  "time": "1:12.50",
+                  "seconds": 72.5,
+                  "applies_to_age": false,
+                  "achieved": true,
+                  "delta_seconds": -4.8
+                },
+                {
+                  "label": "15&O BB",
+                  "time": "1:18.29",
+                  "seconds": 78.29,
+                  "applies_to_age": false,
+                  "achieved": true,
+                  "delta_seconds": -10.59
+                }
+              ],
+              "age": 13,
+              "is_pb": true,
+              "delta_prev": null,
+              "delta_first": 0.0
+            }
+          ],
+          "meets": 1
+        },
+        {
+          "key": "200|freestyle|lc meter",
+          "label": "200 LC Meter Freestyle",
+          "best_seconds": 136.41,
+          "best_time": "2:16.41",
+          "history": [
+            {
+              "meet_slug": "2026-scs-june-ag-invite",
+              "meet_name": "2026 SCS June AG Invite",
+              "date_iso": "2026-06-11",
+              "dates": "6/11/2026 ~ 6/14/2026",
+              "seconds": 136.41,
+              "time": "2:16.41",
+              "label": "200 LC Meter Freestyle",
+              "standards": [
+                {
+                  "label": "13-14 &JAG",
+                  "time": "2:26.30",
+                  "seconds": 146.3,
+                  "applies_to_age": true,
+                  "achieved": true,
+                  "delta_seconds": -9.89
+                },
+                {
+                  "label": "13-14 BB",
+                  "time": "2:42.79",
+                  "seconds": 162.79,
+                  "applies_to_age": true,
+                  "achieved": true,
+                  "delta_seconds": -26.38
+                },
+                {
+                  "label": "15&O &JAG",
+                  "time": "2:20.60",
+                  "seconds": 140.6,
+                  "applies_to_age": false,
+                  "achieved": true,
+                  "delta_seconds": -4.19
+                },
+                {
+                  "label": "15&O BB",
+                  "time": "2:37.09",
+                  "seconds": 157.09,
+                  "applies_to_age": false,
+                  "achieved": true,
+                  "delta_seconds": -20.68
+                }
+              ],
+              "age": 13,
+              "is_pb": true,
+              "delta_prev": null,
+              "delta_first": 0.0
+            }
+          ],
+          "meets": 1
+        },
+        {
+          "key": "400|freestyle|lc meter",
+          "label": "400 LC Meter Freestyle",
+          "best_seconds": 297.05,
+          "best_time": "4:57.05",
+          "history": [
+            {
+              "meet_slug": "2026-scs-june-ag-invite",
+              "meet_name": "2026 SCS June AG Invite",
+              "date_iso": "2026-06-11",
+              "dates": "6/11/2026 ~ 6/14/2026",
+              "seconds": 297.05,
+              "time": "4:57.05",
+              "label": "400 LC Meter Freestyle",
+              "standards": [
+                {
+                  "label": "13-14 &JAG",
+                  "time": "5:09.10",
+                  "seconds": 309.1,
+                  "applies_to_age": true,
+                  "achieved": true,
+                  "delta_seconds": -12.05
+                },
+                {
+                  "label": "15&O &JAG",
+                  "time": "5:01.00",
+                  "seconds": 301.0,
+                  "applies_to_age": false,
+                  "achieved": true,
+                  "delta_seconds": -3.95
+                }
+              ],
+              "age": 13,
+              "is_pb": true,
+              "delta_prev": null,
+              "delta_first": 0.0
+            }
+          ],
+          "meets": 1
+        },
+        {
+          "key": "50|backstroke|lc meter",
+          "label": "50 LC Meter Backstroke",
+          "best_seconds": 32.3,
+          "best_time": "32.30",
+          "history": [
+            {
+              "meet_slug": "2026-scs-june-ag-invite",
+              "meet_name": "2026 SCS June AG Invite",
+              "date_iso": "2026-06-11",
+              "dates": "6/11/2026 ~ 6/14/2026",
+              "seconds": 32.3,
+              "time": "32.30",
+              "label": "50 LC Meter Backstroke",
+              "standards": [
+                {
+                  "label": "13-14 &JAG",
+                  "time": "36.49",
+                  "seconds": 36.49,
+                  "applies_to_age": true,
+                  "achieved": true,
+                  "delta_seconds": -4.19
+                },
+                {
+                  "label": "15&O &JAG",
+                  "time": "35.29",
+                  "seconds": 35.29,
+                  "applies_to_age": false,
+                  "achieved": true,
+                  "delta_seconds": -2.99
+                }
+              ],
+              "age": 13,
+              "is_pb": true,
+              "delta_prev": null,
+              "delta_first": 0.0
+            }
+          ],
+          "meets": 1
+        }
+      ]
+    }
+  ]
+}

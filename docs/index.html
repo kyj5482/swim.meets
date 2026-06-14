@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>swim.meets — 관심 선수 대회 조회</title>
+<link rel="stylesheet" href="assets/style.css" />
+</head>
+<body>
+<header class="app-header">
+  <div class="wrap">
+    <h1>🏊 swim.meets</h1>
+    <nav class="tabs">
+      <button class="tab active" data-view="meets">대회별</button>
+      <button class="tab" data-view="swimmers">선수별 진척도</button>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap" id="main">
+  <div id="loading" class="muted">불러오는 중…</div>
+</main>
+
+<footer class="app-footer wrap muted">
+  <span id="footer-meta"></span>
+</footer>
+
+<script src="assets/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,30 @@
+{
+  "_comment": "관심 선수 등록 목록. last/first(성/이름)는 필수이며 동명이인 구분을 위해 age(나이) 또는 birth_year(출생연도)와 teams(소속 팀 코드)를 함께 넣어 정확도를 높입니다. aliases 로 이전 이름/애칭을 추가할 수 있고, swimmerid(myswimio) 로 과거 기록 추적과 연결합니다.",
+  "swimmers": [
+    {
+      "id": "mu-maggie",
+      "last": "Mu",
+      "first": "Maggie",
+      "age": 15,
+      "teams": ["NOVA-CA", "NOVA"],
+      "swimmerid": null
+    },
+    {
+      "id": "arnold-maddie",
+      "last": "Arnold",
+      "first": "Maddie",
+      "age": 14,
+      "teams": ["NOVA-CA", "NOVA"],
+      "aliases": [{ "last": "Arnold", "first": "Madeline" }],
+      "swimmerid": null
+    },
+    {
+      "id": "radke-lyric",
+      "last": "Radke",
+      "first": "Lyric",
+      "age": 13,
+      "teams": ["NOVA-CA", "NOVA"],
+      "swimmerid": null
+    }
+  ]
+}

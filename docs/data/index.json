@@ -1,0 +1,30 @@
+{
+  "generated_at": "2026-06-14T23:59:38+00:00",
+  "meet_count": 2,
+  "meets": [
+    {
+      "slug": "2026-scs-june-ag-invite",
+      "name": "2026 SCS June AG Invite",
+      "title": "2026 SCS June AG Invite",
+      "dates": "6/11/2026 ~ 6/14/2026",
+      "date_iso": "2026-06-11",
+      "course": "LC Meter",
+      "club": "Irvine Novaquatics, Inc.",
+      "matched_swimmer_count": 3,
+      "matched_entry_count": 13,
+      "has_timeline": true
+    },
+    {
+      "slug": "2026-nova-june-intrasquad",
+      "name": "2026 NOVA June Intrasquad",
+      "title": "2026 NOVA June Intrasquad",
+      "dates": null,
+      "date_iso": null,
+      "course": null,
+      "club": null,
+      "matched_swimmer_count": 0,
+      "matched_entry_count": 0,
+      "has_timeline": true
+    }
+  ]
+}
