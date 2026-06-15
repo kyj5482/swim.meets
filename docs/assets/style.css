@@ -180,6 +180,7 @@ details.histwrap > summary::-webkit-details-marker { display: none; }
   table.sched { font-size: 12.5px; }
   table.sched th, table.sched td { padding: 8px 7px; }
   .hide-sm { display: none; }
+  .show-sm { display: inline; }
   /* 라운드 컬럼 숨김 + 폭 재배분(이벤트 축약에 맞춰 축소, 시드/일정 확대) */
   table.sched th:nth-child(1) { width: 27%; }
   table.sched th:nth-child(3) { width: 21%; }
@@ -211,4 +212,5 @@ details.histwrap > summary::-webkit-details-marker { display: none; }
   .std-row { display: none; }
   .print-title { display: block !important; font-weight: 800; font-size: 15px; margin-bottom: 6px; }
 }
+.show-sm { display: none; }
 .print-title { display: none; }

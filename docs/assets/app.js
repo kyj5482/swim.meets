@@ -237,7 +237,7 @@ async function renderMeet(slug) {
         <span><span class="nm">${esc(s.display_name)}</span>
         <span class="muted"> · ${esc((s.registered_teams || [])[0] || "")} · ${t("events_n", s.entries.length)}</span></span></div>
       <table class="sched"><thead><tr>
-        <th>${t("col_event")}</th><th class="hide-sm">${t("col_session")}</th><th>${t("col_heatlane")}</th><th>${t("col_seed")}</th><th>${t("col_when")}</th>
+        <th>${t("col_event")}</th><th class="hide-sm">${t("col_session")}</th><th><span class="hide-sm">${t("col_heatlane")}</span><span class="show-sm">H·L</span></th><th>${t("col_seed")}</th><th>${t("col_when")}</th>
       </tr></thead><tbody>${rows}</tbody></table></div>`;
   }).join("");
   main.innerHTML = head + blocks;
