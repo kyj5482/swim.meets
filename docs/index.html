@@ -2,30 +2,51 @@
 <html lang="ko">
 <head>
 <meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>swim.meets — 관심 선수 대회 조회</title>
-<link rel="stylesheet" href="assets/style.css" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<!-- 새 배포 후 새로고침이 항상 최신을 받도록 HTML 은 캐시하지 않음 -->
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+<meta http-equiv="Pragma" content="no-cache" />
+<meta http-equiv="Expires" content="0" />
+<meta name="theme-color" content="#0b6bcb" />
+<title>FinSight — 관심 선수 대회 추적</title>
+<link rel="stylesheet" href="assets/style.css?v=6" />
 </head>
 <body>
 <header class="app-header">
-  <div class="wrap">
-    <h1>🏊 swim.meets</h1>
-    <nav class="tabs">
-      <button class="tab active" data-view="meets">대회별</button>
-      <button class="tab" data-view="swimmers">선수별 진척도</button>
-      <button class="tab lang" id="lang-btn" title="Language">EN</button>
+  <div class="wrap bar">
+    <a class="brand" href="#" id="brand">
+      <span class="brand-mark">🐬</span>
+      <span class="brand-name">FinSight</span>
+    </a>
+    <div class="bar-actions">
+      <button class="icon-btn" id="settings-btn" title="설정" aria-label="settings">⚙</button>
+      <div class="lang-switch" id="lang-switch" role="group" aria-label="language">
+        <button data-lang="ko" class="seg">한</button>
+        <button data-lang="en" class="seg">EN</button>
+      </div>
+    </div>
+  </div>
+  <div class="wrap subnav">
+    <nav class="seg-nav" id="seg-nav">
+      <button class="seg-tab active" data-view="meets"></button>
+      <button class="seg-tab" data-view="swimmers"></button>
     </nav>
   </div>
 </header>
 
-<main class="wrap" id="main">
-  <div id="loading" class="muted">불러오는 중…</div>
-</main>
+<div class="settings-panel" id="settings-panel" hidden>
+  <div class="wrap">
+    <label class="switch-row">
+      <span id="lbl-show-standards"></span>
+      <input type="checkbox" id="toggle-standards" />
+    </label>
+  </div>
+</div>
 
-<footer class="app-footer wrap muted">
-  <span id="footer-meta"></span>
-</footer>
+<main class="wrap" id="main"><div class="muted pad">…</div></main>
 
-<script src="assets/app.js"></script>
+<footer class="app-footer wrap muted"><span id="footer-meta"></span></footer>
+
+<script src="assets/app.js?v=6"></script>
 </body>
 </html>

@@ -100,9 +100,13 @@ def build() -> None:
                     "last": sw.get("last"),
                     "first": sw.get("first"),
                     "swimmerid": sw.get("swimmerid"),
+                    "teams": sw.get("registered_teams"),
+                    "age": sw.get("registered_age"),
+                    "meet_slugs": set(),
                     "events": {},
                 },
             )
+            sp["meet_slugs"].add(meet.get("slug"))
             # 종목별 best (round 무관, 가장 빠른 seed) 한 대회당 1건만 기록
             best_per_event: dict[str, dict] = {}
             for e in sw.get("entries", []):
@@ -127,29 +131,50 @@ def build() -> None:
                 sp["events"].setdefault(key, {"label": rec["label"], "history": []})
                 sp["events"][key]["history"].append(rec)
 
-    # 진척도 정리: 시간순 정렬 + 향상도 계산
+    # 진척도 정리: 시간순 정렬 + 향상도/PB/정체(tied) 계산
     swimmers_out = []
     for sid, sp in progression.items():
         events_list = []
+        improved_cnt = 0
         for key, ev in sp["events"].items():
             hist = sorted(ev["history"], key=lambda r: (r["date_iso"] or "", r["meet_name"] or ""))
             best = min((h["seconds"] for h in hist), default=None)
             first_secs = hist[0]["seconds"] if hist else None
+            running_best = None
             for i, h in enumerate(hist):
-                h["is_pb"] = h["seconds"] == best
-                h["delta_prev"] = round(h["seconds"] - hist[i - 1]["seconds"], 2) if i > 0 else None
-                h["delta_first"] = round(h["seconds"] - first_secs, 2) if first_secs is not None else None
+                secs = h["seconds"]
+                # is_pb: 직전까지의 최고기록을 '실제로' 깬 경우(엄격히 더 빠름)만.
+                # tied: 과거 최고와 같은 기록(= 최고기록을 못 깸).
+                if running_best is None:
+                    h["is_pb"], h["tied"] = False, False  # 첫 기록은 기준점
+                elif secs < running_best - 1e-9:
+                    h["is_pb"], h["tied"] = True, False
+                elif abs(secs - running_best) <= 0.01:
+                    h["is_pb"], h["tied"] = False, True
+                else:
+                    h["is_pb"], h["tied"] = False, False
+                running_best = secs if running_best is None else min(running_best, secs)
+                h["is_best"] = abs(secs - best) <= 1e-9
+                h["delta_prev"] = round(secs - hist[i - 1]["seconds"], 2) if i > 0 else None
+                h["delta_first"] = round(secs - first_secs, 2) if first_secs is not None else None
+            improved = best is not None and first_secs is not None and best < first_secs - 1e-9
+            if improved:
+                improved_cnt += 1
             events_list.append(
                 {
                     "key": key,
                     "label": ev["label"],
                     "best_seconds": best,
                     "best_time": common.seconds_to_time(best),
+                    "first_seconds": first_secs,
+                    "improved": improved,
+                    "drop_seconds": round(first_secs - best, 2) if improved else 0.0,
                     "history": hist,
                     "meets": len(hist),
                 }
             )
-        events_list.sort(key=lambda e: e["label"])
+        # 향상된 종목 먼저, 그다음 라벨순
+        events_list.sort(key=lambda e: (not e["improved"], e["label"]))
         swimmers_out.append(
             {
                 "id": sid,
@@ -157,6 +182,11 @@ def build() -> None:
                 "last": sp["last"],
                 "first": sp["first"],
                 "swimmerid": sp["swimmerid"],
+                "teams": sp.get("teams"),
+                "age": sp.get("age"),
+                "meet_count": len(sp.get("meet_slugs") or []),
+                "event_count": len(events_list),
+                "improved_count": improved_cnt,
                 "events": events_list,
             }
         )
