@@ -1,6 +1,6 @@
 name: Process meets & deploy site
 
-# input/ 에 PDF가 추가/변경되거나, 선수 목록/스크립트가 바뀌면 실행한다.
+# input/ 에 PDF가 추가/변경/삭제되거나, 선수 목록/스크립트/사이트가 바뀌면 실행한다.
 on:
   push:
     branches: ["**"]
@@ -15,7 +15,7 @@ on:
 
 permissions:
   contents: write   # 생성된 JSON 커밋
-  pages: write
+  pages: write      # GitHub Pages 배포
   id-token: write
 
 concurrency:
@@ -23,7 +23,9 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  process:
+  # 모든 브랜치에서 실행: 파싱 → 데이터 생성 → 커밋.
+  # main 일 때만 방금 만든 docs/ 를 Pages 아티팩트로 업로드한다.
+  build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -39,7 +41,7 @@ jobs:
       - name: Install Python deps
         run: pip install -r requirements.txt
 
-      - name: Parse meets -> data/*.json
+      - name: Parse meets -> data/*.json (삭제된 대회 정리 포함)
         run: python scripts/process_meet.py
 
       - name: Build site index & progression
@@ -49,7 +51,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add data docs/data
+          git add -A data docs/data
           if git diff --cached --quiet; then
             echo "변경 사항 없음"
           else
@@ -57,19 +59,28 @@ jobs:
             git push
           fi
 
-  # main 브랜치일 때만 GitHub Pages 배포
+      # 방금 빌드한 작업 트리의 docs/ 를 그대로 아티팩트로 만든다(항상 최신).
+      - name: Setup Pages
+        if: github.ref == 'refs/heads/main'
+        uses: actions/configure-pages@v5
+
+      - name: Upload site artifact
+        if: github.ref == 'refs/heads/main'
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: "docs"
+
+  # main 브랜치에서만 실행되는 배포 전용 job.
+  # environment 보호 규칙(main만 허용)은 이 job 에만 적용되므로,
+  # 다른 브랜치에서는 job 자체가 스킵되어 거부 오류가 나지 않는다.
   deploy:
-    needs: process
+    needs: build
     if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/configure-pages@v5
-      - uses: actions/upload-pages-artifact@v3
-        with:
-          path: "docs"
-      - id: deployment
+      - name: Deploy to GitHub Pages
+        id: deployment
         uses: actions/deploy-pages@v4

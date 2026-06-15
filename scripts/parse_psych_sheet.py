@@ -29,7 +29,7 @@ import fitz  # PyMuPDF
 
 EVENT_RE = re.compile(
     r"\bEvent\s+(?P<num>\d+)\s+(?P<gender>Girls|Boys|Women|Men|Mixed)\s+"
-    r"(?P<agegroup>.+?)\s+(?P<distance>\d+)\s+(?P<course>LC Meter|SC Meter|SCY|LCM|SCM|Yard|Meter|Meters)?\s*"
+    r"(?P<agegroup>.*?)\s*(?P<distance>\d+)\s+(?P<course>LC Meter|SC Meter|SCY|LCM|SCM|Yard|Meter|Meters)?\s*"
     r"(?P<stroke>Freestyle|Backstroke|Breaststroke|Butterfly|IM|Individual Medley|Medley Relay|Free Relay|Freestyle Relay)\s*$",
     re.IGNORECASE,
 )
@@ -60,6 +60,9 @@ NAME_RE = re.compile(r"^[^,]+,\s+.+$")
 
 # 나이: 5~99 사이 정수 (혹은 한 두자리)
 AGE_RE = re.compile(r"^\d{1,2}$")
+
+# 성별+나이 결합형 (일부 'Mixed' 대회 양식): M13, W11, F11, G14, B12
+GENDER_AGE_RE = re.compile(r"^([MWFGB])(\d{1,2})$")
 
 # 팀 코드: 보통 대문자/숫자/하이픈 (예: NOVA-CA, UN-01-SI, RAA-CA)
 TEAM_RE = re.compile(r"^[A-Z0-9][A-Z0-9\-]{1,12}$")
@@ -94,6 +97,7 @@ class Entry:
     age: Optional[int]
     team: Optional[str]
     seed_time: Optional[str]
+    gender: Optional[str] = None
     flags: list = field(default_factory=list)
 
 
@@ -227,13 +231,21 @@ def _parse_entry_row(tokens: list[str]) -> Optional[Entry]:
     if not name_tokens or not name_tokens[-1].endswith(","):
         return None
 
-    # 이후 토큰 중 나이(숫자)가 나오기 전까지가 first name (+ middle initial)
+    # 이후 토큰 중 나이가 나오기 전까지가 first name (+ middle initial).
+    # 나이는 순수 숫자('14')이거나 성별+나이 결합형('M13','W11','F11','G14')일 수 있다.
     rest = toks[i:]
     age = None
+    gender = None
     age_pos = None
     for j, t in enumerate(rest):
         if AGE_RE.match(t) and 4 <= int(t) <= 99:
             age = int(t)
+            age_pos = j
+            break
+        gm = GENDER_AGE_RE.match(t)
+        if gm and 4 <= int(gm.group(2)) <= 99:
+            gender = gm.group(1).upper()
+            age = int(gm.group(2))
             age_pos = j
             break
     if age_pos is None:
@@ -270,6 +282,7 @@ def _parse_entry_row(tokens: list[str]) -> Optional[Entry]:
         age=age,
         team=team,
         seed_time=seed,
+        gender=gender,
         flags=flags,
     )
 
