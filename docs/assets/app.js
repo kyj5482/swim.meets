@@ -7,7 +7,7 @@ const I18N = {
     nav_meets: "대회", nav_swimmers: "선수",
     loading: "불러오는 중…", back_meets: "← 대회", back_swimmers: "← 선수",
     print: "🖨 인쇄", show_standards: "배지 표시",
-    col_event: "이벤트", col_session: "라운드", col_heatlane: "조·레인", col_seed: "시드", col_when: "일정",
+    col_event: "이벤트", col_session: "라운드", col_heatlane: "조·레인", col_heat: "조", col_seed: "시드", col_when: "일정",
     swimmers_n: (n) => `선수 ${n}명`, entries_n: (n) => `엔트리 ${n}건`,
     events_n: (n) => `${n}종목`, meets_n: (n) => `대회 ${n}`,
     eventcnt: (n) => `이벤트 ${n}`, timeline_chip: "⏱ 타임라인",
@@ -34,7 +34,7 @@ const I18N = {
     nav_meets: "Meets", nav_swimmers: "Swimmers",
     loading: "Loading…", back_meets: "← Meets", back_swimmers: "← Swimmers",
     print: "🖨 Print", show_standards: "Show badges",
-    col_event: "Event", col_session: "Round", col_heatlane: "Heat·Lane", col_seed: "Seed", col_when: "When",
+    col_event: "Event", col_session: "Round", col_heatlane: "Heat·Lane", col_heat: "Heat", col_seed: "Seed", col_when: "When",
     swimmers_n: (n) => `${n} swimmer${n === 1 ? "" : "s"}`, entries_n: (n) => `${n} entr${n === 1 ? "y" : "ies"}`,
     events_n: (n) => `${n} event${n === 1 ? "" : "s"}`, meets_n: (n) => `${n} meet${n === 1 ? "" : "s"}`,
     eventcnt: (n) => `${n} events`, timeline_chip: "⏱ timeline",
@@ -237,7 +237,7 @@ async function renderMeet(slug) {
         <span><span class="nm">${esc(s.display_name)}</span>
         <span class="muted"> · ${esc((s.registered_teams || [])[0] || "")} · ${t("events_n", s.entries.length)}</span></span></div>
       <table class="sched"><thead><tr>
-        <th>${t("col_event")}</th><th class="hide-sm">${t("col_session")}</th><th><span class="hide-sm">${t("col_heatlane")}</span><span class="show-sm">H·L</span></th><th>${t("col_seed")}</th><th>${t("col_when")}</th>
+        <th>${t("col_event")}</th><th class="hide-sm">${t("col_session")}</th><th><span class="hide-sm">${t("col_heatlane")}</span><span class="show-sm">${t("col_heat")}</span></th><th>${t("col_seed")}</th><th>${t("col_when")}</th>
       </tr></thead><tbody>${rows}</tbody></table></div>`;
   }).join("");
   main.innerHTML = head + blocks;

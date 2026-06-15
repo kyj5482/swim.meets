@@ -212,5 +212,5 @@ details.histwrap > summary::-webkit-details-marker { display: none; }
   .std-row { display: none; }
   .print-title { display: block !important; font-weight: 800; font-size: 15px; margin-bottom: 6px; }
 }
-.show-sm { display: none; }
+.show-sm { display: none; white-space: nowrap; }
 .print-title { display: none; }
