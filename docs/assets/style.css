@@ -115,6 +115,8 @@ table.sched th:nth-child(5) { width: 26%; }
 .ev-no { font-weight: 800; }
 .ev-name { color: var(--muted); font-weight: 600; }
 .ev-abbr { display: none; }
+/* 모바일에서만 보이는 축약 헤더(기본 숨김). @media 규칙보다 먼저 와야 모바일에서 노출됨 */
+.show-sm { display: none; white-space: nowrap; }
 .pill { display: inline-block; font-size: 11px; font-weight: 800; padding: 1px 7px; border-radius: 6px; }
 .pill-A { background: var(--good-weak); color: var(--good); }
 .pill-B { background: var(--warn-weak); color: var(--warn); }
@@ -212,5 +214,4 @@ details.histwrap > summary::-webkit-details-marker { display: none; }
   .std-row { display: none; }
   .print-title { display: block !important; font-weight: 800; font-size: 15px; margin-bottom: 6px; }
 }
-.show-sm { display: none; white-space: nowrap; }
 .print-title { display: none; }
