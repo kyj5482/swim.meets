@@ -63,6 +63,13 @@ const STROKE = {
         IM: "개인혼영", "Individual Medley": "개인혼영", "Medley Relay": "혼계영",
         "Free Relay": "계영", "Freestyle Relay": "계영" }, en: {} };
 const ROUND = { ko: { Prelims: "예선", Finals: "결승", "Timed Finals": "타임결승", Semifinals: "준결승" }, en: {} };
+// 모바일용 축약(영어). 한국어는 이미 짧아 trStroke 그대로 사용.
+const STROKE_ABBR = {
+  en: { Freestyle: "Free", Backstroke: "Back", Breaststroke: "Breast", Butterfly: "Fly",
+        IM: "IM", "Individual Medley": "IM", "Medley Relay": "Medley R",
+        "Freestyle Relay": "Free R", "Free Relay": "Free R" },
+  ko: {} };
+const strokeShort = (s) => (STROKE_ABBR[LANG] && STROKE_ABBR[LANG][s]) || trStroke(s);
 
 // 미국 대회는 25Y(단수로 야드)와 50M(장수로 미터)로 구분. 한/영 동일 표기.
 function courseLabel(c) {
@@ -218,7 +225,7 @@ async function renderMeet(slug) {
       const fl = e.flight ? `<span class="pill pill-${e.flight}" title="${esc(t("flight", e.flight))}">${e.flight}</span>` : "";
       const std = standardChips(e.standards);
       return `<tr>
-        <td class="ev-cell"><span class="ev-no">#${e.event_number}</span> <span class="ev-name">${esc(eventName(e))}</span></td>
+        <td class="ev-cell"><span class="ev-no">#${e.event_number}</span> <span class="ev-name"><span class="ev-full">${e.distance} ${esc(trStroke(e.stroke || ""))}</span><span class="ev-abbr">${e.distance} ${esc(strokeShort(e.stroke || ""))}</span></span></td>
         <td class="hide-sm muted">${esc(trRound(e.round))}</td>
         <td class="hl"><span class="h">H${heat}</span> <span class="l">L${e.lane ?? "-"}</span></td>
         <td class="t-seed">${esc(e.seed_time || "NT")}</td>

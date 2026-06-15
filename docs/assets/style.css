@@ -114,6 +114,7 @@ table.sched th:nth-child(4) { width: 13%; }
 table.sched th:nth-child(5) { width: 26%; }
 .ev-no { font-weight: 800; }
 .ev-name { color: var(--muted); font-weight: 600; }
+.ev-abbr { display: none; }
 .pill { display: inline-block; font-size: 11px; font-weight: 800; padding: 1px 7px; border-radius: 6px; }
 .pill-A { background: var(--good-weak); color: var(--good); }
 .pill-B { background: var(--warn-weak); color: var(--warn); }
@@ -184,6 +185,9 @@ details.histwrap > summary::-webkit-details-marker { display: none; }
   table.sched th:nth-child(3) { width: 24%; }
   table.sched th:nth-child(4) { width: 16%; }
   table.sched th:nth-child(5) { width: 24%; }
+  /* 모바일: 종목명 축약(Free/Back/Breast/Fly/IM) 으로 컬럼 넘침 방지 */
+  .ev-full { display: none; }
+  .ev-abbr { display: inline; }
   /* 셀 내부를 2줄로 쌓아 토큰(시드기록·시각 등)이 한 줄에 온전히 표시되도록 */
   .ev-cell .ev-no, .ev-cell .ev-name { display: block; }
   .ev-cell .ev-name { margin-top: 1px; }
