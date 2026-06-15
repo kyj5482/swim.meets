@@ -11,7 +11,11 @@
       "psych_sheet": "2026 NOVA LC Ditch Meet - Meet Program.pdf",
       "timeline": "2026 NOVA LC Ditch Meet - Timeline.pdf"
     },
+<<<<<<< HEAD
     "processed_at": "2026-06-15T19:18:58+00:00",
+=======
+    "processed_at": "2026-06-15T19:18:20+00:00",
+>>>>>>> origin/claude/charming-newton-jax10c
     "event_count": 12
   },
   "swimmers": [
