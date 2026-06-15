@@ -107,6 +107,11 @@ function fmtDate(iso) {
   const loc = LANG === "ko" ? "ko-KR" : "en-US";
   return `${d.getMonth() + 1}/${d.getDate()} (${d.toLocaleDateString(loc, { weekday: "short" })})`;
 }
+// 대회 목록용 날짜: 연도 제거(M/D 또는 M/D ~ M/D). 연도는 그룹 구분선으로 따로 표시.
+function fmtMeetDates(s) {
+  if (!s) return "";
+  return s.replace(/(\d{1,2})\/(\d{1,2})\/\d{2,4}/g, "$1/$2");
+}
 function fmtDelta(d) {
   if (d === null || d === undefined) return "";
   if (Math.abs(d) < 0.005) return `<span class="muted">0.00s</span>`;
@@ -184,16 +189,25 @@ async function renderMeetList() {
   if (!meets.length) {
     main.innerHTML = `<div class="empty">${t("no_meets")}<br><span class="muted">${t("no_meets_help")}</span></div>`; return;
   }
-  main.innerHTML = meets.map((m) => `
+  // 여러 연도가 섞여 있으면 연도 구분선을 넣는다(목록은 최신순 정렬).
+  const years = new Set(meets.map((m) => (m.date_iso || "").slice(0, 4)).filter(Boolean));
+  const showYear = years.size > 1;
+  let lastYear = null;
+  main.innerHTML = meets.map((m) => {
+    const yr = (m.date_iso || "").slice(0, 4);
+    let divider = "";
+    if (showYear && yr && yr !== lastYear) { divider = `<div class="year-divider">${yr}</div>`; lastYear = yr; }
+    return `${divider}
     <div class="card click" data-go="meet/${encodeURIComponent(m.slug)}">
-      <div class="row-between"><h2>${esc(m.title || m.name)}</h2><span class="muted">${esc(m.dates || "")}</span></div>
+      <div class="row-between"><h2>${esc(m.title || m.name)}</h2><span class="muted meet-date">${esc(fmtMeetDates(m.dates))}</span></div>
       <div class="muted">${esc(m.club || "")}</div>
       <div class="chips">
         ${m.course ? `<span class="chip accent">${esc(courseLabel(m.course))}</span>` : ""}
         <span class="chip">${t("swimmers_n", m.matched_swimmer_count)}</span>
         <span class="chip">${t("entries_n", m.matched_entry_count)}</span>
         ${m.has_timeline ? `<span class="chip">${t("timeline_chip")}</span>` : ""}
-      </div></div>`).join("");
+      </div></div>`;
+  }).join("");
 }
 
 // ---------- meet detail (schedule) ----------
