@@ -88,6 +88,57 @@ def _assign_flights(session: dict) -> None:
             e["flight"] = None
 
 
+def _time_candidates(t: str) -> list[str]:
+    """OCR 시각 문자열의 보정 후보. 원본 + '앞자리 1 누락' 복원형.
+
+    OCR 은 '12:10 PM'→'2:10 PM', '10:36 AM'→'0:36 AM' 처럼 앞자리 1 을 자주
+    떨어뜨린다. 한 자리 시(h)에 1 을 붙여 10/11/12 후보를 추가한다.
+    """
+    m = TIME_AT_RE.search(t)
+    if not m:
+        return [t]
+    h, mm, ap = m.group(1), m.group(2), m.group(3).upper()
+    cands = [f"{int(h)}:{mm} {ap}"]
+    if len(h) == 1:
+        ph = int("1" + h)  # 0->10, 1->11, 2->12, 3->13...
+        if ph in (10, 11, 12):
+            cands.append(f"{ph}:{mm} {ap}")
+    return cands
+
+
+def _repair_times(session: dict) -> None:
+    """플라이트(세션 구간) 내 시각은 단조 증가해야 한다는 점을 이용해 OCR 오류 보정.
+
+    각 플라이트 그룹을 등장 순서대로 보며, 직전 시각보다 빠르거나 다음 시각보다
+    늦어 순서를 깨면 '앞자리 1 누락' 복원 후보 중 [직전, 다음] 사이에 맞는 값으로
+    교정한다. 정상 시각(원본이 들어맞음)은 그대로 둔다.
+    """
+    from collections import defaultdict
+
+    groups: dict = defaultdict(list)
+    for e in session.get("events", []):
+        if e.get("start_time"):
+            groups[e.get("flight")].append(e)
+    for evs in groups.values():
+        prev = None
+        for i, e in enumerate(evs):
+            nxt = _time_minutes(evs[i + 1]["start_time"]) if i + 1 < len(evs) else None
+            cands = _time_candidates(e["start_time"])
+            chosen = None
+            for c in cands:  # 원본 우선 — [직전, 다음] 범위에 맞으면 채택
+                cm = _time_minutes(c)
+                lo_ok = prev is None or cm >= prev
+                hi_ok = nxt is None or cm <= nxt or (prev is not None and nxt < prev)
+                if lo_ok and hi_ok:
+                    chosen = c
+                    break
+            if chosen is None:  # 범위에 맞는 게 없으면 직전 이상인 최소 후보
+                valid = [(c, _time_minutes(c)) for c in cands if prev is None or _time_minutes(c) >= prev]
+                chosen = min(valid, key=lambda x: x[1])[0] if valid else cands[0]
+            e["start_time"] = chosen
+            prev = _time_minutes(chosen)
+
+
 def round_category(s: Optional[str]) -> Optional[str]:
     """라벨/라운드 문자열을 'prelim' / 'final' 로 정규화."""
     if not s:
@@ -110,7 +161,7 @@ def _ocr_page(page: "fitz.Page") -> str:
         from PIL import Image
         import io
 
-        pix = page.get_pixmap(dpi=200)
+        pix = page.get_pixmap(dpi=300)
         img = Image.open(io.BytesIO(pix.tobytes("png")))
         return pytesseract.image_to_string(img)
     except Exception as exc:  # pragma: no cover - 환경 의존
@@ -252,9 +303,10 @@ def parse_pdf(path: str) -> dict:
             )
         i += 1
 
-    # 세션별로 중복 이벤트를 플라이트(A/B/…)로 라벨링 (헤더 누락에 강건)
+    # 세션별로 중복 이벤트를 플라이트(A/B/…)로 라벨링 후, OCR 시각 오류를 보정
     for s in sessions:
         _assign_flights(s)
+        _repair_times(s)
 
     return {
         "source_file": path.split("/")[-1],
