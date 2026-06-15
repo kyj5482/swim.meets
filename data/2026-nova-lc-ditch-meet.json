@@ -1,0 +1,129 @@
+{
+  "meet": {
+    "name": "2026 NOVA LC Ditch Meet",
+    "slug": "2026-nova-lc-ditch-meet",
+    "title": "CA 2026 NOVA LC Ditch Meet",
+    "club": "Irvine Novaquatics, Inc.",
+    "dates": "5/2/2026",
+    "sanction": null,
+    "course": "LC Meter",
+    "source_files": {
+      "psych_sheet": "2026 NOVA LC Ditch Meet - Meet Program.pdf",
+      "timeline": "2026 NOVA LC Ditch Meet - Timeline.pdf"
+    },
+    "processed_at": "2026-06-15T00:19:31+00:00",
+    "event_count": 12
+  },
+  "swimmers": [
+    {
+      "id": "nova-jaei",
+      "display_name": "Jaei Kim",
+      "last": "Kim",
+      "first": "Jaei",
+      "registered_age": 13,
+      "registered_teams": [
+        "NOVA-CA",
+        "NOVA"
+      ],
+      "swimmerid": 1045380,
+      "entries": [
+        {
+          "event_number": 2,
+          "event_title": "Event 2 Mixed 100 LC Meter Breaststroke",
+          "gender": "Mixed",
+          "distance": 100,
+          "course": null,
+          "stroke": "Breaststroke",
+          "age_group": "",
+          "round": "Finals",
+          "heat": 1,
+          "heat_of": 6,
+          "lane": 3,
+          "entry_age": null,
+          "entry_team": null,
+          "seed_time": null,
+          "seed_seconds": null,
+          "estimated_start": "08:50 AM",
+          "standards": [],
+          "match_score": 5.8
+        },
+        {
+          "event_number": 12,
+          "event_title": "Event 12 Mixed 200 LC Meter Butterfly",
+          "gender": "Mixed",
+          "distance": 200,
+          "course": null,
+          "stroke": "Butterfly",
+          "age_group": "",
+          "round": "Finals",
+          "heat": 2,
+          "heat_of": 2,
+          "lane": 2,
+          "entry_age": null,
+          "entry_team": null,
+          "seed_time": null,
+          "seed_seconds": null,
+          "estimated_start": "10:31 AM",
+          "standards": [],
+          "match_score": 5.8
+        }
+      ]
+    },
+    {
+      "id": "nova-jia",
+      "display_name": "Jia Kim",
+      "last": "Kim",
+      "first": "Jia",
+      "registered_age": 11,
+      "registered_teams": [
+        "NOVA-CA",
+        "NOVA"
+      ],
+      "swimmerid": 1045382,
+      "entries": [
+        {
+          "event_number": 4,
+          "event_title": "Event 4 Mixed 100 LC Meter Butterfly",
+          "gender": "Mixed",
+          "distance": 100,
+          "course": null,
+          "stroke": "Butterfly",
+          "age_group": "",
+          "round": "Finals",
+          "heat": 3,
+          "heat_of": 4,
+          "lane": 4,
+          "entry_age": null,
+          "entry_team": null,
+          "seed_time": null,
+          "seed_seconds": null,
+          "estimated_start": "09:12 AM",
+          "standards": [],
+          "match_score": 5.8
+        },
+        {
+          "event_number": 9,
+          "event_title": "Event 9 Mixed 100 LC Meter Freestyle",
+          "gender": "Mixed",
+          "distance": 100,
+          "course": null,
+          "stroke": "Freestyle",
+          "age_group": "",
+          "round": "Finals",
+          "heat": 4,
+          "heat_of": 7,
+          "lane": 8,
+          "entry_age": null,
+          "entry_team": null,
+          "seed_time": null,
+          "seed_seconds": null,
+          "estimated_start": "09:57 AM",
+          "standards": [],
+          "match_score": 5.8
+        }
+      ]
+    }
+  ],
+  "matched_swimmer_count": 2,
+  "matched_entry_count": 4
+}
