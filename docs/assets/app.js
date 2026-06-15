@@ -224,7 +224,7 @@ async function renderMeet(slug) {
     </div>
     <div class="print-title">${t("print_title")} — ${esc(m.title || m.name)}</div>
     <div class="card meet-head">
-      <div class="row-between"><h2>${esc(m.title || m.name)}</h2><span class="muted">${esc(m.dates || "")}</span></div>
+      <div class="row-between"><h2>${esc(m.title || m.name)}</h2><span class="muted meet-date">${esc(fmtMeetDates(m.dates))}</span></div>
       <div class="muted">${esc(m.club || "")}${m.sanction ? " · " + esc(m.sanction) : ""}</div>
       <div class="chips no-print">
         ${m.course ? `<span class="chip accent">${esc(courseLabel(m.course))}</span>` : ""}
