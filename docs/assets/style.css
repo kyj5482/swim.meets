@@ -99,20 +99,27 @@ main.wrap { padding-top: 18px; padding-bottom: 56px; min-height: 64vh; }
 .avatar.lg { width: 52px; height: 52px; font-size: 18px; }
 .swimmer-head .nm { font-size: 16px; font-weight: 800; }
 
-table.sched { width: 100%; border-collapse: collapse; font-size: 13.5px; background: var(--surface);
-  border: 1px solid var(--border); border-radius: 12px; overflow: hidden; box-shadow: var(--shadow); }
-table.sched th, table.sched td { text-align: left; padding: 9px 11px; border-bottom: 1px solid var(--border); vertical-align: top; }
+table.sched { width: 100%; table-layout: fixed; border-collapse: collapse; font-size: 13.5px;
+  background: var(--surface); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; box-shadow: var(--shadow); }
+table.sched th, table.sched td { text-align: left; padding: 9px 11px; border-bottom: 1px solid var(--border);
+  vertical-align: top; overflow-wrap: anywhere; word-break: break-word; }
 table.sched thead th { background: var(--surface-2); color: var(--muted); font-size: 11px;
   text-transform: uppercase; letter-spacing: .04em; font-weight: 700; }
 table.sched tbody tr:last-child td { border-bottom: none; }
+/* 선수마다 동일한 컬럼 폭 유지 (table-layout: fixed + 고정 비율) */
+table.sched th:nth-child(1) { width: 30%; }
+table.sched th:nth-child(2) { width: 13%; }
+table.sched th:nth-child(3) { width: 18%; }
+table.sched th:nth-child(4) { width: 13%; }
+table.sched th:nth-child(5) { width: 26%; }
 .ev-no { font-weight: 800; }
 .ev-name { color: var(--muted); font-weight: 600; }
 .pill { display: inline-block; font-size: 11px; font-weight: 800; padding: 1px 7px; border-radius: 6px; }
 .pill-A { background: var(--good-weak); color: var(--good); }
 .pill-B { background: var(--warn-weak); color: var(--warn); }
-.hl { color: var(--accent); font-weight: 700; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.hl { color: var(--accent); font-weight: 700; font-variant-numeric: tabular-nums; }
 .t-seed { font-variant-numeric: tabular-nums; font-weight: 700; }
-.when { white-space: nowrap; font-variant-numeric: tabular-nums; }
+.when { font-variant-numeric: tabular-nums; }
 .when .d { color: var(--muted); font-size: 11.5px; }
 .when .tm { color: var(--warn); font-weight: 700; }
 .std-row td { padding-top: 0; }
@@ -139,7 +146,8 @@ table.sched tbody tr:last-child td { border-bottom: none; }
 .ev-prog .best .t { font-weight: 800; color: var(--accent); font-variant-numeric: tabular-nums; font-size: 15px; }
 .drop { color: var(--good); font-weight: 700; font-size: 12.5px; }
 .flat { color: var(--muted); font-weight: 700; font-size: 12.5px; }
-.spark { width: 100%; height: 56px; margin: 10px 0 6px; display: block; }
+/* 비율 고정으로 PC/모바일 모두 원형 마커 유지(가로로 늘어나지 않음) */
+.spark { display: block; width: 100%; max-width: 520px; height: auto; margin: 10px 0 6px; }
 .spark .ln { fill: none; stroke: var(--accent); stroke-width: 2; }
 .spark .ar { fill: var(--accent-weak); opacity: .55; }
 .spark .dot { fill: #fff; stroke: var(--accent); stroke-width: 2; }
@@ -167,9 +175,14 @@ details.histwrap > summary::-webkit-details-marker { display: none; }
 
 @media (max-width: 560px) {
   .brand-name { font-size: 18px; }
-  table.sched { font-size: 13px; }
-  table.sched th, table.sched td { padding: 8px 8px; }
+  table.sched { font-size: 12.5px; }
+  table.sched th, table.sched td { padding: 8px 6px; }
   .hide-sm { display: none; }
+  /* 라운드 컬럼 숨기고 나머지 폭을 100% 로 재배분 → 좌우 스크롤 없음 */
+  table.sched th:nth-child(1) { width: 37%; }
+  table.sched th:nth-child(3) { width: 24%; }
+  table.sched th:nth-child(4) { width: 16%; }
+  table.sched th:nth-child(5) { width: 23%; }
   .sw-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
   .sw-card .nm { font-size: 14.5px; }
 }

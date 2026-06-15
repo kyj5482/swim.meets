@@ -6,7 +6,7 @@ const I18N = {
   ko: {
     nav_meets: "대회", nav_swimmers: "선수",
     loading: "불러오는 중…", back_meets: "← 대회", back_swimmers: "← 선수",
-    print: "🖨 인쇄", show_standards: "기준기록(JAG) 배지 표시",
+    print: "🖨 인쇄", show_standards: "배지 표시",
     col_event: "이벤트", col_session: "라운드", col_heatlane: "조·레인", col_seed: "시드", col_when: "일정",
     swimmers_n: (n) => `선수 ${n}명`, entries_n: (n) => `엔트리 ${n}건`,
     events_n: (n) => `${n}종목`, meets_n: (n) => `대회 ${n}`,
@@ -33,7 +33,7 @@ const I18N = {
   en: {
     nav_meets: "Meets", nav_swimmers: "Swimmers",
     loading: "Loading…", back_meets: "← Meets", back_swimmers: "← Swimmers",
-    print: "🖨 Print", show_standards: "Show standard (JAG) badges",
+    print: "🖨 Print", show_standards: "Show badges",
     col_event: "Event", col_session: "Round", col_heatlane: "Heat·Lane", col_seed: "Seed", col_when: "When",
     swimmers_n: (n) => `${n} swimmer${n === 1 ? "" : "s"}`, entries_n: (n) => `${n} entr${n === 1 ? "y" : "ies"}`,
     events_n: (n) => `${n} event${n === 1 ? "" : "s"}`, meets_n: (n) => `${n} meet${n === 1 ? "" : "s"}`,
@@ -63,7 +63,16 @@ const STROKE = {
         IM: "개인혼영", "Individual Medley": "개인혼영", "Medley Relay": "혼계영",
         "Free Relay": "계영", "Freestyle Relay": "계영" }, en: {} };
 const ROUND = { ko: { Prelims: "예선", Finals: "결승", "Timed Finals": "타임결승", Semifinals: "준결승" }, en: {} };
-const COURSE = { ko: { "LC Meter": "장수로", "SC Meter": "단수로(25m)", SCY: "단수로(yd)" }, en: {} };
+
+// 미국 대회는 25Y(단수로 야드)와 50M(장수로 미터)로 구분. 한/영 동일 표기.
+function courseLabel(c) {
+  if (!c) return "";
+  const k = String(c).trim();
+  if (/^lcm$|long course|lc meter/i.test(k)) return "50M";
+  if (/scy|yard/i.test(k)) return "25Y";
+  if (/^scm$|short course meter|sc meter/i.test(k)) return "25M";
+  return k;
+}
 
 let LANG = localStorage.getItem("lang") || (((navigator.language || "").startsWith("ko")) ? "ko" : "en");
 if (!["ko", "en"].includes(LANG)) LANG = "ko";
@@ -71,7 +80,7 @@ let SHOW_STD = localStorage.getItem("showStandards") !== "0";
 
 const t = (k, ...a) => { const v = I18N[LANG][k]; return typeof v === "function" ? v(...a) : (v ?? k); };
 const tr = (m, v) => (v && (m[LANG][v] || m.en[v])) || v || "";
-const trStroke = (s) => tr(STROKE, s), trRound = (r) => tr(ROUND, r), trCourse = (c) => tr(COURSE, c);
+const trStroke = (s) => tr(STROKE, s), trRound = (r) => tr(ROUND, r);
 
 // ---------- utils ----------
 const $ = (s, e = document) => e.querySelector(s);
@@ -114,14 +123,14 @@ function standardChips(stds) {
 function sparkline(history) {
   const pts = history.filter((h) => h.seconds != null);
   if (!pts.length) return "";
-  const W = 320, H = 56, P = 8;
+  const W = 520, H = 64, P = 8;
   const secs = pts.map((p) => p.seconds);
   const mn = Math.min(...secs), mx = Math.max(...secs), rng = (mx - mn) || 1;
   const n = pts.length;
   const X = (i) => (n === 1 ? W / 2 : P + (i * (W - 2 * P)) / (n - 1));
   const Y = (s) => P + ((s - mn) / rng) * (H - 2 * P); // faster(min) -> top
   if (n === 1) {
-    return `<svg class="spark" viewBox="0 0 ${W} ${H}" preserveAspectRatio="none">
+    return `<svg class="spark" viewBox="0 0 ${W} ${H}">
       <circle class="dot" cx="${W / 2}" cy="${H / 2}" r="4"/></svg>`;
   }
   const line = pts.map((p, i) => `${X(i).toFixed(1)},${Y(p.seconds).toFixed(1)}`).join(" ");
@@ -130,7 +139,7 @@ function sparkline(history) {
     const cls = p.is_pb ? "dot pb" : p.tied ? "dot tie" : "dot";
     return `<circle class="${cls}" cx="${X(i).toFixed(1)}" cy="${Y(p.seconds).toFixed(1)}" r="3.5"/>`;
   }).join("");
-  return `<svg class="spark" viewBox="0 0 ${W} ${H}" preserveAspectRatio="none">
+  return `<svg class="spark" viewBox="0 0 ${W} ${H}">
     <polyline class="ar" points="${area}"/><polyline class="ln" points="${line}"/>${dots}</svg>`;
 }
 
@@ -173,7 +182,7 @@ async function renderMeetList() {
       <div class="row-between"><h2>${esc(m.title || m.name)}</h2><span class="muted">${esc(m.dates || "")}</span></div>
       <div class="muted">${esc(m.club || "")}</div>
       <div class="chips">
-        ${m.course ? `<span class="chip accent">${esc(trCourse(m.course))}</span>` : ""}
+        ${m.course ? `<span class="chip accent">${esc(courseLabel(m.course))}</span>` : ""}
         <span class="chip">${t("swimmers_n", m.matched_swimmer_count)}</span>
         <span class="chip">${t("entries_n", m.matched_entry_count)}</span>
         ${m.has_timeline ? `<span class="chip">${t("timeline_chip")}</span>` : ""}
@@ -197,7 +206,7 @@ async function renderMeet(slug) {
       <div class="row-between"><h2>${esc(m.title || m.name)}</h2><span class="muted">${esc(m.dates || "")}</span></div>
       <div class="muted">${esc(m.club || "")}${m.sanction ? " · " + esc(m.sanction) : ""}</div>
       <div class="chips no-print">
-        ${m.course ? `<span class="chip accent">${esc(trCourse(m.course))}</span>` : ""}
+        ${m.course ? `<span class="chip accent">${esc(courseLabel(m.course))}</span>` : ""}
         <span class="chip">${t("eventcnt", m.event_count ?? "?")}</span>
         ${m.source_files?.timeline ? `<span class="chip">${t("timeline_chip")}</span>` : ""}
       </div></div>`;
@@ -219,7 +228,7 @@ async function renderMeet(slug) {
     return `<div class="swimmer-block">
       <div class="swimmer-head"><span class="avatar">${esc(initials(s.display_name))}</span>
         <span><span class="nm">${esc(s.display_name)}</span>
-        <span class="muted"> · ${esc((s.registered_teams || []).join(", "))} · ${t("events_n", s.entries.length)}</span></span></div>
+        <span class="muted"> · ${esc((s.registered_teams || [])[0] || "")} · ${t("events_n", s.entries.length)}</span></span></div>
       <table class="sched"><thead><tr>
         <th>${t("col_event")}</th><th class="hide-sm">${t("col_session")}</th><th>${t("col_heatlane")}</th><th>${t("col_seed")}</th><th>${t("col_when")}</th>
       </tr></thead><tbody>${rows}</tbody></table></div>`;
@@ -238,7 +247,7 @@ async function renderSwimmers() {
     <div class="card click sw-card" data-go="swimmer/${encodeURIComponent(s.id)}">
       <div class="top"><span class="avatar lg">${esc(initials(s.display_name))}</span>
         <div><div class="nm">${esc(s.display_name)}</div>
-          <div class="sub">${esc((s.teams || []).join(", "))}${s.age ? " · " + s.age : ""}</div></div></div>
+          <div class="sub">${esc((s.teams || [])[0] || "")}${s.age ? " · " + s.age : ""}</div></div></div>
       <div class="statline">
         <div class="stat"><b>${s.meet_count}</b><span>${t("stat_meets")}</span></div>
         <div class="stat"><b>${s.event_count}</b><span>${t("stat_events")}</span></div>
@@ -268,7 +277,7 @@ async function renderSwimmer(id) {
       <div class="swimmer-head" style="margin:0">
         <span class="avatar lg">${esc(initials(s.display_name))}</span>
         <div><div class="nm" style="font-size:20px">${esc(s.display_name)}</div>
-          <div class="muted">${esc((s.teams || []).join(", "))}${s.age ? " · " + s.age : ""} ${swimio ? "· " + swimio : ""}</div></div>
+          <div class="muted">${esc((s.teams || [])[0] || "")}${s.age ? " · " + s.age : ""} ${swimio ? "· " + swimio : ""}</div></div>
       </div>
       <div class="statline" style="margin-top:14px">
         <div class="stat"><b>${s.meet_count}</b><span>${t("stat_meets")}</span></div>
