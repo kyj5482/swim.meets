@@ -11,7 +11,7 @@
       "psych_sheet": "JAG26 Meet Program.pdf",
       "timeline": "JAG26 Timeline.pdf"
     },
-    "processed_at": "2026-06-15T00:54:32+00:00",
+    "processed_at": "2026-06-15T00:55:20+00:00",
     "event_count": 76
   },
   "swimmers": [
@@ -43,7 +43,7 @@
           "entry_team": "NOVA-CA",
           "seed_time": "1:07.64",
           "seed_seconds": 67.64,
-          "estimated_start": null,
+          "estimated_start": "10:12 AM",
           "standards": [
             {
               "label": "13-14 &JAG",
@@ -96,7 +96,7 @@
           "entry_team": "NOVA-CA",
           "seed_time": "2:35.21",
           "seed_seconds": 155.21,
-          "estimated_start": null,
+          "estimated_start": "8:25 AM",
           "standards": [
             {
               "label": "13-14 &JAG",
@@ -149,7 +149,7 @@
           "entry_team": "NOVA-CA",
           "seed_time": "34.60",
           "seed_seconds": 34.6,
-          "estimated_start": null,
+          "estimated_start": "2:32 PM",
           "standards": [
             {
               "label": "13-14 &JAG",
@@ -186,7 +186,7 @@
           "entry_team": "NOVA-CA",
           "seed_time": "1:14.99",
           "seed_seconds": 74.99,
-          "estimated_start": null,
+          "estimated_start": "9:52 AM",
           "standards": [
             {
               "label": "13-14 &JAG",
@@ -239,7 +239,7 @@
           "entry_team": "NOVA-CA",
           "seed_time": "30.39",
           "seed_seconds": 30.39,
-          "estimated_start": null,
+          "estimated_start": "11:14 AM",
           "standards": [
             {
               "label": "13-14 &JAG",
@@ -327,7 +327,7 @@
           "entry_team": "NOVA-CA",
           "seed_time": "2:28.49",
           "seed_seconds": 148.49,
-          "estimated_start": null,
+          "estimated_start": "9:21 AM",
           "standards": [
             {
               "label": "&JAG",
@@ -364,7 +364,7 @@
           "entry_team": "NOVA-CA",
           "seed_time": "1:20.79",
           "seed_seconds": 80.79,
-          "estimated_start": null,
+          "estimated_start": "10:45 AM",
           "standards": [
             {
               "label": "&JAG",
@@ -401,7 +401,7 @@
           "entry_team": "NOVA-CA",
           "seed_time": "2:49.16",
           "seed_seconds": 169.16,
-          "estimated_start": null,
+          "estimated_start": "8:48 AM",
           "standards": [
             {
               "label": "&JAG",
@@ -438,7 +438,7 @@
           "entry_team": "NOVA-CA",
           "seed_time": "35.04",
           "seed_seconds": 35.04,
-          "estimated_start": null,
+          "estimated_start": "2:10 PM",
           "standards": [
             {
               "label": "&JAG",
@@ -475,7 +475,7 @@
           "entry_team": "NOVA-CA",
           "seed_time": "1:32.26",
           "seed_seconds": 92.26,
-          "estimated_start": null,
+          "estimated_start": "10:05 AM",
           "standards": [
             {
               "label": "&JAG",
