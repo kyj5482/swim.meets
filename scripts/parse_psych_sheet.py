@@ -443,6 +443,19 @@ def parse_pdf(path: str) -> dict:
                         current_heat.entries.append(entry)
                         continue
 
+    # 후처리: 컬럼 경계에서 헤더가 조각나 round/heat_of 를 놓친 heat 를
+    # 같은 이벤트의 다른 heat 값으로 보충한다(한 이벤트의 모든 heat 는 동일 라운드).
+    for ev in events:
+        rounds = [h.round for h in ev.heats if h.round]
+        hofs = [h.heat_of for h in ev.heats if h.heat_of]
+        ev_round = rounds[0] if rounds else None
+        ev_hof = max(hofs) if hofs else None
+        for h in ev.heats:
+            if h.round is None:
+                h.round = ev_round
+            if h.heat_of is None:
+                h.heat_of = ev_hof
+
     meta = doc.metadata or {}
     result = {
         "source_file": path.split("/")[-1],

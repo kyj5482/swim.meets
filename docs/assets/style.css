@@ -45,8 +45,15 @@ main.wrap { padding-top: 18px; padding-bottom: 40px; min-height: 60vh; }
 .chip.good { color: var(--good); border-color: #1f5e3a; }
 .chip.bad { color: var(--bad); border-color: #5e2424; }
 
-.back { display: inline-flex; align-items: center; gap: 6px; margin-bottom: 12px;
+.tab.lang { background: transparent; border-color: var(--border); color: var(--muted);
+  min-width: 38px; font-weight: 600; }
+.meet-toolbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+.back { display: inline-flex; align-items: center; gap: 6px;
   background: none; border: none; color: var(--accent); cursor: pointer; font-size: 14px; padding: 0; }
+.btn-print { background: var(--chip); color: var(--text); border: 1px solid var(--border);
+  padding: 6px 14px; border-radius: 8px; cursor: pointer; font-size: 13px; }
+.btn-print:hover { border-color: var(--accent); }
+.print-title { display: none; }
 
 .swimmer-block { margin-bottom: 18px; }
 .swimmer-head { display: flex; align-items: baseline; gap: 10px; margin: 6px 0 10px;
@@ -80,4 +87,28 @@ summary .best { color: var(--accent); font-variant-numeric: tabular-nums; }
 .app-footer { padding: 16px; }
 @media (max-width: 560px) {
   table.entries th:nth-child(2), table.entries td:nth-child(2) { display: none; } /* hide round on mobile */
+}
+
+/* ---- 인쇄(Psych Sheet 느낌): 등록 선수만, 흑백 종이 친화 레이아웃 ---- */
+@media print {
+  :root { --text: #000; --muted: #333; --border: #999; }
+  html, body { background: #fff; color: #000; }
+  .app-header, .app-footer, .no-print, .meet-toolbar, .std-row { display: none !important; }
+  .wrap { max-width: 100%; padding: 0; }
+  main.wrap { padding: 0; }
+  .print-title { display: block; font-size: 16px; font-weight: 700; margin-bottom: 4px; }
+  .card, .swimmer-block { background: #fff; border: none; box-shadow: none;
+    padding: 0; margin: 0 0 10px; }
+  .meet-head { border-bottom: 1px solid #000; padding-bottom: 6px; margin-bottom: 10px; }
+  .meet-head h2 { font-size: 15px; }
+  .swimmer-block { break-inside: avoid; page-break-inside: avoid; margin-bottom: 14px; }
+  .swimmer-head { border-bottom: 1px solid #000; }
+  .swimmer-head .name { font-size: 14px; }
+  table.entries { font-size: 11.5px; }
+  table.entries th, table.entries td { padding: 3px 6px; border-bottom: 1px solid #ccc; }
+  table.entries th { color: #000; }
+  .hl, .start { color: #000; }
+  /* 인쇄 시 모바일 숨김 해제 */
+  table.entries th:nth-child(2), table.entries td:nth-child(2) { display: table-cell !important; }
+  a[href]::after { content: ""; }
 }

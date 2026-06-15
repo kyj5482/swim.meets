@@ -92,22 +92,33 @@ def extract_meet_meta(psych_path: Path | None) -> dict:
 
 
 def lookup_start_time(timeline: dict | None, event_number: int, round_name: str | None) -> str | None:
+    """엔트리의 라운드(round_name)에 해당하는 예상 시작 시각을 찾는다.
+
+    Prelim/Final 이 모두 있는 대회에서 선수의 예선(Prelims) 엔트리에는 예선 시각을
+    보여줘야 하므로, 라운드가 명확하면 같은 라운드의 시각만 반환한다(다른 라운드로
+    잘못 폴백하지 않음). 라운드를 알 수 없을 때만 아무 시각이나 사용한다.
+    """
     if not timeline:
         return None
-    want_final = (round_name or "").lower().startswith("final")
-    want_prelim = (round_name or "").lower().startswith(("prelim", "semi"))
-    fallback = None
+    want = parse_timeline.round_category(round_name)
+    cands: list[tuple[str | None, str]] = []  # (라운드범주, 시작시각)
     for s in timeline.get("sessions", []):
-        label = (s.get("label") or "").lower()
+        sess_cat = parse_timeline.round_category(s.get("label"))
         for e in s.get("events", []):
             if e.get("number") != event_number or not e.get("start_time"):
                 continue
-            if want_final and "final" in label:
-                return e["start_time"]
-            if want_prelim and "prelim" in label:
-                return e["start_time"]
-            fallback = fallback or e["start_time"]
-    return fallback
+            cands.append((e.get("round") or sess_cat, e["start_time"]))
+    if not cands:
+        return None
+    if want:
+        same = next((t for cat, t in cands if cat == want), None)
+        if same:
+            return same
+        # 타임라인이 라운드를 전혀 구분하지 않으면(단일 세션 등) 그 시각을 사용
+        if all(cat is None for cat, _ in cands):
+            return cands[0][1]
+        return None  # 다른 라운드 시각만 있으면 표시하지 않음
+    return cands[0][1]
 
 
 # ---------------------------------------------------------------------------
