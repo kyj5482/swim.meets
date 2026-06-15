@@ -13,6 +13,11 @@ on:
       - ".github/workflows/process-meets.yml"
   workflow_dispatch:
 
+# Node.js 20 기반 액션 폐기 대응: 번들 JS 액션을 Node.js 24 로 실행하도록 강제.
+# (2026-06-16 부터 기본값이 되지만, 미리 옵트인해 폐기 경고를 없앤다.)
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: "true"
+
 permissions:
   contents: write   # 생성된 JSON 커밋
   pages: write      # GitHub Pages 배포
