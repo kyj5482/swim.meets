@@ -23,13 +23,10 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  # 파싱 → 데이터 생성 → 커밋 → (main 한정) 방금 만든 docs/ 를 그대로 Pages 배포.
-  # 하나의 job 안에서 처리해야 '배포가 옛 커밋을 올리는' 문제가 생기지 않는다.
-  build-and-deploy:
+  # 모든 브랜치에서 실행: 파싱 → 데이터 생성 → 커밋.
+  # main 일 때만 방금 만든 docs/ 를 Pages 아티팩트로 업로드한다.
+  build:
     runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - uses: actions/checkout@v4
 
@@ -62,8 +59,7 @@ jobs:
             git push
           fi
 
-      # 이하 배포 단계는 main 브랜치에서만 동작한다. 방금 빌드한 작업 트리의
-      # docs/ 를 그대로 업로드하므로 항상 최신 데이터가 배포된다.
+      # 방금 빌드한 작업 트리의 docs/ 를 그대로 아티팩트로 만든다(항상 최신).
       - name: Setup Pages
         if: github.ref == 'refs/heads/main'
         uses: actions/configure-pages@v5
@@ -74,7 +70,17 @@ jobs:
         with:
           path: "docs"
 
+  # main 브랜치에서만 실행되는 배포 전용 job.
+  # environment 보호 규칙(main만 허용)은 이 job 에만 적용되므로,
+  # 다른 브랜치에서는 job 자체가 스킵되어 거부 오류가 나지 않는다.
+  deploy:
+    needs: build
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
       - name: Deploy to GitHub Pages
         id: deployment
-        if: github.ref == 'refs/heads/main'
         uses: actions/deploy-pages@v4
