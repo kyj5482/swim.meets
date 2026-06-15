@@ -40,6 +40,46 @@ FLIGHT_RE = re.compile(r"^FLIGHT\s+(?P<flight>[AB])\b", re.IGNORECASE)
 TAIL_RE = re.compile(r"(?:\s+\d+){0,2}\s+\d{1,2}[:.]\d{2}\s*[AP]M.*$", re.IGNORECASE)
 
 
+def _time_minutes(t: Optional[str]) -> int:
+    """'1:53 PM' -> 자정 기준 분. 정렬용. 파싱 실패 시 0."""
+    if not t:
+        return 0
+    m = TIME_AT_RE.search(t)
+    if not m:
+        return 0
+    h, mm, ap = int(m.group(1)), int(m.group(2)), m.group(3).upper()
+    if ap == "PM" and h != 12:
+        h += 12
+    if ap == "AM" and h == 12:
+        h = 0
+    return h * 60 + mm
+
+
+def _assign_flights(session: dict) -> None:
+    """세션 내에서 같은 이벤트가 여러 번(다른 시간) 등장하면 플라이트로 본다.
+
+    선수가 많은 이벤트는 'FLIGHT A'(이른 시간)/'FLIGHT B'(늦은 시간)로 나뉘는데,
+    OCR 이 'FLIGHT B' 배너를 놓치는 경우가 많으므로, 헤더가 아니라 '같은 이벤트의
+    중복 등장'으로 판정한다. 시작 시각이 빠른 쪽부터 A, B, C… 로 라벨링한다.
+    한 번만 등장하면 분할이 없으므로 flight=None.
+    """
+    from collections import defaultdict
+
+    groups: dict[int, list] = defaultdict(list)
+    for e in session.get("events", []):
+        if e.get("start_time"):
+            groups[e["number"]].append(e)
+    for evs in groups.values():
+        if len(evs) >= 2:
+            for idx, e in enumerate(sorted(evs, key=lambda x: _time_minutes(x["start_time"]))):
+                e["flight"] = chr(ord("A") + idx)
+        else:
+            evs[0]["flight"] = None
+    for e in session.get("events", []):
+        if not e.get("start_time"):
+            e["flight"] = None
+
+
 def round_category(s: Optional[str]) -> Optional[str]:
     """라벨/라운드 문자열을 'prelim' / 'final' 로 정규화."""
     if not s:
@@ -179,6 +219,10 @@ def parse_pdf(path: str) -> dict:
                 }
             )
         i += 1
+
+    # 세션별로 중복 이벤트를 플라이트(A/B/…)로 라벨링 (헤더 누락에 강건)
+    for s in sessions:
+        _assign_flights(s)
 
     return {
         "source_file": path.split("/")[-1],
