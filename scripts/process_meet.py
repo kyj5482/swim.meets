@@ -91,33 +91,60 @@ def extract_meet_meta(psych_path: Path | None) -> dict:
 # ---------------------------------------------------------------------------
 
 
-def lookup_start_time(timeline: dict | None, event_number: int, round_name: str | None) -> str | None:
-    """엔트리의 라운드(round_name)에 해당하는 예상 시작 시각을 찾는다.
+def lookup_start_time(
+    timeline: dict | None,
+    event_number: int,
+    round_name: str | None,
+    heat: int | None = None,
+    heat_of: int | None = None,
+) -> tuple[str | None, str | None]:
+    """엔트리의 라운드/조에 맞는 예상 시작 시각과 플라이트(A/B)를 찾는다.
 
-    Prelim/Final 이 모두 있는 대회에서 선수의 예선(Prelims) 엔트리에는 예선 시각을
-    보여줘야 하므로, 라운드가 명확하면 같은 라운드의 시각만 반환한다(다른 라운드로
-    잘못 폴백하지 않음). 라운드를 알 수 없을 때만 아무 시각이나 사용한다.
+    선수가 많은 대회는 한 이벤트를 'FLIGHT A'(상위 조)와 'FLIGHT B'(하위 조)로 나눠
+    서로 다른 시간에 진행한다. psych 의 조 번호로 어느 플라이트인지 판정한다:
+    상위 heat 들이 Flight A, 나머지(하위 조)가 Flight B.
+
+    반환: (시작시각, 플라이트라벨 'A'/'B' 또는 None)
     """
     if not timeline:
-        return None
+        return None, None
     want = parse_timeline.round_category(round_name)
-    cands: list[tuple[str | None, str]] = []  # (라운드범주, 시작시각)
+
+    # 이 이벤트 번호의 타임라인 기록 수집
+    recs: list[dict] = []
     for s in timeline.get("sessions", []):
         sess_cat = parse_timeline.round_category(s.get("label"))
         for e in s.get("events", []):
             if e.get("number") != event_number or not e.get("start_time"):
                 continue
-            cands.append((e.get("round") or sess_cat, e["start_time"]))
-    if not cands:
-        return None
-    if want:
-        same = next((t for cat, t in cands if cat == want), None)
-        if same:
-            return same
-        # 해당 라운드(예: 예선) 시각이 없으면, 그 종목엔 예선이 없는 것(타임결승 등)
-        # 이므로 가용한 시각을 사용한다.
-        return cands[0][1]
-    return cands[0][1]
+            recs.append({
+                "cat": e.get("round") or sess_cat,
+                "flight": e.get("flight"),
+                "heats": e.get("heats"),
+                "time": e["start_time"],
+            })
+    if not recs:
+        return None, None
+
+    # 우선 같은 라운드(예: 예선)의 기록으로 좁힌다.
+    same = [r for r in recs if want and r["cat"] == want]
+    pool = same or recs
+
+    # 플라이트 기록(A/B)이 있으면 조 번호로 판정
+    flights = {r["flight"]: r for r in pool if r["flight"] in ("A", "B")}
+    if "A" in flights and "B" in flights and heat:
+        a = flights["A"]
+        heats_a = a.get("heats")
+        if heats_a and heat_of:
+            # 상위 heats_a 개 조 = Flight A, 그 아래 = Flight B
+            boundary = heat_of - heats_a  # 이 값 이하의 조는 B
+            chosen = "A" if heat > boundary else "B"
+        else:
+            chosen = "A"
+        return flights[chosen]["time"], chosen
+
+    # 플라이트 구분이 없으면 해당 라운드(또는 가용) 첫 시각
+    return pool[0]["time"], pool[0].get("flight")
 
 
 # ---------------------------------------------------------------------------
@@ -166,8 +193,12 @@ def process_meet(meet_dir: Path, swimmers: list[dict]) -> dict:
         }
 
     for ev in psych.get("events", []):
+        ev_gender = common.normalize_gender(ev.get("gender"))  # 'Girls'/'Boys' -> F/M
         for heat in ev.get("heats", []):
             for entry in heat.get("entries", []):
+                # 엔트리 자체 성별이 없으면(연령부 양식) 이벤트 성별을 사용해 매칭 정확도 향상
+                if not entry.get("gender") and ev_gender:
+                    entry = {**entry, "gender": ev_gender}
                 m = common.best_match(entry, swimmers)
                 if not m:
                     continue
@@ -175,7 +206,10 @@ def process_meet(meet_dir: Path, swimmers: list[dict]) -> dict:
                 std_eval = common.evaluate_standards(
                     entry.get("seed_time"), entry.get("age"), ev.get("standards", {})
                 )
-                start_time = lookup_start_time(timeline, ev.get("number"), heat.get("round"))
+                start_time, flight = lookup_start_time(
+                    timeline, ev.get("number"), heat.get("round"),
+                    heat.get("heat"), heat.get("heat_of"),
+                )
                 results[sw["id"]]["entries"].append(
                     {
                         "event_number": ev.get("number"),
@@ -188,6 +222,7 @@ def process_meet(meet_dir: Path, swimmers: list[dict]) -> dict:
                         "round": heat.get("round"),
                         "heat": heat.get("heat"),
                         "heat_of": heat.get("heat_of"),
+                        "flight": flight,
                         "lane": entry.get("lane"),
                         "entry_age": entry.get("age"),
                         "entry_team": entry.get("team"),

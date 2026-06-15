@@ -70,6 +70,23 @@ def _norm_team(s: Optional[str]) -> str:
     return re.sub(r"[^a-z0-9]", "", s.lower())
 
 
+def normalize_gender(s: Optional[str]) -> Optional[str]:
+    """다양한 성별 표기를 'M' / 'F' 로 정규화. 알 수 없으면 None.
+
+    허용: M/F, Boy(s)/Girl(s), Men/Women, Male/Female, B/G, W(여, HY-TEK).
+    """
+    if not s:
+        return None
+    c = str(s).strip().lower()
+    if not c:
+        return None
+    if c[0] == "m" or c.startswith(("boy", "male")) or c[0] == "b":
+        return "M"
+    if c[0] in ("f", "g", "w") or c.startswith(("girl", "women", "female")):
+        return "F"
+    return None
+
+
 # ---------------------------------------------------------------------------
 # 선수 매칭
 # ---------------------------------------------------------------------------
@@ -114,7 +131,15 @@ def match_score(swimmer: dict, entry: dict) -> Optional[float]:
     if best is None:
         return None
 
+    # 성별 평가: 둘 다 알려져 있고 다르면 동명이인이므로 제외(동성 종목 정확도 핵심).
+    s_gender = normalize_gender(swimmer.get("gender"))
+    e_gender = normalize_gender(entry.get("gender"))
+    if s_gender and e_gender and s_gender != e_gender:
+        return None
+
     score = 5.0 + best  # 성+이름 일치 기본 점수
+    if s_gender and e_gender and s_gender == e_gender:
+        score += 1.0
 
     # 나이 평가 (대회마다 ±1 변동 가능)
     s_age = swimmer.get("age")

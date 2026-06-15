@@ -68,6 +68,9 @@ table.entries tr:last-child td { border-bottom: none; }
 .hl { color: var(--accent); font-variant-numeric: tabular-nums; white-space: nowrap; }
 .time { font-variant-numeric: tabular-nums; font-weight: 600; }
 .start { color: var(--warn); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.flight { font-weight: 700; }
+.flight-A { color: var(--good); }
+.flight-B { color: var(--warn); }
 .std-ok { color: var(--good); }
 .std-miss { color: var(--muted); }
 .delta-neg { color: var(--good); } /* 빨라짐 */

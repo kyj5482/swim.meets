@@ -34,6 +34,8 @@ EVENT_LINE_RE = re.compile(
 )
 SESSION_RE = re.compile(r"Session:?\s*(?P<num>\d+)\s*(?P<label>.*)", re.IGNORECASE)
 DAY_RE = re.compile(r"Day of Meet:?\s*(?P<day>\d+)", re.IGNORECASE)
+# 'FLIGHT A' / 'Flight B' 구분 헤더 (선수가 많아 한 이벤트를 두 플라이트로 나눠 진행)
+FLIGHT_RE = re.compile(r"^FLIGHT\s+(?P<flight>[AB])\b", re.IGNORECASE)
 # 설명 뒤에 붙는 'entries heats time' 꼬리 제거용
 TAIL_RE = re.compile(r"(?:\s+\d+){0,2}\s+\d{1,2}[:.]\d{2}\s*[AP]M.*$", re.IGNORECASE)
 
@@ -91,6 +93,7 @@ def parse_pdf(path: str) -> dict:
 
     sessions: list[dict] = []
     current: Optional[dict] = None
+    current_flight: Optional[str] = None
 
     def ensure_session() -> dict:
         nonlocal current
@@ -114,6 +117,13 @@ def parse_pdf(path: str) -> dict:
                 "events": [],
             }
             sessions.append(current)
+            current_flight = None
+            i += 1
+            continue
+
+        fm = FLIGHT_RE.match(line)
+        if fm:
+            current_flight = fm.group("flight").upper()
             i += 1
             continue
 
@@ -162,6 +172,7 @@ def parse_pdf(path: str) -> dict:
                     "number": int(em.group("num")),
                     "description": desc,
                     "round": ev_round,
+                    "flight": current_flight,
                     "entries": entries,
                     "heats": heats,
                     "start_time": start_time,

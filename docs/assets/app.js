@@ -12,6 +12,7 @@ const I18N = {
     swimmers_n: (n) => `선수 ${n}명`, entries_n: (n) => `엔트리 ${n}건`,
     events_n: (n) => `${n}종목`, meets_n: (n) => `${n}개 대회`,
     eventcnt_n: (n) => `이벤트 ${n}개`,
+    flight: (f) => `${f}플라이트`,
     best: (t) => `최고 ${t}`, timeline_chip: "⏱ 타임라인",
     updated: "갱신", meet_count: (n) => `대회 ${n}개`,
     no_meets_title: "아직 처리된 대회가 없습니다.",
@@ -34,6 +35,7 @@ const I18N = {
     events_n: (n) => `${n} event${n === 1 ? "" : "s"}`,
     meets_n: (n) => `${n} meet${n === 1 ? "" : "s"}`,
     eventcnt_n: (n) => `${n} events`,
+    flight: (f) => `Flight ${f}`,
     best: (t) => `Best ${t}`, timeline_chip: "⏱ timeline",
     updated: "Updated", meet_count: (n) => `${n} meet${n === 1 ? "" : "s"}`,
     no_meets_title: "No meets processed yet.",
@@ -218,7 +220,7 @@ async function renderMeet(slug) {
       const heat = e.heat != null ? `${e.heat}${e.heat_of ? "/" + e.heat_of : ""}` : "-";
       return `<tr>
         <td class="ev">#${e.event_number} <span class="muted">${esc(eventName(e))}</span></td>
-        <td class="muted">${esc(trRound(e.round))}</td>
+        <td class="muted">${esc(trRound(e.round))}${e.flight ? ` · <span class="flight flight-${e.flight}">${t("flight", e.flight)}</span>` : ""}</td>
         <td class="hl">H${heat} · L${e.lane ?? "-"}</td>
         <td class="time">${esc(e.seed_time || "NT")}</td>
         <td class="start">${e.estimated_start ? "⏱ " + esc(e.estimated_start) : ""}</td>
