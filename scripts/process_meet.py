@@ -114,10 +114,9 @@ def lookup_start_time(timeline: dict | None, event_number: int, round_name: str 
         same = next((t for cat, t in cands if cat == want), None)
         if same:
             return same
-        # 타임라인이 라운드를 전혀 구분하지 않으면(단일 세션 등) 그 시각을 사용
-        if all(cat is None for cat, _ in cands):
-            return cands[0][1]
-        return None  # 다른 라운드 시각만 있으면 표시하지 않음
+        # 해당 라운드(예: 예선) 시각이 없으면, 그 종목엔 예선이 없는 것(타임결승 등)
+        # 이므로 가용한 시각을 사용한다.
+        return cands[0][1]
     return cands[0][1]
 
 
