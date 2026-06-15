@@ -11,678 +11,531 @@
       "psych_sheet": "JAG26 Meet Program.pdf",
       "timeline": "JAG26 Timeline.pdf"
     },
-    "processed_at": "2026-06-15T00:00:25+00:00",
+    "processed_at": "2026-06-15T00:04:41+00:00",
     "event_count": 76
   },
   "swimmers": [
     {
-      "id": "mu-maggie",
-      "display_name": "Maggie Mu",
-      "last": "Mu",
-      "first": "Maggie",
-      "registered_age": 15,
-      "registered_teams": [
-        "NOVA-CA",
-        "NOVA"
-      ],
-      "swimmerid": null,
-      "entries": [
-        {
-          "event_number": 1,
-          "event_title": "Event 1 Girls 13 & Over 200 LC Meter Freestyle",
-          "gender": "Girls",
-          "distance": 200,
-          "course": "LC Meter",
-          "stroke": "Freestyle",
-          "age_group": "13 & Over",
-          "round": "Prelims",
-          "heat": 1,
-          "heat_of": 15,
-          "lane": 7,
-          "entry_age": 15,
-          "entry_team": "NOVA-CA",
-          "seed_time": "2:10.44",
-          "seed_seconds": 130.44,
-          "estimated_start": "05:00 PM",
-          "standards": [
-            {
-              "label": "15&O &JAG",
-              "time": "2:20.60",
-              "seconds": 140.6,
-              "applies_to_age": true,
-              "achieved": true,
-              "delta_seconds": -10.16
-            },
-            {
-              "label": "15&O BB",
-              "time": "2:37.09",
-              "seconds": 157.09,
-              "applies_to_age": true,
-              "achieved": true,
-              "delta_seconds": -26.65
-            },
-            {
-              "label": "13-14 &JAG",
-              "time": "2:26.30",
-              "seconds": 146.3,
-              "applies_to_age": false,
-              "achieved": true,
-              "delta_seconds": -15.86
-            },
-            {
-              "label": "13-14 BB",
-              "time": "2:42.79",
-              "seconds": 162.79,
-              "applies_to_age": false,
-              "achieved": true,
-              "delta_seconds": -32.35
-            }
-          ],
-          "match_score": 10.0
-        },
-        {
-          "event_number": 27,
-          "event_title": "Event 27 Girls 13 & Over 100 LC Meter Freestyle",
-          "gender": "Girls",
-          "distance": 100,
-          "course": "LC Meter",
-          "stroke": "Freestyle",
-          "age_group": "13 & Over",
-          "round": "Prelims",
-          "heat": 1,
-          "heat_of": 19,
-          "lane": 8,
-          "entry_age": 15,
-          "entry_team": "NOVA-CA",
-          "seed_time": "1:00.17",
-          "seed_seconds": 60.17,
-          "estimated_start": "05:52 PM",
-          "standards": [
-            {
-              "label": "15&O &JAG",
-              "time": "1:04.10",
-              "seconds": 64.1,
-              "applies_to_age": true,
-              "achieved": true,
-              "delta_seconds": -3.93
-            },
-            {
-              "label": "15&O BB",
-              "time": "1:12.79",
-              "seconds": 72.79,
-              "applies_to_age": true,
-              "achieved": true,
-              "delta_seconds": -12.62
-            },
-            {
-              "label": "13-14 &JAG",
-              "time": "1:06.70",
-              "seconds": 66.7,
-              "applies_to_age": false,
-              "achieved": true,
-              "delta_seconds": -6.53
-            },
-            {
-              "label": "13-14 BB",
-              "time": "1:15.39",
-              "seconds": 75.39,
-              "applies_to_age": false,
-              "achieved": true,
-              "delta_seconds": -15.22
-            }
-          ],
-          "match_score": 10.0
-        }
-      ]
-    },
-    {
-      "id": "arnold-maddie",
-      "display_name": "Maddie Arnold",
-      "last": "Arnold",
-      "first": "Maddie",
-      "registered_age": 14,
-      "registered_teams": [
-        "NOVA-CA",
-        "NOVA"
-      ],
-      "swimmerid": null,
-      "entries": [
-        {
-          "event_number": 1,
-          "event_title": "Event 1 Girls 13 & Over 200 LC Meter Freestyle",
-          "gender": "Girls",
-          "distance": 200,
-          "course": "LC Meter",
-          "stroke": "Freestyle",
-          "age_group": "13 & Over",
-          "round": "Prelims",
-          "heat": 5,
-          "heat_of": 15,
-          "lane": 3,
-          "entry_age": 14,
-          "entry_team": "NOVA-CA",
-          "seed_time": "2:15.95",
-          "seed_seconds": 135.95,
-          "estimated_start": "05:00 PM",
-          "standards": [
-            {
-              "label": "13-14 &JAG",
-              "time": "2:26.30",
-              "seconds": 146.3,
-              "applies_to_age": true,
-              "achieved": true,
-              "delta_seconds": -10.35
-            },
-            {
-              "label": "13-14 BB",
-              "time": "2:42.79",
-              "seconds": 162.79,
-              "applies_to_age": true,
-              "achieved": true,
-              "delta_seconds": -26.84
-            },
-            {
-              "label": "15&O &JAG",
-              "time": "2:20.60",
-              "seconds": 140.6,
-              "applies_to_age": false,
-              "achieved": true,
-              "delta_seconds": -4.65
-            },
-            {
-              "label": "15&O BB",
-              "time": "2:37.09",
-              "seconds": 157.09,
-              "applies_to_age": false,
-              "achieved": true,
-              "delta_seconds": -21.14
-            }
-          ],
-          "match_score": 9.8
-        },
-        {
-          "event_number": 7,
-          "event_title": "Event 7 Girls 13 & Over 100 LC Meter Butterfly",
-          "gender": "Girls",
-          "distance": 100,
-          "course": "LC Meter",
-          "stroke": "Butterfly",
-          "age_group": "13 & Over",
-          "round": "Prelims",
-          "heat": 4,
-          "heat_of": 14,
-          "lane": 1,
-          "entry_age": 14,
-          "entry_team": "NOVA-CA",
-          "seed_time": "1:09.25",
-          "seed_seconds": 69.25,
-          "estimated_start": "05:47 PM",
-          "standards": [
-            {
-              "label": "13-14 &JAG",
-              "time": "1:16.00",
-              "seconds": 76.0,
-              "applies_to_age": true,
-              "achieved": true,
-              "delta_seconds": -6.75
-            },
-            {
-              "label": "13-14 BB",
-              "time": "1:20.99",
-              "seconds": 80.99,
-              "applies_to_age": true,
-              "achieved": true,
-              "delta_seconds": -11.74
-            },
-            {
-              "label": "15&O &JAG",
-              "time": "1:12.50",
-              "seconds": 72.5,
-              "applies_to_age": false,
-              "achieved": true,
-              "delta_seconds": -3.25
-            },
-            {
-              "label": "15&O BB",
-              "time": "1:18.29",
-              "seconds": 78.29,
-              "applies_to_age": false,
-              "achieved": true,
-              "delta_seconds": -9.04
-            }
-          ],
-          "match_score": 9.8
-        },
-        {
-          "event_number": 27,
-          "event_title": "Event 27 Girls 13 & Over 100 LC Meter Freestyle",
-          "gender": "Girls",
-          "distance": 100,
-          "course": "LC Meter",
-          "stroke": "Freestyle",
-          "age_group": "13 & Over",
-          "round": "Prelims",
-          "heat": 6,
-          "heat_of": 19,
-          "lane": 5,
-          "entry_age": 14,
-          "entry_team": "NOVA-CA",
-          "seed_time": "1:02.50",
-          "seed_seconds": 62.5,
-          "estimated_start": "05:52 PM",
-          "standards": [
-            {
-              "label": "13-14 &JAG",
-              "time": "1:06.70",
-              "seconds": 66.7,
-              "applies_to_age": true,
-              "achieved": true,
-              "delta_seconds": -4.2
-            },
-            {
-              "label": "13-14 BB",
-              "time": "1:15.39",
-              "seconds": 75.39,
-              "applies_to_age": true,
-              "achieved": true,
-              "delta_seconds": -12.89
-            },
-            {
-              "label": "15&O &JAG",
-              "time": "1:04.10",
-              "seconds": 64.1,
-              "applies_to_age": false,
-              "achieved": true,
-              "delta_seconds": -1.6
-            },
-            {
-              "label": "15&O BB",
-              "time": "1:12.79",
-              "seconds": 72.79,
-              "applies_to_age": false,
-              "achieved": true,
-              "delta_seconds": -10.29
-            }
-          ],
-          "match_score": 9.8
-        },
-        {
-          "event_number": 33,
-          "event_title": "Event 33 Girls 11 & Over 200 LC Meter Butterfly",
-          "gender": "Girls",
-          "distance": 200,
-          "course": "LC Meter",
-          "stroke": "Butterfly",
-          "age_group": "11 & Over",
-          "round": "Prelims",
-          "heat": 3,
-          "heat_of": 9,
-          "lane": 4,
-          "entry_age": 14,
-          "entry_team": "NOVA-CA",
-          "seed_time": "2:36.27",
-          "seed_seconds": 156.27,
-          "estimated_start": "06:18 PM",
-          "standards": [
-            {
-              "label": "&JAG",
-              "time": "3:00.80",
-              "seconds": 180.8,
-              "applies_to_age": true,
-              "achieved": true,
-              "delta_seconds": -24.53
-            },
-            {
-              "label": "BB",
-              "time": "3:01.69",
-              "seconds": 181.69,
-              "applies_to_age": true,
-              "achieved": true,
-              "delta_seconds": -25.42
-            }
-          ],
-          "match_score": 9.8
-        },
-        {
-          "event_number": 57,
-          "event_title": "Event 57 Girls 13 & Over 50 LC Meter Butterfly",
-          "gender": "Girls",
-          "distance": 50,
-          "course": "LC Meter",
-          "stroke": "Butterfly",
-          "age_group": "13 & Over",
-          "round": "Prelims",
-          "heat": 8,
-          "heat_of": 23,
-          "lane": 7,
-          "entry_age": 14,
-          "entry_team": "NOVA-CA",
-          "seed_time": "32.12",
-          "seed_seconds": 32.12,
-          "estimated_start": "06:56 PM",
-          "standards": [
-            {
-              "label": "13-14 &JAG",
-              "time": "34.39",
-              "seconds": 34.39,
-              "applies_to_age": true,
-              "achieved": true,
-              "delta_seconds": -2.27
-            },
-            {
-              "label": "15&O &JAG",
-              "time": "33.49",
-              "seconds": 33.49,
-              "applies_to_age": false,
-              "achieved": true,
-              "delta_seconds": -1.37
-            }
-          ],
-          "match_score": 9.8
-        },
-        {
-          "event_number": 79,
-          "event_title": "Event 79 Girls 13 & Over 50 LC Meter Freestyle",
-          "gender": "Girls",
-          "distance": 50,
-          "course": "LC Meter",
-          "stroke": "Freestyle",
-          "age_group": "13 & Over",
-          "round": "Prelims",
-          "heat": 5,
-          "heat_of": 20,
-          "lane": 6,
-          "entry_age": 14,
-          "entry_team": "NOVA-CA",
-          "seed_time": "28.60",
-          "seed_seconds": 28.6,
-          "estimated_start": "04:57 PM",
-          "standards": [
-            {
-              "label": "13-14 &JAG",
-              "time": "30.70",
-              "seconds": 30.7,
-              "applies_to_age": true,
-              "achieved": true,
-              "delta_seconds": -2.1
-            },
-            {
-              "label": "13-14 BB",
-              "time": "34.59",
-              "seconds": 34.59,
-              "applies_to_age": true,
-              "achieved": true,
-              "delta_seconds": -5.99
-            },
-            {
-              "label": "15&O &JAG",
-              "time": "29.60",
-              "seconds": 29.6,
-              "applies_to_age": false,
-              "achieved": true,
-              "delta_seconds": -1.0
-            },
-            {
-              "label": "15&O BB",
-              "time": "33.49",
-              "seconds": 33.49,
-              "applies_to_age": false,
-              "achieved": true,
-              "delta_seconds": -4.89
-            }
-          ],
-          "match_score": 9.8
-        }
-      ]
-    },
-    {
-      "id": "radke-lyric",
-      "display_name": "Lyric Radke",
-      "last": "Radke",
-      "first": "Lyric",
+      "id": "nova-jaei",
+      "display_name": "Jaei Kim",
+      "last": "Kim",
+      "first": "Jaei",
       "registered_age": 13,
       "registered_teams": [
         "NOVA-CA",
         "NOVA"
       ],
-      "swimmerid": null,
+      "swimmerid": 1045380,
       "entries": [
         {
-          "event_number": 1,
-          "event_title": "Event 1 Girls 13 & Over 200 LC Meter Freestyle",
-          "gender": "Girls",
-          "distance": 200,
-          "course": "LC Meter",
-          "stroke": "Freestyle",
-          "age_group": "13 & Over",
-          "round": "Prelims",
-          "heat": 6,
-          "heat_of": 15,
-          "lane": 6,
-          "entry_age": 13,
-          "entry_team": "NOVA-CA",
-          "seed_time": "2:16.41",
-          "seed_seconds": 136.41,
-          "estimated_start": "05:00 PM",
-          "standards": [
-            {
-              "label": "13-14 &JAG",
-              "time": "2:26.30",
-              "seconds": 146.3,
-              "applies_to_age": true,
-              "achieved": true,
-              "delta_seconds": -9.89
-            },
-            {
-              "label": "13-14 BB",
-              "time": "2:42.79",
-              "seconds": 162.79,
-              "applies_to_age": true,
-              "achieved": true,
-              "delta_seconds": -26.38
-            },
-            {
-              "label": "15&O &JAG",
-              "time": "2:20.60",
-              "seconds": 140.6,
-              "applies_to_age": false,
-              "achieved": true,
-              "delta_seconds": -4.19
-            },
-            {
-              "label": "15&O BB",
-              "time": "2:37.09",
-              "seconds": 157.09,
-              "applies_to_age": false,
-              "achieved": true,
-              "delta_seconds": -20.68
-            }
-          ],
-          "match_score": 9.8
-        },
-        {
-          "event_number": 7,
-          "event_title": "Event 7 Girls 13 & Over 100 LC Meter Butterfly",
-          "gender": "Girls",
+          "event_number": 8,
+          "event_title": "Event 8 Boys 13 & Over 100 LC Meter Butterfly",
+          "gender": "Boys",
           "distance": 100,
           "course": "LC Meter",
           "stroke": "Butterfly",
           "age_group": "13 & Over",
           "round": "Prelims",
-          "heat": 3,
+          "heat": 10,
           "heat_of": 14,
           "lane": 1,
           "entry_age": 13,
           "entry_team": "NOVA-CA",
-          "seed_time": "1:07.70",
-          "seed_seconds": 67.7,
-          "estimated_start": "05:47 PM",
+          "seed_time": "1:07.64",
+          "seed_seconds": 67.64,
+          "estimated_start": "05:54 PM",
           "standards": [
             {
               "label": "13-14 &JAG",
-              "time": "1:16.00",
-              "seconds": 76.0,
+              "time": "1:10.40",
+              "seconds": 70.4,
               "applies_to_age": true,
               "achieved": true,
-              "delta_seconds": -8.3
+              "delta_seconds": -2.76
             },
             {
               "label": "13-14 BB",
-              "time": "1:20.99",
-              "seconds": 80.99,
+              "time": "1:14.59",
+              "seconds": 74.59,
               "applies_to_age": true,
               "achieved": true,
-              "delta_seconds": -13.29
+              "delta_seconds": -6.95
             },
             {
               "label": "15&O &JAG",
-              "time": "1:12.50",
-              "seconds": 72.5,
+              "time": "1:03.70",
+              "seconds": 63.7,
               "applies_to_age": false,
-              "achieved": true,
-              "delta_seconds": -4.8
+              "achieved": false,
+              "delta_seconds": 3.94
             },
             {
               "label": "15&O BB",
-              "time": "1:18.29",
-              "seconds": 78.29,
+              "time": "1:11.29",
+              "seconds": 71.29,
               "applies_to_age": false,
               "achieved": true,
-              "delta_seconds": -10.59
+              "delta_seconds": -3.65
             }
           ],
-          "match_score": 9.8
+          "match_score": 10.0
         },
         {
-          "event_number": 13,
-          "event_title": "Event 13 Girls 13 & Over 50 LC Meter Backstroke",
-          "gender": "Girls",
-          "distance": 50,
+          "event_number": 22,
+          "event_title": "Event 22 Boys 13 & Over 200 LC Meter IM",
+          "gender": "Boys",
+          "distance": 200,
           "course": "LC Meter",
-          "stroke": "Backstroke",
+          "stroke": "IM",
           "age_group": "13 & Over",
           "round": "Prelims",
-          "heat": 2,
-          "heat_of": 9,
+          "heat": 12,
+          "heat_of": 14,
           "lane": 2,
           "entry_age": 13,
           "entry_team": "NOVA-CA",
-          "seed_time": "32.30",
-          "seed_seconds": 32.3,
-          "estimated_start": "06:16 PM",
+          "seed_time": "2:35.21",
+          "seed_seconds": 155.21,
+          "estimated_start": "05:13 PM",
           "standards": [
             {
               "label": "13-14 &JAG",
-              "time": "36.49",
-              "seconds": 36.49,
+              "time": "2:36.00",
+              "seconds": 156.0,
               "applies_to_age": true,
               "achieved": true,
-              "delta_seconds": -4.19
+              "delta_seconds": -0.79
+            },
+            {
+              "label": "13-14 BB",
+              "time": "2:49.79",
+              "seconds": 169.79,
+              "applies_to_age": true,
+              "achieved": true,
+              "delta_seconds": -14.58
             },
             {
               "label": "15&O &JAG",
-              "time": "35.29",
-              "seconds": 35.29,
+              "time": "2:24.10",
+              "seconds": 144.1,
+              "applies_to_age": false,
+              "achieved": false,
+              "delta_seconds": 11.11
+            },
+            {
+              "label": "15&O BB",
+              "time": "2:43.59",
+              "seconds": 163.59,
               "applies_to_age": false,
               "achieved": true,
-              "delta_seconds": -2.99
+              "delta_seconds": -8.38
             }
           ],
-          "match_score": 9.8
+          "match_score": 10.0
         },
         {
-          "event_number": 51,
-          "event_title": "Event 51 Girls 13 & Over 100 LC Meter Breaststroke",
-          "gender": "Girls",
+          "event_number": 40,
+          "event_title": "Event 40 Boys 13 & Over 50 LC Meter Breaststroke",
+          "gender": "Boys",
+          "distance": 50,
+          "course": "LC Meter",
+          "stroke": "Breaststroke",
+          "age_group": "13 & Over",
+          "round": "Prelims",
+          "heat": 7,
+          "heat_of": 15,
+          "lane": 6,
+          "entry_age": 13,
+          "entry_team": "NOVA-CA",
+          "seed_time": "34.60",
+          "seed_seconds": 34.6,
+          "estimated_start": "06:44 PM",
+          "standards": [
+            {
+              "label": "13-14 &JAG",
+              "time": "37.69",
+              "seconds": 37.69,
+              "applies_to_age": true,
+              "achieved": true,
+              "delta_seconds": -3.09
+            },
+            {
+              "label": "15&O &JAG",
+              "time": "35.79",
+              "seconds": 35.79,
+              "applies_to_age": false,
+              "achieved": true,
+              "delta_seconds": -1.19
+            }
+          ],
+          "match_score": 10.0
+        },
+        {
+          "event_number": 52,
+          "event_title": "Event 52 Boys 13 & Over 100 LC Meter Breaststroke",
+          "gender": "Boys",
           "distance": 100,
           "course": "LC Meter",
           "stroke": "Breaststroke",
           "age_group": "13 & Over",
           "round": "Prelims",
           "heat": 10,
-          "heat_of": 17,
-          "lane": 5,
+          "heat_of": 18,
+          "lane": 4,
           "entry_age": 13,
           "entry_team": "NOVA-CA",
-          "seed_time": "1:24.76",
-          "seed_seconds": 84.76,
-          "estimated_start": "06:25 PM",
+          "seed_time": "1:14.99",
+          "seed_seconds": 74.99,
+          "estimated_start": "06:32 PM",
           "standards": [
             {
               "label": "13-14 &JAG",
-              "time": "1:28.50",
-              "seconds": 88.5,
+              "time": "1:22.10",
+              "seconds": 82.1,
               "applies_to_age": true,
               "achieved": true,
-              "delta_seconds": -3.74
+              "delta_seconds": -7.11
             },
             {
               "label": "13-14 BB",
-              "time": "1:34.99",
-              "seconds": 94.99,
+              "time": "1:27.09",
+              "seconds": 87.09,
               "applies_to_age": true,
               "achieved": true,
-              "delta_seconds": -10.23
+              "delta_seconds": -12.1
             },
             {
               "label": "15&O &JAG",
-              "time": "1:25.10",
-              "seconds": 85.1,
+              "time": "1:15.00",
+              "seconds": 75.0,
               "applies_to_age": false,
               "achieved": true,
-              "delta_seconds": -0.34
+              "delta_seconds": -0.01
             },
             {
               "label": "15&O BB",
-              "time": "1:31.59",
-              "seconds": 91.59,
+              "time": "1:23.09",
+              "seconds": 83.09,
               "applies_to_age": false,
               "achieved": true,
-              "delta_seconds": -6.83
+              "delta_seconds": -8.1
             }
           ],
-          "match_score": 9.8
+          "match_score": 10.0
         },
         {
-          "event_number": 61,
-          "event_title": "Event 61 Girls 13 & Over 400 LC Meter Freestyle",
-          "gender": "Girls",
-          "distance": 400,
+          "event_number": 58,
+          "event_title": "Event 58 Boys 13 & Over 50 LC Meter Butterfly",
+          "gender": "Boys",
+          "distance": 50,
           "course": "LC Meter",
-          "stroke": "Freestyle",
+          "stroke": "Butterfly",
           "age_group": "13 & Over",
-          "round": "Prelims",
-          "heat": 8,
-          "heat_of": 14,
-          "lane": 6,
+          "round": null,
+          "heat": 14,
+          "heat_of": null,
+          "lane": 5,
           "entry_age": 13,
           "entry_team": "NOVA-CA",
-          "seed_time": "4:57.05",
-          "seed_seconds": 297.05,
-          "estimated_start": "07:05 PM",
+          "seed_time": "30.39",
+          "seed_seconds": 30.39,
+          "estimated_start": "07:00 PM",
           "standards": [
             {
               "label": "13-14 &JAG",
-              "time": "5:09.10",
-              "seconds": 309.1,
+              "time": "31.89",
+              "seconds": 31.89,
               "applies_to_age": true,
               "achieved": true,
-              "delta_seconds": -12.05
+              "delta_seconds": -1.5
             },
             {
               "label": "15&O &JAG",
-              "time": "5:01.00",
-              "seconds": 301.0,
+              "time": "30.59",
+              "seconds": 30.59,
               "applies_to_age": false,
               "achieved": true,
-              "delta_seconds": -3.95
+              "delta_seconds": -0.2
             }
           ],
-          "match_score": 9.8
+          "match_score": 10.0
+        },
+        {
+          "event_number": 68,
+          "event_title": "Event 68 Boys 11 & Over 200 LC Meter Breaststroke",
+          "gender": "Boys",
+          "distance": 200,
+          "course": "LC Meter",
+          "stroke": "Breaststroke",
+          "age_group": "11 & Over",
+          "round": "Prelims",
+          "heat": 6,
+          "heat_of": 17,
+          "lane": 8,
+          "entry_age": 13,
+          "entry_team": "NOVA-CA",
+          "seed_time": "2:46.15",
+          "seed_seconds": 166.15,
+          "estimated_start": "04:07 PM",
+          "standards": [
+            {
+              "label": "&JAG",
+              "time": "3:02.10",
+              "seconds": 182.1,
+              "applies_to_age": true,
+              "achieved": true,
+              "delta_seconds": -15.95
+            },
+            {
+              "label": "BB",
+              "time": "3:08.29",
+              "seconds": 188.29,
+              "applies_to_age": true,
+              "achieved": true,
+              "delta_seconds": -22.14
+            }
+          ],
+          "match_score": 10.0
+        }
+      ]
+    },
+    {
+      "id": "nova-jia",
+      "display_name": "Jia Kim",
+      "last": "Kim",
+      "first": "Jia",
+      "registered_age": 11,
+      "registered_teams": [
+        "NOVA-CA",
+        "NOVA"
+      ],
+      "swimmerid": 1045382,
+      "entries": [
+        {
+          "event_number": 5,
+          "event_title": "Event 5 Girls 11-12 200 LC Meter Freestyle",
+          "gender": "Girls",
+          "distance": 200,
+          "course": "LC Meter",
+          "stroke": "Freestyle",
+          "age_group": "11-12",
+          "round": "Prelims",
+          "heat": 3,
+          "heat_of": 7,
+          "lane": 6,
+          "entry_age": 11,
+          "entry_team": "NOVA-CA",
+          "seed_time": "2:28.49",
+          "seed_seconds": 148.49,
+          "estimated_start": "05:35 PM",
+          "standards": [
+            {
+              "label": "&JAG",
+              "time": "2:36.40",
+              "seconds": 156.4,
+              "applies_to_age": true,
+              "achieved": true,
+              "delta_seconds": -7.91
+            },
+            {
+              "label": "BB",
+              "time": "2:53.09",
+              "seconds": 173.09,
+              "applies_to_age": true,
+              "achieved": true,
+              "delta_seconds": -24.6
+            }
+          ],
+          "match_score": 10.0
+        },
+        {
+          "event_number": 11,
+          "event_title": "Event 11 Girls 11-12 100 LC Meter Butterfly",
+          "gender": "Girls",
+          "distance": 100,
+          "course": "LC Meter",
+          "stroke": "Butterfly",
+          "age_group": "11-12",
+          "round": "Prelims",
+          "heat": 4,
+          "heat_of": 7,
+          "lane": 1,
+          "entry_age": 11,
+          "entry_team": "NOVA-CA",
+          "seed_time": "1:20.79",
+          "seed_seconds": 80.79,
+          "estimated_start": "06:08 PM",
+          "standards": [
+            {
+              "label": "&JAG",
+              "time": "1:23.20",
+              "seconds": 83.2,
+              "applies_to_age": true,
+              "achieved": true,
+              "delta_seconds": -2.41
+            },
+            {
+              "label": "BB",
+              "time": "1:30.49",
+              "seconds": 90.49,
+              "applies_to_age": true,
+              "achieved": true,
+              "delta_seconds": -9.7
+            }
+          ],
+          "match_score": 10.0
+        },
+        {
+          "event_number": 23,
+          "event_title": "Event 23 Girls 11-12 200 LC Meter IM",
+          "gender": "Girls",
+          "distance": 200,
+          "course": "LC Meter",
+          "stroke": "IM",
+          "age_group": "11-12",
+          "round": "Prelims",
+          "heat": 3,
+          "heat_of": 7,
+          "lane": 3,
+          "entry_age": 11,
+          "entry_team": "NOVA-CA",
+          "seed_time": "2:49.16",
+          "seed_seconds": 169.16,
+          "estimated_start": "05:24 PM",
+          "standards": [
+            {
+              "label": "&JAG",
+              "time": "2:56.80",
+              "seconds": 176.8,
+              "applies_to_age": true,
+              "achieved": true,
+              "delta_seconds": -7.64
+            },
+            {
+              "label": "BB",
+              "time": "3:15.59",
+              "seconds": 195.59,
+              "applies_to_age": true,
+              "achieved": true,
+              "delta_seconds": -26.43
+            }
+          ],
+          "match_score": 10.0
+        },
+        {
+          "event_number": 35,
+          "event_title": "Event 35 Girls 11-12 50 LC Meter Butterfly",
+          "gender": "Girls",
+          "distance": 50,
+          "course": "LC Meter",
+          "stroke": "Butterfly",
+          "age_group": "11-12",
+          "round": "Prelims",
+          "heat": 5,
+          "heat_of": 11,
+          "lane": 6,
+          "entry_age": 11,
+          "entry_team": "NOVA-CA",
+          "seed_time": "35.04",
+          "seed_seconds": 35.04,
+          "estimated_start": "06:30 PM",
+          "standards": [
+            {
+              "label": "&JAG",
+              "time": "36.40",
+              "seconds": 36.4,
+              "applies_to_age": true,
+              "achieved": true,
+              "delta_seconds": -1.36
+            },
+            {
+              "label": "BB",
+              "time": "38.79",
+              "seconds": 38.79,
+              "applies_to_age": true,
+              "achieved": true,
+              "delta_seconds": -3.75
+            }
+          ],
+          "match_score": 10.0
+        },
+        {
+          "event_number": 53,
+          "event_title": "Event 53 Girls 11-12 100 LC Meter Breaststroke",
+          "gender": "Girls",
+          "distance": 100,
+          "course": "LC Meter",
+          "stroke": "Breaststroke",
+          "age_group": "11-12",
+          "round": "Prelims",
+          "heat": 4,
+          "heat_of": 10,
+          "lane": 8,
+          "entry_age": 11,
+          "entry_team": "NOVA-CA",
+          "seed_time": "1:32.26",
+          "seed_seconds": 92.26,
+          "estimated_start": "06:39 PM",
+          "standards": [
+            {
+              "label": "&JAG",
+              "time": "1:35.40",
+              "seconds": 95.4,
+              "applies_to_age": true,
+              "achieved": true,
+              "delta_seconds": -3.14
+            },
+            {
+              "label": "BB",
+              "time": "1:42.19",
+              "seconds": 102.19,
+              "applies_to_age": true,
+              "achieved": true,
+              "delta_seconds": -9.93
+            }
+          ],
+          "match_score": 10.0
+        },
+        {
+          "event_number": 71,
+          "event_title": "Event 71 Girls 11-12 50 LC Meter Breaststroke",
+          "gender": "Girls",
+          "distance": 50,
+          "course": "LC Meter",
+          "stroke": "Breaststroke",
+          "age_group": "11-12",
+          "round": "Prelims",
+          "heat": 4,
+          "heat_of": 9,
+          "lane": 8,
+          "entry_age": 11,
+          "entry_team": "NOVA-CA",
+          "seed_time": "42.65",
+          "seed_seconds": 42.65,
+          "estimated_start": "04:19 PM",
+          "standards": [
+            {
+              "label": "&JAG",
+              "time": "44.20",
+              "seconds": 44.2,
+              "applies_to_age": true,
+              "achieved": true,
+              "delta_seconds": -1.55
+            },
+            {
+              "label": "BB",
+              "time": "46.19",
+              "seconds": 46.19,
+              "applies_to_age": true,
+              "achieved": true,
+              "delta_seconds": -3.54
+            }
+          ],
+          "match_score": 10.0
         }
       ]
     }
   ],
-  "matched_swimmer_count": 3,
-  "matched_entry_count": 13
+  "matched_swimmer_count": 2,
+  "matched_entry_count": 12
 }

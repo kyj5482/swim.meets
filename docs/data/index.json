@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-15T00:00:25+00:00",
+  "generated_at": "2026-06-15T00:04:41+00:00",
   "meet_count": 2,
   "meets": [
     {
@@ -10,8 +10,8 @@
       "date_iso": "2026-06-11",
       "course": "LC Meter",
       "club": "Irvine Novaquatics, Inc.",
-      "matched_swimmer_count": 3,
-      "matched_entry_count": 13,
+      "matched_swimmer_count": 2,
+      "matched_entry_count": 12,
       "has_timeline": true
     },
     {
