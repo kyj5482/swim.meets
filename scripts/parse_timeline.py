@@ -65,16 +65,24 @@ def _assign_flights(session: dict) -> None:
     """
     from collections import defaultdict
 
+    label = (session.get("label") or "").upper()
     groups: dict[int, list] = defaultdict(list)
     for e in session.get("events", []):
         if e.get("start_time"):
             groups[e["number"]].append(e)
+
+    # 플라이트/풀 포맷 세션만 플라이트를 부여한다(결승 등 일반 세션은 제외).
+    flighted = ("FLIGHT" in label) or ("POOL" in label) or any(len(v) >= 2 for v in groups.values())
+
     for evs in groups.values():
-        if len(evs) >= 2:
-            for idx, e in enumerate(sorted(evs, key=lambda x: _time_minutes(x["start_time"]))):
+        if flighted:
+            # 문서 순서(= FLIGHT A 섹션이 먼저)대로 A, B, C… 라벨링.
+            # 분할 안 된(단일) 이벤트도 첫(유일) 조는 Flight A 로 본다.
+            for idx, e in enumerate(evs):
                 e["flight"] = chr(ord("A") + idx)
         else:
-            evs[0]["flight"] = None
+            for e in evs:
+                e["flight"] = None
     for e in session.get("events", []):
         if not e.get("start_time"):
             e["flight"] = None
@@ -110,26 +118,50 @@ def _ocr_page(page: "fitz.Page") -> str:
         return ""
 
 
-def _extract_text(doc: "fitz.Document") -> tuple[str, bool]:
-    """페이지별로 텍스트를 얻되, 텍스트가 없는 페이지만 OCR 한다."""
-    parts: list[str] = []
-    ocr_used = False
-    for page in doc:
-        t = page.get_text()
-        if t.strip():
-            parts.append(t)
+def _rows_from_words(words: list, y_tol: float = 3.0) -> list[str]:
+    """단어 좌표로 같은 줄(행)을 재구성해 정렬된 텍스트 줄 목록을 만든다.
+
+    HY-TEK 의 'TWO POOL'(좌우 2열) 등 복잡한 레이아웃은 get_text() 의 줄 순서가
+    뒤섞여 한 행의 항목들이 흩어진다. y 좌표로 묶고 x 로 정렬하면 한 행이
+    'Prelims 68 Boys 11 & Over 200 Breaststroke 131 17 8:00 AM' 처럼 복원된다.
+    """
+    rows: list[dict] = []
+    for w in sorted(words, key=lambda x: (x[1], x[0])):
+        for r in rows:
+            if abs(r["y"] - w[1]) <= y_tol:
+                r["w"].append(w)
+                break
         else:
-            ocr = _ocr_page(page)
-            if ocr.strip():
-                ocr_used = True
-            parts.append(ocr)
-    return "\n".join(parts), ocr_used
+            rows.append({"y": w[1], "w": [w]})
+    out = []
+    for r in sorted(rows, key=lambda r: r["y"]):
+        toks = [t[4] for t in sorted(r["w"], key=lambda x: x[0])]
+        out.append(" ".join(toks).strip())
+    return out
+
+
+def _page_lines(page: "fitz.Page") -> tuple[list[str], bool]:
+    """한 페이지의 텍스트 줄 목록과 OCR 사용 여부.
+
+    텍스트가 있으면 좌표로 행을 재구성(복잡한 2열 레이아웃 대응),
+    없으면(벡터 페이지) OCR 한다.
+    """
+    words = page.get_text("words")
+    if words:
+        return _rows_from_words(words), False
+    ocr = _ocr_page(page)
+    return [l.strip() for l in ocr.splitlines() if l.strip()], bool(ocr.strip())
 
 
 def parse_pdf(path: str) -> dict:
     doc = fitz.open(path)
-    text, ocr_used = _extract_text(doc)
-    lines = [ln.strip() for ln in text.splitlines() if ln.strip()]
+    lines: list[str] = []
+    ocr_used = False
+    for page in doc:
+        pls, used = _page_lines(page)
+        ocr_used = ocr_used or used
+        lines.extend(pls)
+    text = "\n".join(lines)
 
     sessions: list[dict] = []
     current: Optional[dict] = None

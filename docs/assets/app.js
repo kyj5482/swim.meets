@@ -6,7 +6,7 @@ const I18N = {
     tab_meets: "대회별", tab_swimmers: "선수별 진척도",
     loading: "불러오는 중…", back: "← 대회 목록", print: "🖨 인쇄",
     col_event: "이벤트", col_round: "라운드", col_heatlane: "조·레인",
-    col_seed: "시드", col_start: "예상시각",
+    col_seed: "시드", col_start: "예상시각", col_when: "일정(일자·시각)",
     col_meet: "대회", col_date: "일자", col_time: "기록",
     col_dprev: "직전대비", col_dfirst: "최초대비",
     swimmers_n: (n) => `선수 ${n}명`, entries_n: (n) => `엔트리 ${n}건`,
@@ -27,7 +27,7 @@ const I18N = {
     tab_meets: "Meets", tab_swimmers: "Swimmer progress",
     loading: "Loading…", back: "← Meets", print: "🖨 Print",
     col_event: "Event", col_round: "Round", col_heatlane: "Heat·Lane",
-    col_seed: "Seed", col_start: "Est. start",
+    col_seed: "Seed", col_start: "Est. start", col_when: "When (date·time)",
     col_meet: "Meet", col_date: "Date", col_time: "Time",
     col_dprev: "vs prev", col_dfirst: "vs first",
     swimmers_n: (n) => `${n} swimmer${n === 1 ? "" : "s"}`,
@@ -110,6 +110,16 @@ function standardChips(stds) {
 }
 
 const eventName = (e) => `${e.distance} ${trStroke(e.stroke || "")}`.trim();
+
+// ISO 날짜(2026-06-13) -> '6/13 (토)' / '6/13 (Sat)'
+function fmtDate(iso) {
+  if (!iso) return "";
+  const d = new Date(iso + "T00:00:00");
+  if (isNaN(d)) return iso;
+  const loc = LANG === "ko" ? "ko-KR" : "en-US";
+  const wd = d.toLocaleDateString(loc, { weekday: "short" });
+  return `${d.getMonth() + 1}/${d.getDate()} (${wd})`;
+}
 
 // ---- 상태 / 라우팅 -------------------------------------------------------
 const state = { view: "meets", index: null, swimmers: null, meetCache: {} };
@@ -223,7 +233,7 @@ async function renderMeet(slug) {
         <td class="muted">${esc(trRound(e.round))}${e.flight ? ` · <span class="flight flight-${e.flight}">${t("flight", e.flight)}</span>` : ""}</td>
         <td class="hl">H${heat} · L${e.lane ?? "-"}</td>
         <td class="time">${esc(e.seed_time || "NT")}</td>
-        <td class="start">${e.estimated_start ? "⏱ " + esc(e.estimated_start) : ""}</td>
+        <td class="start">${e.date ? `<span class="ev-date">${esc(fmtDate(e.date))}</span> ` : ""}${e.estimated_start ? esc(e.estimated_start) : ""}</td>
       </tr>
       <tr class="std-row no-print"><td colspan="5"><div class="chips">${standardChips(e.standards)}</div></td></tr>`;
     }).join("");
@@ -231,7 +241,7 @@ async function renderMeet(slug) {
       <div class="swimmer-head"><span class="name">${esc(sw.display_name)}</span>
         <span class="muted">${esc((sw.registered_teams || []).join(", "))} · ${t("events_n", sw.entries.length)}</span></div>
       <table class="entries">
-        <thead><tr><th>${t("col_event")}</th><th>${t("col_round")}</th><th>${t("col_heatlane")}</th><th>${t("col_seed")}</th><th>${t("col_start")}</th></tr></thead>
+        <thead><tr><th>${t("col_event")}</th><th>${t("col_round")}</th><th>${t("col_heatlane")}</th><th>${t("col_seed")}</th><th>${t("col_when")}</th></tr></thead>
         <tbody>${rows}</tbody>
       </table>
     </div>`;

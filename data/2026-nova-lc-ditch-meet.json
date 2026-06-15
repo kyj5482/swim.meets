@@ -11,7 +11,7 @@
       "psych_sheet": "2026 NOVA LC Ditch Meet - Meet Program.pdf",
       "timeline": "2026 NOVA LC Ditch Meet - Timeline.pdf"
     },
-    "processed_at": "2026-06-15T01:16:59+00:00",
+    "processed_at": "2026-06-15T04:52:46+00:00",
     "event_count": 12
   },
   "swimmers": [
@@ -45,6 +45,9 @@
           "seed_time": "1:15.70",
           "seed_seconds": 75.7,
           "estimated_start": "8:50 AM",
+          "session_day": 1,
+          "session_label": "Saturday Morning",
+          "date": "2026-05-02",
           "standards": [],
           "match_score": 11.0
         },
@@ -66,6 +69,9 @@
           "seed_time": "NT",
           "seed_seconds": null,
           "estimated_start": "10:31 AM",
+          "session_day": 1,
+          "session_label": "Saturday Morning",
+          "date": "2026-05-02",
           "standards": [],
           "match_score": 11.0
         }
@@ -101,6 +107,9 @@
           "seed_time": "1:20.79",
           "seed_seconds": 80.79,
           "estimated_start": "9:12 AM",
+          "session_day": 1,
+          "session_label": "Saturday Morning",
+          "date": "2026-05-02",
           "standards": [],
           "match_score": 11.0
         },
@@ -122,6 +131,9 @@
           "seed_time": "1:13.92",
           "seed_seconds": 73.92,
           "estimated_start": "9:57 AM",
+          "session_day": 1,
+          "session_label": "Saturday Morning",
+          "date": "2026-05-02",
           "standards": [],
           "match_score": 11.0
         }

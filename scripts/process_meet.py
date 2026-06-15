@@ -97,20 +97,22 @@ def lookup_start_time(
     round_name: str | None,
     heat: int | None = None,
     heat_of: int | None = None,
-) -> tuple[str | None, str | None]:
-    """엔트리의 라운드/조에 맞는 예상 시작 시각과 플라이트(A/B)를 찾는다.
+) -> dict:
+    """엔트리(이벤트/조)에 맞는 예상 시작 시각·플라이트·진행일을 타임라인에서 찾는다.
 
-    선수가 많은 대회는 한 이벤트를 'FLIGHT A'(상위 조)와 'FLIGHT B'(하위 조)로 나눠
-    서로 다른 시간에 진행한다. psych 의 조 번호로 어느 플라이트인지 판정한다:
-    상위 heat 들이 Flight A, 나머지(하위 조)가 Flight B.
+    선수가 많은 대회는 한 이벤트를 'FLIGHT A'/'FLIGHT B' 로 나눠 다른 시간에 진행한다.
+    타임라인 FLIGHT A 섹션에는 각 이벤트의 'Flight A 조 수(heatsA)'가 적혀 있으므로,
+    선수의 조 번호로 플라이트를 계산한다:
+        조 번호 <= heatsA  -> Flight A (Flight A 시각)
+        그 외               -> Flight B (Flight B 시각)
 
-    반환: (시작시각, 플라이트라벨 'A'/'B' 또는 None)
+    반환: {"start": 시각, "flight": 'A'/'B'/None, "day": 세션일(int), "session_label": str}
     """
+    none = {"start": None, "flight": None, "day": None, "session_label": None}
     if not timeline:
-        return None, None
+        return none
     want = parse_timeline.round_category(round_name)
 
-    # 이 이벤트 번호의 타임라인 기록 수집
     recs: list[dict] = []
     for s in timeline.get("sessions", []):
         sess_cat = parse_timeline.round_category(s.get("label"))
@@ -122,34 +124,66 @@ def lookup_start_time(
                 "flight": e.get("flight"),
                 "heats": e.get("heats"),
                 "time": e["start_time"],
+                "day": s.get("day"),
+                "session_label": s.get("label"),
             })
     if not recs:
-        return None, None
+        return none
 
     # 우선 같은 라운드(예: 예선)의 기록으로 좁힌다.
     same = [r for r in recs if want and r["cat"] == want]
     pool = same or recs
 
-    # 플라이트 기록(A/B)이 있으면 조 번호로 판정
-    flights = {r["flight"]: r for r in pool if r["flight"] in ("A", "B")}
-    if "A" in flights and "B" in flights and heat:
-        a = flights["A"]
-        heats_a = a.get("heats")
-        if heats_a and heat_of:
-            # 상위 heats_a 개 조 = Flight A, 그 아래 = Flight B
-            boundary = heat_of - heats_a  # 이 값 이하의 조는 B
-            chosen = "A" if heat > boundary else "B"
-        else:
-            chosen = "A"
-        return flights[chosen]["time"], chosen
+    recA = next((r for r in pool if r["flight"] == "A"), None)
+    recB = next((r for r in pool if r["flight"] == "B"), None)
 
-    # 플라이트 구분이 없으면 해당 라운드(또는 가용) 첫 시각
-    return pool[0]["time"], pool[0].get("flight")
+    # 타임라인에 한 기록만 잡혔지만 그 조 수가 psych 총 조 수보다 적으면,
+    # 분할 이벤트의 Flight A 기록(나머지 조는 OCR 누락)으로 본다.
+    if recA is None and recB is None and heat_of and len(pool) == 1:
+        only = pool[0]
+        if only.get("heats") and only["heats"] < heat_of:
+            recA = only
+
+    chosen = None
+    flight = None
+    if recA and recA.get("heats") and heat:
+        # Flight A = 앞쪽 heatsA 개 조. 조 번호로 플라이트 결정.
+        if heat <= recA["heats"]:
+            chosen, flight = recA, "A"
+        else:
+            flight = "B"
+            chosen = recB or recA  # B 기록이 없으면 가용한(A) 시각으로 대체
+    else:
+        chosen = pool[0]
+        flight = chosen.get("flight")
+
+    return {
+        "start": chosen["time"],
+        "flight": flight,
+        "day": chosen.get("day"),
+        "session_label": chosen.get("session_label"),
+    }
 
 
 # ---------------------------------------------------------------------------
 # 메인 처리
 # ---------------------------------------------------------------------------
+
+
+def _meet_start_date(dates: str | None) -> dt.date | None:
+    """'6/11/2026 ~ 6/14/2026' 같은 문자열에서 시작일(date)을 파싱."""
+    if not dates:
+        return None
+    m = re.search(r"(\d{1,2})/(\d{1,2})/(\d{2,4})", dates)
+    if not m:
+        return None
+    mo, da, yr = int(m.group(1)), int(m.group(2)), int(m.group(3))
+    if yr < 100:
+        yr += 2000
+    try:
+        return dt.date(yr, mo, da)
+    except ValueError:
+        return None
 
 
 def load_swimmers() -> list[dict]:
@@ -177,6 +211,7 @@ def process_meet(meet_dir: Path, swimmers: list[dict]) -> dict:
     psych = parse_psych_sheet.parse_pdf(str(psych_path)) if psych_path else {"events": []}
     timeline = parse_timeline.parse_pdf(str(timeline_path)) if timeline_path else None
     meta = extract_meet_meta(psych_path)
+    meet_start = _meet_start_date(meta.get("dates"))  # dt.date 또는 None
 
     # 선수별 결과 누적
     results: dict[str, dict] = {}
@@ -206,10 +241,13 @@ def process_meet(meet_dir: Path, swimmers: list[dict]) -> dict:
                 std_eval = common.evaluate_standards(
                     entry.get("seed_time"), entry.get("age"), ev.get("standards", {})
                 )
-                start_time, flight = lookup_start_time(
+                sched = lookup_start_time(
                     timeline, ev.get("number"), heat.get("round"),
                     heat.get("heat"), heat.get("heat_of"),
                 )
+                event_date = None
+                if meet_start and sched.get("day"):
+                    event_date = (meet_start + dt.timedelta(days=sched["day"] - 1)).isoformat()
                 results[sw["id"]]["entries"].append(
                     {
                         "event_number": ev.get("number"),
@@ -222,13 +260,16 @@ def process_meet(meet_dir: Path, swimmers: list[dict]) -> dict:
                         "round": heat.get("round"),
                         "heat": heat.get("heat"),
                         "heat_of": heat.get("heat_of"),
-                        "flight": flight,
+                        "flight": sched.get("flight"),
                         "lane": entry.get("lane"),
                         "entry_age": entry.get("age"),
                         "entry_team": entry.get("team"),
                         "seed_time": entry.get("seed_time"),
                         "seed_seconds": common.time_to_seconds(entry.get("seed_time")),
-                        "estimated_start": start_time,
+                        "estimated_start": sched.get("start"),
+                        "session_day": sched.get("day"),
+                        "session_label": sched.get("session_label"),
+                        "date": event_date,
                         "standards": std_eval,
                         "match_score": round(score, 2),
                     }
