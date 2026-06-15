@@ -1,15 +1,16 @@
 """HY-TEK Session Report(타임라인) PDF 파서.
 
-대회 세션별 이벤트 예상 시작 시각을 추출한다. 결과는 다음 형태:
-  { "sessions": [ {"session": 1, "label": "Saturday", "day": 1,
-                    "events": [ {"number": 1, "description": "...",
-                                 "entries": 29, "heats": 4,
-                                 "start_time": "12:45 PM"} ] } ] }
+대회 세션별 이벤트 예상 시작 시각을 추출한다. 결과 형태:
+  { "sessions": [ {"session": 1, "label": "THURSDAY PRELIMS", "round": "prelim",
+                    "day": 1,
+                    "events": [ {"number": 1, "description": "...", "round": "prelim",
+                                 "entries": 117, "heats": 8,
+                                 "start_time": "8:00 AM"} ] } ] }
 
-두 가지 입력 형태를 지원한다:
-  1) 텍스트 추출이 되는 PDF (일반적인 HY-TEK Session Report) — 직접 파싱.
-  2) 텍스트가 벡터로 그려져 추출이 안 되는 PDF — pytesseract 가 있으면 OCR,
-     없으면 빈 결과를 반환하고 경고를 남긴다. (타임라인은 보조 정보)
+입력 PDF 는 두 가지 줄 구조가 섞일 수 있다:
+  1) 텍스트 추출형(일반 Session Report) — 한 이벤트의 항목이 여러 줄로 분리.
+  2) OCR형(Prelims 가 벡터로 그려져 텍스트가 없는 페이지) — 한 줄에 모든 항목.
+페이지별로 텍스트가 없으면 그 페이지만 OCR(pytesseract, 있을 때) 한다.
 """
 
 from __future__ import annotations
@@ -21,54 +22,94 @@ from typing import Optional
 import fitz
 
 
-TIME_AT_RE = re.compile(r"\b(\d{1,2}:\d{2}\s*[AP]M)\b", re.IGNORECASE)
+# 시간: 8:00 AM / 12:45 PM (OCR 오인식 대비 '.' 구분자도 허용)
+TIME_AT_RE = re.compile(r"\b(\d{1,2})[:.](\d{2})\s*([AP]M)\b", re.IGNORECASE)
+
+ROUND_WORDS = r"Prelims|Finals|Timed Finals|Semifinals|Swim-?off"
+# 이벤트 라인: (선택)라운드 + 이벤트번호 + 'Girls/Boys/...' 로 시작하는 설명
 EVENT_LINE_RE = re.compile(
-    r"^(?P<num>\d+)\s+(?P<desc>(?:Girls|Boys|Women|Men|Mixed)\s+.+)$"
+    rf"^(?:(?P<round>{ROUND_WORDS})\s+)?(?P<num>\d+)\s+"
+    r"(?P<desc>(?:Girls|Boys|Women|Men|Mixed)\b.*)$",
+    re.IGNORECASE,
 )
-SESSION_RE = re.compile(r"Session:\s*(?P<num>\d+)\s*(?P<label>.*)", re.IGNORECASE)
-DAY_RE = re.compile(r"Day of Meet:\s*(?P<day>\d+)", re.IGNORECASE)
+SESSION_RE = re.compile(r"Session:?\s*(?P<num>\d+)\s*(?P<label>.*)", re.IGNORECASE)
+DAY_RE = re.compile(r"Day of Meet:?\s*(?P<day>\d+)", re.IGNORECASE)
+# 설명 뒤에 붙는 'entries heats time' 꼬리 제거용
+TAIL_RE = re.compile(r"(?:\s+\d+){0,2}\s+\d{1,2}[:.]\d{2}\s*[AP]M.*$", re.IGNORECASE)
 
 
-def _extract_text(doc: "fitz.Document") -> str:
-    parts = [page.get_text() for page in doc]
-    text = "\n".join(parts)
-    if text.strip():
-        return text
-    # 텍스트가 없으면 OCR 시도 (CI 환경에서 tesseract 설치 시 동작)
+def round_category(s: Optional[str]) -> Optional[str]:
+    """라벨/라운드 문자열을 'prelim' / 'final' 로 정규화."""
+    if not s:
+        return None
+    s = s.lower()
+    if "prelim" in s or "semi" in s:
+        return "prelim"
+    if "final" in s:  # 'timed finals' 포함
+        return "final"
+    return None
+
+
+def _norm_time(h: str, m: str, ampm: str) -> str:
+    return f"{int(h)}:{m} {ampm.upper()}"
+
+
+def _ocr_page(page: "fitz.Page") -> str:
     try:
-        import pytesseract  # noqa: F401
+        import pytesseract
         from PIL import Image
         import io
 
-        ocr_parts = []
-        for page in doc:
-            pix = page.get_pixmap(dpi=200)
-            img = Image.open(io.BytesIO(pix.tobytes("png")))
-            ocr_parts.append(pytesseract.image_to_string(img))
-        return "\n".join(ocr_parts)
+        pix = page.get_pixmap(dpi=200)
+        img = Image.open(io.BytesIO(pix.tobytes("png")))
+        return pytesseract.image_to_string(img)
     except Exception as exc:  # pragma: no cover - 환경 의존
-        print(f"[timeline] OCR 불가(텍스트 없음): {exc}", file=sys.stderr)
+        print(f"[timeline] OCR 불가: {exc}", file=sys.stderr)
         return ""
+
+
+def _extract_text(doc: "fitz.Document") -> tuple[str, bool]:
+    """페이지별로 텍스트를 얻되, 텍스트가 없는 페이지만 OCR 한다."""
+    parts: list[str] = []
+    ocr_used = False
+    for page in doc:
+        t = page.get_text()
+        if t.strip():
+            parts.append(t)
+        else:
+            ocr = _ocr_page(page)
+            if ocr.strip():
+                ocr_used = True
+            parts.append(ocr)
+    return "\n".join(parts), ocr_used
 
 
 def parse_pdf(path: str) -> dict:
     doc = fitz.open(path)
-    text = _extract_text(doc)
+    text, ocr_used = _extract_text(doc)
     lines = [ln.strip() for ln in text.splitlines() if ln.strip()]
 
     sessions: list[dict] = []
     current: Optional[dict] = None
 
-    i = 0
-    n = len(lines)
+    def ensure_session() -> dict:
+        nonlocal current
+        if current is None:
+            current = {"session": 1, "label": None, "round": None, "day": None, "events": []}
+            sessions.append(current)
+        return current
+
+    i, n = 0, len(lines)
     while i < n:
         line = lines[i]
 
         sm = SESSION_RE.search(line)
         if sm:
+            label = sm.group("label").strip() or None
             current = {
                 "session": int(sm.group("num")),
-                "label": sm.group("label").strip() or None,
+                "label": label,
+                "round": round_category(label),
                 "day": None,
                 "events": [],
             }
@@ -84,26 +125,43 @@ def parse_pdf(path: str) -> dict:
 
         em = EVENT_LINE_RE.match(line)
         if em:
-            if current is None:
-                current = {"session": 1, "label": None, "day": None, "events": []}
-                sessions.append(current)
-            # 이벤트 라인 이후 몇 줄 안에서 entries/heats/시작시각을 수집
-            window = lines[i : i + 8]
-            nums = []
-            start_time = None
-            for w in window[1:]:
-                tm = TIME_AT_RE.search(w)
-                if tm:
-                    start_time = re.sub(r"\s+", " ", tm.group(1)).upper()
-                    break
-                if w.isdigit():
-                    nums.append(int(w))
-            entries = nums[0] if len(nums) >= 1 else None
-            heats = nums[1] if len(nums) >= 2 else None
-            current["events"].append(
+            sess = ensure_session()
+            round_tok = em.group("round")
+            desc_raw = em.group("desc")
+
+            entries = heats = start_time = None
+            tm = TIME_AT_RE.search(line)
+            if tm:
+                # OCR형: 같은 줄에 entries/heats/시간이 모두 있음
+                start_time = _norm_time(*tm.groups())
+                trailing = re.search(
+                    r"\s+(\d+)\s+(\d+)\s+\d{1,2}[:.]\d{2}\s*[AP]M\s*$", line, re.IGNORECASE
+                )
+                if trailing:
+                    entries, heats = int(trailing.group(1)), int(trailing.group(2))
+            else:
+                # 텍스트형: 다음 줄들에서 entries/heats/시간 수집
+                nums: list[int] = []
+                for w in lines[i + 1 : i + 9]:
+                    if EVENT_LINE_RE.match(w) or SESSION_RE.search(w):
+                        break
+                    t2 = TIME_AT_RE.search(w)
+                    if t2:
+                        start_time = _norm_time(*t2.groups())
+                        break
+                    if w.isdigit():
+                        nums.append(int(w))
+                if nums:
+                    entries = nums[0]
+                    heats = nums[1] if len(nums) > 1 else None
+
+            desc = TAIL_RE.sub("", desc_raw).strip()
+            ev_round = round_category(round_tok) or sess.get("round")
+            sess["events"].append(
                 {
                     "number": int(em.group("num")),
-                    "description": em.group("desc").strip(),
+                    "description": desc,
+                    "round": ev_round,
                     "entries": entries,
                     "heats": heats,
                     "start_time": start_time,
@@ -114,18 +172,9 @@ def parse_pdf(path: str) -> dict:
     return {
         "source_file": path.split("/")[-1],
         "text_extracted": bool(text.strip()),
+        "ocr_used": ocr_used,
         "sessions": sessions,
     }
-
-
-def event_start_map(timeline: dict) -> dict[int, str]:
-    """이벤트 번호 -> 시작 시각 매핑 (여러 세션을 평탄화)."""
-    out: dict[int, str] = {}
-    for s in timeline.get("sessions", []):
-        for e in s.get("events", []):
-            if e.get("start_time"):
-                out[e["number"]] = e["start_time"]
-    return out
 
 
 def main(argv: list[str]) -> int:
@@ -140,7 +189,11 @@ def main(argv: list[str]) -> int:
         with open(argv[2], "w", encoding="utf-8") as f:
             f.write(text)
         nev = sum(len(s["events"]) for s in result["sessions"])
-        print(f"parsed {len(result['sessions'])} sessions, {nev} events -> {argv[2]}", file=sys.stderr)
+        print(
+            f"parsed {len(result['sessions'])} sessions, {nev} events "
+            f"(ocr={result['ocr_used']}) -> {argv[2]}",
+            file=sys.stderr,
+        )
     else:
         print(text)
     return 0

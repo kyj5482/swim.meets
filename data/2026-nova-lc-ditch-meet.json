@@ -11,7 +11,7 @@
       "psych_sheet": "2026 NOVA LC Ditch Meet - Meet Program.pdf",
       "timeline": "2026 NOVA LC Ditch Meet - Timeline.pdf"
     },
-    "processed_at": "2026-06-15T00:33:28+00:00",
+    "processed_at": "2026-06-15T00:49:44+00:00",
     "event_count": 12
   },
   "swimmers": [
@@ -43,7 +43,7 @@
           "entry_team": "NOVA-CA",
           "seed_time": "1:15.70",
           "seed_seconds": 75.7,
-          "estimated_start": "08:50 AM",
+          "estimated_start": "8:50 AM",
           "standards": [],
           "match_score": 10.0
         },
@@ -97,7 +97,7 @@
           "entry_team": "NOVA-CA",
           "seed_time": "1:20.79",
           "seed_seconds": 80.79,
-          "estimated_start": "09:12 AM",
+          "estimated_start": "9:12 AM",
           "standards": [],
           "match_score": 10.0
         },
@@ -117,7 +117,7 @@
           "entry_team": "NOVA-CA",
           "seed_time": "1:13.92",
           "seed_seconds": 73.92,
-          "estimated_start": "09:57 AM",
+          "estimated_start": "9:57 AM",
           "standards": [],
           "match_score": 10.0
         }
