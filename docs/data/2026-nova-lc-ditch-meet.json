@@ -11,7 +11,7 @@
       "psych_sheet": "2026 NOVA LC Ditch Meet - Meet Program.pdf",
       "timeline": "2026 NOVA LC Ditch Meet - Timeline.pdf"
     },
-    "processed_at": "2026-06-15T00:57:31+00:00",
+    "processed_at": "2026-06-15T01:11:57+00:00",
     "event_count": 12
   },
   "swimmers": [
@@ -38,6 +38,7 @@
           "round": "Finals",
           "heat": 1,
           "heat_of": 6,
+          "flight": null,
           "lane": 3,
           "entry_age": 13,
           "entry_team": "NOVA-CA",
@@ -45,7 +46,7 @@
           "seed_seconds": 75.7,
           "estimated_start": "8:50 AM",
           "standards": [],
-          "match_score": 10.0
+          "match_score": 11.0
         },
         {
           "event_number": 12,
@@ -58,6 +59,7 @@
           "round": "Finals",
           "heat": 2,
           "heat_of": 2,
+          "flight": null,
           "lane": 2,
           "entry_age": 13,
           "entry_team": "NOVA-CA",
@@ -65,7 +67,7 @@
           "seed_seconds": null,
           "estimated_start": "10:31 AM",
           "standards": [],
-          "match_score": 10.0
+          "match_score": 11.0
         }
       ]
     },
@@ -92,6 +94,7 @@
           "round": "Finals",
           "heat": 3,
           "heat_of": 4,
+          "flight": null,
           "lane": 4,
           "entry_age": 11,
           "entry_team": "NOVA-CA",
@@ -99,7 +102,7 @@
           "seed_seconds": 80.79,
           "estimated_start": "9:12 AM",
           "standards": [],
-          "match_score": 10.0
+          "match_score": 11.0
         },
         {
           "event_number": 9,
@@ -112,6 +115,7 @@
           "round": "Finals",
           "heat": 4,
           "heat_of": 7,
+          "flight": null,
           "lane": 8,
           "entry_age": 11,
           "entry_team": "NOVA-CA",
@@ -119,7 +123,7 @@
           "seed_seconds": 73.92,
           "estimated_start": "9:57 AM",
           "standards": [],
-          "match_score": 10.0
+          "match_score": 11.0
         }
       ]
     }
