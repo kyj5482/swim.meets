@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-15T00:19:32+00:00",
+  "generated_at": "2026-06-15T00:27:46+00:00",
   "swimmer_count": 2,
   "swimmers": [
     {
@@ -15,6 +15,20 @@
           "best_seconds": 74.99,
           "best_time": "1:14.99",
           "history": [
+            {
+              "meet_slug": "2026-nova-lc-ditch-meet",
+              "meet_name": "CA 2026 NOVA LC Ditch Meet",
+              "date_iso": "2026-05-02",
+              "dates": "5/2/2026",
+              "seconds": 75.7,
+              "time": "1:15.70",
+              "label": "100 LC Meter Breaststroke",
+              "standards": [],
+              "age": 13,
+              "is_pb": false,
+              "delta_prev": null,
+              "delta_first": 0.0
+            },
             {
               "meet_slug": "2026-scs-june-ag-invite",
               "meet_name": "2026 SCS June AG Invite",
@@ -59,11 +73,11 @@
               ],
               "age": 13,
               "is_pb": true,
-              "delta_prev": null,
-              "delta_first": 0.0
+              "delta_prev": -0.71,
+              "delta_first": -0.71
             }
           ],
-          "meets": 1
+          "meets": 2
         },
         {
           "key": "100|butterfly|lc meter",
@@ -353,6 +367,20 @@
           "best_time": "1:20.79",
           "history": [
             {
+              "meet_slug": "2026-nova-lc-ditch-meet",
+              "meet_name": "CA 2026 NOVA LC Ditch Meet",
+              "date_iso": "2026-05-02",
+              "dates": "5/2/2026",
+              "seconds": 80.79,
+              "time": "1:20.79",
+              "label": "100 LC Meter Butterfly",
+              "standards": [],
+              "age": 11,
+              "is_pb": true,
+              "delta_prev": null,
+              "delta_first": 0.0
+            },
+            {
               "meet_slug": "2026-scs-june-ag-invite",
               "meet_name": "2026 SCS June AG Invite",
               "date_iso": "2026-06-11",
@@ -378,6 +406,29 @@
                   "delta_seconds": -9.7
                 }
               ],
+              "age": 11,
+              "is_pb": true,
+              "delta_prev": 0.0,
+              "delta_first": 0.0
+            }
+          ],
+          "meets": 2
+        },
+        {
+          "key": "100|freestyle|lc meter",
+          "label": "100 LC Meter Freestyle",
+          "best_seconds": 73.92,
+          "best_time": "1:13.92",
+          "history": [
+            {
+              "meet_slug": "2026-nova-lc-ditch-meet",
+              "meet_name": "CA 2026 NOVA LC Ditch Meet",
+              "date_iso": "2026-05-02",
+              "dates": "5/2/2026",
+              "seconds": 73.92,
+              "time": "1:13.92",
+              "label": "100 LC Meter Freestyle",
+              "standards": [],
               "age": 11,
               "is_pb": true,
               "delta_prev": null,

@@ -228,6 +228,25 @@ def write_outputs(result: dict) -> tuple[Path, Path]:
     return data_path, site_path
 
 
+def prune_orphans(valid_slugs: set[str]) -> list[str]:
+    """input/ 에 더 이상 없는 대회의 생성물(data/, docs/data/)을 삭제한다.
+
+    index.json / swimmers.json 은 build_index.py 가 관리하므로 건드리지 않는다.
+    """
+    removed: list[str] = []
+    keep = {"index", "swimmers"}
+    for base in (ROOT / "data", ROOT / "docs" / "data"):
+        if not base.exists():
+            continue
+        for p in base.glob("*.json"):
+            if p.stem in keep:
+                continue
+            if p.stem not in valid_slugs:
+                p.unlink()
+                removed.append(str(p.relative_to(ROOT)))
+    return removed
+
+
 def main(argv: list[str]) -> int:
     ap = argparse.ArgumentParser(description="대회 폴더 처리")
     ap.add_argument("meet_dir", nargs="?", help="처리할 대회 폴더 (미지정 시 input/ 전체)")
@@ -238,24 +257,35 @@ def main(argv: list[str]) -> int:
 
     if args.meet_dir:
         dirs = [Path(args.meet_dir)]
+        full_run = False
     else:
         dirs = [d for d in sorted(input_root.iterdir()) if d.is_dir()] if input_root.exists() else []
+        full_run = True
 
-    if not dirs:
+    if not dirs and not full_run:
         print("처리할 대회 폴더가 없습니다 (input/<대회명>/).", file=sys.stderr)
         return 0
 
+    valid_slugs: set[str] = set()
     for d in dirs:
         if not any(p.suffix.lower() == ".pdf" for p in d.iterdir()):
             print(f"건너뜀(PDF 없음): {d}", file=sys.stderr)
             continue
         result = process_meet(d, swimmers)
         dp, sp = write_outputs(result)
+        valid_slugs.add(result["meet"]["slug"])
         print(
             f"[{d.name}] 선수 {result['matched_swimmer_count']}명 / "
             f"엔트리 {result['matched_entry_count']}건 -> {dp.relative_to(ROOT)}",
             file=sys.stderr,
         )
+
+    # 전체 처리(=input/ 전체 스캔) 시에만, 삭제된 대회의 옛 산출물을 정리한다.
+    if full_run:
+        removed = prune_orphans(valid_slugs)
+        for r in removed:
+            print(f"정리(삭제된 대회): {r}", file=sys.stderr)
+
     return 0
 
 
