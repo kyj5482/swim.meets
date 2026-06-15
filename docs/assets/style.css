@@ -180,11 +180,11 @@ details.histwrap > summary::-webkit-details-marker { display: none; }
   table.sched { font-size: 12.5px; }
   table.sched th, table.sched td { padding: 8px 7px; }
   .hide-sm { display: none; }
-  /* 라운드 컬럼 숨기고 나머지 폭을 100% 로 재배분 → 좌우 스크롤 없음 */
-  table.sched th:nth-child(1) { width: 36%; }
-  table.sched th:nth-child(3) { width: 24%; }
-  table.sched th:nth-child(4) { width: 16%; }
-  table.sched th:nth-child(5) { width: 24%; }
+  /* 라운드 컬럼 숨김 + 폭 재배분(이벤트 축약에 맞춰 축소, 시드/일정 확대) */
+  table.sched th:nth-child(1) { width: 27%; }
+  table.sched th:nth-child(3) { width: 21%; }
+  table.sched th:nth-child(4) { width: 21%; }
+  table.sched th:nth-child(5) { width: 31%; }
   /* 모바일: 종목명 축약(Free/Back/Breast/Fly/IM) 으로 컬럼 넘침 방지 */
   .ev-full { display: none; }
   .ev-abbr { display: inline; }
