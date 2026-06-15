@@ -118,10 +118,11 @@ table.sched th:nth-child(5) { width: 26%; }
 .pill-A { background: var(--good-weak); color: var(--good); }
 .pill-B { background: var(--warn-weak); color: var(--warn); }
 .hl { color: var(--accent); font-weight: 700; font-variant-numeric: tabular-nums; }
-.t-seed { font-variant-numeric: tabular-nums; font-weight: 700; }
+.hl .l { color: var(--muted); }
+.t-seed { font-variant-numeric: tabular-nums; font-weight: 700; white-space: nowrap; }
 .when { font-variant-numeric: tabular-nums; }
-.when .d { color: var(--muted); font-size: 11.5px; }
-.when .tm { color: var(--warn); font-weight: 700; }
+.when .d { color: var(--muted); font-size: 11.5px; white-space: nowrap; }
+.when .tm { color: var(--warn); font-weight: 700; white-space: nowrap; }
 .std-row td { padding-top: 0; }
 
 /* ---------- Swimmer grid ---------- */
@@ -176,13 +177,19 @@ details.histwrap > summary::-webkit-details-marker { display: none; }
 @media (max-width: 560px) {
   .brand-name { font-size: 18px; }
   table.sched { font-size: 12.5px; }
-  table.sched th, table.sched td { padding: 8px 6px; }
+  table.sched th, table.sched td { padding: 8px 7px; }
   .hide-sm { display: none; }
   /* 라운드 컬럼 숨기고 나머지 폭을 100% 로 재배분 → 좌우 스크롤 없음 */
-  table.sched th:nth-child(1) { width: 37%; }
+  table.sched th:nth-child(1) { width: 36%; }
   table.sched th:nth-child(3) { width: 24%; }
   table.sched th:nth-child(4) { width: 16%; }
-  table.sched th:nth-child(5) { width: 23%; }
+  table.sched th:nth-child(5) { width: 24%; }
+  /* 셀 내부를 2줄로 쌓아 토큰(시드기록·시각 등)이 한 줄에 온전히 표시되도록 */
+  .ev-cell .ev-no, .ev-cell .ev-name { display: block; }
+  .ev-cell .ev-name { margin-top: 1px; }
+  .hl .h, .hl .l { display: block; }
+  .when .d, .when .tm { display: block; }
+  .when .d { margin-bottom: 1px; }
   .sw-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
   .sw-card .nm { font-size: 14.5px; }
 }

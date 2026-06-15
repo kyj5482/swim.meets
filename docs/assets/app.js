@@ -218,11 +218,11 @@ async function renderMeet(slug) {
       const fl = e.flight ? `<span class="pill pill-${e.flight}" title="${esc(t("flight", e.flight))}">${e.flight}</span>` : "";
       const std = standardChips(e.standards);
       return `<tr>
-        <td><span class="ev-no">#${e.event_number}</span> <span class="ev-name">${esc(eventName(e))}</span></td>
+        <td class="ev-cell"><span class="ev-no">#${e.event_number}</span> <span class="ev-name">${esc(eventName(e))}</span></td>
         <td class="hide-sm muted">${esc(trRound(e.round))}</td>
-        <td class="hl">H${heat}·L${e.lane ?? "-"}</td>
+        <td class="hl"><span class="h">H${heat}</span> <span class="l">L${e.lane ?? "-"}</span></td>
         <td class="t-seed">${esc(e.seed_time || "NT")}</td>
-        <td class="when">${e.date ? `<span class="d">${esc(fmtDate(e.date))}</span> ` : ""}${e.estimated_start ? `<span class="tm">${esc(e.estimated_start)}</span>` : ""}${fl ? " " + fl : ""}</td>
+        <td class="when">${e.date ? `<span class="d">${esc(fmtDate(e.date))}</span> ` : ""}${e.estimated_start ? `<span class="tm">${esc(e.estimated_start)}${fl ? " " + fl : ""}</span>` : (fl ? `<span class="tm">${fl}</span>` : "")}</td>
       </tr>${std ? `<tr class="std-row"><td colspan="5"><div class="chips">${std}</div></td></tr>` : ""}`;
     }).join("");
     return `<div class="swimmer-block">
