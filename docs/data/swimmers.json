@@ -1,0 +1,552 @@
+{
+  "generated_at": "2026-06-15T00:04:41+00:00",
+  "swimmer_count": 2,
+  "swimmers": [
+    {
+      "id": "nova-jaei",
+      "display_name": "Jaei Kim",
+      "last": "Kim",
+      "first": "Jaei",
+      "swimmerid": 1045380,
+      "events": [
+        {
+          "key": "100|breaststroke|lc meter",
+          "label": "100 LC Meter Breaststroke",
+          "best_seconds": 74.99,
+          "best_time": "1:14.99",
+          "history": [
+            {
+              "meet_slug": "2026-scs-june-ag-invite",
+              "meet_name": "2026 SCS June AG Invite",
+              "date_iso": "2026-06-11",
+              "dates": "6/11/2026 ~ 6/14/2026",
+              "seconds": 74.99,
+              "time": "1:14.99",
+              "label": "100 LC Meter Breaststroke",
+              "standards": [
+                {
+                  "label": "13-14 &JAG",
+                  "time": "1:22.10",
+                  "seconds": 82.1,
+                  "applies_to_age": true,
+                  "achieved": true,
+                  "delta_seconds": -7.11
+                },
+                {
+                  "label": "13-14 BB",
+                  "time": "1:27.09",
+                  "seconds": 87.09,
+                  "applies_to_age": true,
+                  "achieved": true,
+                  "delta_seconds": -12.1
+                },
+                {
+                  "label": "15&O &JAG",
+                  "time": "1:15.00",
+                  "seconds": 75.0,
+                  "applies_to_age": false,
+                  "achieved": true,
+                  "delta_seconds": -0.01
+                },
+                {
+                  "label": "15&O BB",
+                  "time": "1:23.09",
+                  "seconds": 83.09,
+                  "applies_to_age": false,
+                  "achieved": true,
+                  "delta_seconds": -8.1
+                }
+              ],
+              "age": 13,
+              "is_pb": true,
+              "delta_prev": null,
+              "delta_first": 0.0
+            }
+          ],
+          "meets": 1
+        },
+        {
+          "key": "100|butterfly|lc meter",
+          "label": "100 LC Meter Butterfly",
+          "best_seconds": 67.64,
+          "best_time": "1:07.64",
+          "history": [
+            {
+              "meet_slug": "2026-scs-june-ag-invite",
+              "meet_name": "2026 SCS June AG Invite",
+              "date_iso": "2026-06-11",
+              "dates": "6/11/2026 ~ 6/14/2026",
+              "seconds": 67.64,
+              "time": "1:07.64",
+              "label": "100 LC Meter Butterfly",
+              "standards": [
+                {
+                  "label": "13-14 &JAG",
+                  "time": "1:10.40",
+                  "seconds": 70.4,
+                  "applies_to_age": true,
+                  "achieved": true,
+                  "delta_seconds": -2.76
+                },
+                {
+                  "label": "13-14 BB",
+                  "time": "1:14.59",
+                  "seconds": 74.59,
+                  "applies_to_age": true,
+                  "achieved": true,
+                  "delta_seconds": -6.95
+                },
+                {
+                  "label": "15&O &JAG",
+                  "time": "1:03.70",
+                  "seconds": 63.7,
+                  "applies_to_age": false,
+                  "achieved": false,
+                  "delta_seconds": 3.94
+                },
+                {
+                  "label": "15&O BB",
+                  "time": "1:11.29",
+                  "seconds": 71.29,
+                  "applies_to_age": false,
+                  "achieved": true,
+                  "delta_seconds": -3.65
+                }
+              ],
+              "age": 13,
+              "is_pb": true,
+              "delta_prev": null,
+              "delta_first": 0.0
+            }
+          ],
+          "meets": 1
+        },
+        {
+          "key": "200|breaststroke|lc meter",
+          "label": "200 LC Meter Breaststroke",
+          "best_seconds": 166.15,
+          "best_time": "2:46.15",
+          "history": [
+            {
+              "meet_slug": "2026-scs-june-ag-invite",
+              "meet_name": "2026 SCS June AG Invite",
+              "date_iso": "2026-06-11",
+              "dates": "6/11/2026 ~ 6/14/2026",
+              "seconds": 166.15,
+              "time": "2:46.15",
+              "label": "200 LC Meter Breaststroke",
+              "standards": [
+                {
+                  "label": "&JAG",
+                  "time": "3:02.10",
+                  "seconds": 182.1,
+                  "applies_to_age": true,
+                  "achieved": true,
+                  "delta_seconds": -15.95
+                },
+                {
+                  "label": "BB",
+                  "time": "3:08.29",
+                  "seconds": 188.29,
+                  "applies_to_age": true,
+                  "achieved": true,
+                  "delta_seconds": -22.14
+                }
+              ],
+              "age": 13,
+              "is_pb": true,
+              "delta_prev": null,
+              "delta_first": 0.0
+            }
+          ],
+          "meets": 1
+        },
+        {
+          "key": "200|im|lc meter",
+          "label": "200 LC Meter IM",
+          "best_seconds": 155.21,
+          "best_time": "2:35.21",
+          "history": [
+            {
+              "meet_slug": "2026-scs-june-ag-invite",
+              "meet_name": "2026 SCS June AG Invite",
+              "date_iso": "2026-06-11",
+              "dates": "6/11/2026 ~ 6/14/2026",
+              "seconds": 155.21,
+              "time": "2:35.21",
+              "label": "200 LC Meter IM",
+              "standards": [
+                {
+                  "label": "13-14 &JAG",
+                  "time": "2:36.00",
+                  "seconds": 156.0,
+                  "applies_to_age": true,
+                  "achieved": true,
+                  "delta_seconds": -0.79
+                },
+                {
+                  "label": "13-14 BB",
+                  "time": "2:49.79",
+                  "seconds": 169.79,
+                  "applies_to_age": true,
+                  "achieved": true,
+                  "delta_seconds": -14.58
+                },
+                {
+                  "label": "15&O &JAG",
+                  "time": "2:24.10",
+                  "seconds": 144.1,
+                  "applies_to_age": false,
+                  "achieved": false,
+                  "delta_seconds": 11.11
+                },
+                {
+                  "label": "15&O BB",
+                  "time": "2:43.59",
+                  "seconds": 163.59,
+                  "applies_to_age": false,
+                  "achieved": true,
+                  "delta_seconds": -8.38
+                }
+              ],
+              "age": 13,
+              "is_pb": true,
+              "delta_prev": null,
+              "delta_first": 0.0
+            }
+          ],
+          "meets": 1
+        },
+        {
+          "key": "50|breaststroke|lc meter",
+          "label": "50 LC Meter Breaststroke",
+          "best_seconds": 34.6,
+          "best_time": "34.60",
+          "history": [
+            {
+              "meet_slug": "2026-scs-june-ag-invite",
+              "meet_name": "2026 SCS June AG Invite",
+              "date_iso": "2026-06-11",
+              "dates": "6/11/2026 ~ 6/14/2026",
+              "seconds": 34.6,
+              "time": "34.60",
+              "label": "50 LC Meter Breaststroke",
+              "standards": [
+                {
+                  "label": "13-14 &JAG",
+                  "time": "37.69",
+                  "seconds": 37.69,
+                  "applies_to_age": true,
+                  "achieved": true,
+                  "delta_seconds": -3.09
+                },
+                {
+                  "label": "15&O &JAG",
+                  "time": "35.79",
+                  "seconds": 35.79,
+                  "applies_to_age": false,
+                  "achieved": true,
+                  "delta_seconds": -1.19
+                }
+              ],
+              "age": 13,
+              "is_pb": true,
+              "delta_prev": null,
+              "delta_first": 0.0
+            }
+          ],
+          "meets": 1
+        },
+        {
+          "key": "50|butterfly|lc meter",
+          "label": "50 LC Meter Butterfly",
+          "best_seconds": 30.39,
+          "best_time": "30.39",
+          "history": [
+            {
+              "meet_slug": "2026-scs-june-ag-invite",
+              "meet_name": "2026 SCS June AG Invite",
+              "date_iso": "2026-06-11",
+              "dates": "6/11/2026 ~ 6/14/2026",
+              "seconds": 30.39,
+              "time": "30.39",
+              "label": "50 LC Meter Butterfly",
+              "standards": [
+                {
+                  "label": "13-14 &JAG",
+                  "time": "31.89",
+                  "seconds": 31.89,
+                  "applies_to_age": true,
+                  "achieved": true,
+                  "delta_seconds": -1.5
+                },
+                {
+                  "label": "15&O &JAG",
+                  "time": "30.59",
+                  "seconds": 30.59,
+                  "applies_to_age": false,
+                  "achieved": true,
+                  "delta_seconds": -0.2
+                }
+              ],
+              "age": 13,
+              "is_pb": true,
+              "delta_prev": null,
+              "delta_first": 0.0
+            }
+          ],
+          "meets": 1
+        }
+      ]
+    },
+    {
+      "id": "nova-jia",
+      "display_name": "Jia Kim",
+      "last": "Kim",
+      "first": "Jia",
+      "swimmerid": 1045382,
+      "events": [
+        {
+          "key": "100|breaststroke|lc meter",
+          "label": "100 LC Meter Breaststroke",
+          "best_seconds": 92.26,
+          "best_time": "1:32.26",
+          "history": [
+            {
+              "meet_slug": "2026-scs-june-ag-invite",
+              "meet_name": "2026 SCS June AG Invite",
+              "date_iso": "2026-06-11",
+              "dates": "6/11/2026 ~ 6/14/2026",
+              "seconds": 92.26,
+              "time": "1:32.26",
+              "label": "100 LC Meter Breaststroke",
+              "standards": [
+                {
+                  "label": "&JAG",
+                  "time": "1:35.40",
+                  "seconds": 95.4,
+                  "applies_to_age": true,
+                  "achieved": true,
+                  "delta_seconds": -3.14
+                },
+                {
+                  "label": "BB",
+                  "time": "1:42.19",
+                  "seconds": 102.19,
+                  "applies_to_age": true,
+                  "achieved": true,
+                  "delta_seconds": -9.93
+                }
+              ],
+              "age": 11,
+              "is_pb": true,
+              "delta_prev": null,
+              "delta_first": 0.0
+            }
+          ],
+          "meets": 1
+        },
+        {
+          "key": "100|butterfly|lc meter",
+          "label": "100 LC Meter Butterfly",
+          "best_seconds": 80.79,
+          "best_time": "1:20.79",
+          "history": [
+            {
+              "meet_slug": "2026-scs-june-ag-invite",
+              "meet_name": "2026 SCS June AG Invite",
+              "date_iso": "2026-06-11",
+              "dates": "6/11/2026 ~ 6/14/2026",
+              "seconds": 80.79,
+              "time": "1:20.79",
+              "label": "100 LC Meter Butterfly",
+              "standards": [
+                {
+                  "label": "&JAG",
+                  "time": "1:23.20",
+                  "seconds": 83.2,
+                  "applies_to_age": true,
+                  "achieved": true,
+                  "delta_seconds": -2.41
+                },
+                {
+                  "label": "BB",
+                  "time": "1:30.49",
+                  "seconds": 90.49,
+                  "applies_to_age": true,
+                  "achieved": true,
+                  "delta_seconds": -9.7
+                }
+              ],
+              "age": 11,
+              "is_pb": true,
+              "delta_prev": null,
+              "delta_first": 0.0
+            }
+          ],
+          "meets": 1
+        },
+        {
+          "key": "200|freestyle|lc meter",
+          "label": "200 LC Meter Freestyle",
+          "best_seconds": 148.49,
+          "best_time": "2:28.49",
+          "history": [
+            {
+              "meet_slug": "2026-scs-june-ag-invite",
+              "meet_name": "2026 SCS June AG Invite",
+              "date_iso": "2026-06-11",
+              "dates": "6/11/2026 ~ 6/14/2026",
+              "seconds": 148.49,
+              "time": "2:28.49",
+              "label": "200 LC Meter Freestyle",
+              "standards": [
+                {
+                  "label": "&JAG",
+                  "time": "2:36.40",
+                  "seconds": 156.4,
+                  "applies_to_age": true,
+                  "achieved": true,
+                  "delta_seconds": -7.91
+                },
+                {
+                  "label": "BB",
+                  "time": "2:53.09",
+                  "seconds": 173.09,
+                  "applies_to_age": true,
+                  "achieved": true,
+                  "delta_seconds": -24.6
+                }
+              ],
+              "age": 11,
+              "is_pb": true,
+              "delta_prev": null,
+              "delta_first": 0.0
+            }
+          ],
+          "meets": 1
+        },
+        {
+          "key": "200|im|lc meter",
+          "label": "200 LC Meter IM",
+          "best_seconds": 169.16,
+          "best_time": "2:49.16",
+          "history": [
+            {
+              "meet_slug": "2026-scs-june-ag-invite",
+              "meet_name": "2026 SCS June AG Invite",
+              "date_iso": "2026-06-11",
+              "dates": "6/11/2026 ~ 6/14/2026",
+              "seconds": 169.16,
+              "time": "2:49.16",
+              "label": "200 LC Meter IM",
+              "standards": [
+                {
+                  "label": "&JAG",
+                  "time": "2:56.80",
+                  "seconds": 176.8,
+                  "applies_to_age": true,
+                  "achieved": true,
+                  "delta_seconds": -7.64
+                },
+                {
+                  "label": "BB",
+                  "time": "3:15.59",
+                  "seconds": 195.59,
+                  "applies_to_age": true,
+                  "achieved": true,
+                  "delta_seconds": -26.43
+                }
+              ],
+              "age": 11,
+              "is_pb": true,
+              "delta_prev": null,
+              "delta_first": 0.0
+            }
+          ],
+          "meets": 1
+        },
+        {
+          "key": "50|breaststroke|lc meter",
+          "label": "50 LC Meter Breaststroke",
+          "best_seconds": 42.65,
+          "best_time": "42.65",
+          "history": [
+            {
+              "meet_slug": "2026-scs-june-ag-invite",
+              "meet_name": "2026 SCS June AG Invite",
+              "date_iso": "2026-06-11",
+              "dates": "6/11/2026 ~ 6/14/2026",
+              "seconds": 42.65,
+              "time": "42.65",
+              "label": "50 LC Meter Breaststroke",
+              "standards": [
+                {
+                  "label": "&JAG",
+                  "time": "44.20",
+                  "seconds": 44.2,
+                  "applies_to_age": true,
+                  "achieved": true,
+                  "delta_seconds": -1.55
+                },
+                {
+                  "label": "BB",
+                  "time": "46.19",
+                  "seconds": 46.19,
+                  "applies_to_age": true,
+                  "achieved": true,
+                  "delta_seconds": -3.54
+                }
+              ],
+              "age": 11,
+              "is_pb": true,
+              "delta_prev": null,
+              "delta_first": 0.0
+            }
+          ],
+          "meets": 1
+        },
+        {
+          "key": "50|butterfly|lc meter",
+          "label": "50 LC Meter Butterfly",
+          "best_seconds": 35.04,
+          "best_time": "35.04",
+          "history": [
+            {
+              "meet_slug": "2026-scs-june-ag-invite",
+              "meet_name": "2026 SCS June AG Invite",
+              "date_iso": "2026-06-11",
+              "dates": "6/11/2026 ~ 6/14/2026",
+              "seconds": 35.04,
+              "time": "35.04",
+              "label": "50 LC Meter Butterfly",
+              "standards": [
+                {
+                  "label": "&JAG",
+                  "time": "36.40",
+                  "seconds": 36.4,
+                  "applies_to_age": true,
+                  "achieved": true,
+                  "delta_seconds": -1.36
+                },
+                {
+                  "label": "BB",
+                  "time": "38.79",
+                  "seconds": 38.79,
+                  "applies_to_age": true,
+                  "achieved": true,
+                  "delta_seconds": -3.75
+                }
+              ],
+              "age": 11,
+              "is_pb": true,
+              "delta_prev": null,
+              "delta_first": 0.0
+            }
+          ],
+          "meets": 1
+        }
+      ]
+    }
+  ]
+}

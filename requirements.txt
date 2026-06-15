@@ -1,0 +1,5 @@
+PyMuPDF>=1.24
+# 타임라인 PDF가 벡터/이미지로만 되어 텍스트 추출이 안 될 때 OCR 보조(선택).
+# CI(workflow)에서는 tesseract-ocr 시스템 패키지도 함께 설치한다.
+pytesseract>=0.3.10
+Pillow>=10.0
