@@ -262,6 +262,7 @@ def process_meet(meet_dir: Path, swimmers: list[dict]) -> dict:
                         "heat_of": heat.get("heat_of"),
                         "flight": sched.get("flight"),
                         "lane": entry.get("lane"),
+                        "seed_rank": entry.get("seed_rank"),
                         "entry_age": entry.get("age"),
                         "entry_team": entry.get("team"),
                         "seed_time": entry.get("seed_time"),

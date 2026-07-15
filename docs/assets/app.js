@@ -12,7 +12,7 @@ const I18N = {
     events_n: (n) => `${n}종목`, meets_n: (n) => `대회 ${n}`,
     eventcnt: (n) => `이벤트 ${n}`, timeline_chip: "⏱ 타임라인",
     updated: "갱신", meet_count: (n) => `대회 ${n}개`,
-    flight: (f) => `${f}조`,
+    flight: (f) => `${f}조`, rank_help: "시드 순위",
     no_meets: "아직 처리된 대회가 없습니다.",
     no_meets_help: "input/<대회명>/ 에 Psych Sheet와 Timeline PDF를 올리세요.",
     no_matched: "이 대회에서 매칭된 관심 선수가 없습니다.",
@@ -39,7 +39,7 @@ const I18N = {
     events_n: (n) => `${n} event${n === 1 ? "" : "s"}`, meets_n: (n) => `${n} meet${n === 1 ? "" : "s"}`,
     eventcnt: (n) => `${n} events`, timeline_chip: "⏱ timeline",
     updated: "Updated", meet_count: (n) => `${n} meet${n === 1 ? "" : "s"}`,
-    flight: (f) => `Heat grp ${f}`,
+    flight: (f) => `Heat grp ${f}`, rank_help: "Seed rank",
     no_meets: "No meets processed yet.",
     no_meets_help: "Upload a Psych Sheet & Timeline PDF into input/<MeetName>/.",
     no_matched: "No registered swimmers matched in this meet.",
@@ -111,6 +111,19 @@ function fmtDate(iso) {
 function fmtMeetDates(s) {
   if (!s) return "";
   return s.replace(/(\d{1,2})\/(\d{1,2})\/\d{2,4}/g, "$1/$2");
+}
+const WEEKDAY = {
+  Sunday: { ko: "일", en: "Sun" }, Monday: { ko: "월", en: "Mon" }, Tuesday: { ko: "화", en: "Tue" },
+  Wednesday: { ko: "수", en: "Wed" }, Thursday: { ko: "목", en: "Thu" }, Friday: { ko: "금", en: "Fri" }, Saturday: { ko: "토", en: "Sat" },
+};
+// 날짜(월/일)가 없을 때 세션 라벨('Friday Prelims')에서 요일만 뽑아 표시.
+function weekdayFrom(label) {
+  if (!label) return "";
+  const m = String(label).match(/\b(Sunday|Monday|Tuesday|Wednesday|Thursday|Friday|Saturday)\b/i);
+  if (!m) return "";
+  const key = m[1][0].toUpperCase() + m[1].slice(1).toLowerCase();
+  const w = WEEKDAY[key];
+  return w ? `(${LANG === "ko" ? w.ko : w.en})` : "";
 }
 function fmtDelta(d) {
   if (d === null || d === undefined) return "";
@@ -237,13 +250,19 @@ async function renderMeet(slug) {
     const rows = s.entries.map((e) => {
       const heat = e.heat != null ? `${e.heat}${e.heat_of ? "/" + e.heat_of : ""}` : "-";
       const fl = e.flight ? `<span class="pill pill-${e.flight}" title="${esc(t("flight", e.flight))}">${e.flight}</span>` : "";
+      // Psych Sheet: 조/레인 배정이 없으면 시드 순위만 표시한다.
+      const hlCell = (e.heat != null || e.lane != null)
+        ? `<span class="h">H${heat}</span> <span class="l">L${e.lane ?? "-"}</span>`
+        : (e.seed_rank != null ? `<span class="rank" title="${t("rank_help")}">#${e.seed_rank}</span>` : "-");
+      // 날짜가 없으면 세션 라벨의 요일만이라도 표시한다.
+      const dayText = e.date ? fmtDate(e.date) : weekdayFrom(e.session_label);
       const std = standardChips(e.standards);
       return `<tr>
         <td class="ev-cell"><span class="ev-no">#${e.event_number}</span> <span class="ev-name"><span class="ev-full">${e.distance} ${esc(trStroke(e.stroke || ""))}</span><span class="ev-abbr">${e.distance} ${esc(strokeShort(e.stroke || ""))}</span></span></td>
         <td class="hide-sm muted">${esc(trRound(e.round))}</td>
-        <td class="hl"><span class="h">H${heat}</span> <span class="l">L${e.lane ?? "-"}</span></td>
+        <td class="hl">${hlCell}</td>
         <td class="t-seed">${esc(e.seed_time || "NT")}</td>
-        <td class="when">${e.date ? `<span class="d">${esc(fmtDate(e.date))}</span> ` : ""}${e.estimated_start ? `<span class="tm">${esc(e.estimated_start)}${fl ? " " + fl : ""}</span>` : (fl ? `<span class="tm">${fl}</span>` : "")}</td>
+        <td class="when">${dayText ? `<span class="d">${esc(dayText)}</span> ` : ""}${e.estimated_start ? `<span class="tm">${esc(e.estimated_start)}${fl ? " " + fl : ""}</span>` : (fl ? `<span class="tm">${fl}</span>` : "")}</td>
       </tr>${std ? `<tr class="std-row"><td colspan="5"><div class="chips">${std}</div></td></tr>` : ""}`;
     }).join("");
     return `<div class="swimmer-block">

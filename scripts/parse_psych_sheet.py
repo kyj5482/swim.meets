@@ -102,6 +102,7 @@ class Entry:
     team: Optional[str]
     seed_time: Optional[str]
     gender: Optional[str] = None
+    seed_rank: Optional[int] = None  # Psych Sheet 시드 순위(레인/조 없을 때 표시)
     flags: list = field(default_factory=list)
 
 
@@ -213,13 +214,15 @@ def _parse_entry_row(tokens: list[str], treat_leading_as_lane: bool = True) -> O
     toks = list(tokens)
 
     lane = None
+    seed_rank = None
     if treat_leading_as_lane:
         if toks and toks[0].isdigit() and len(toks[0]) <= 2 and int(toks[0]) <= 10:
             lane = int(toks[0])
             toks = toks[1:]
     else:
-        # Psych Sheet: 선두 정수는 시드 순위(1..N). 레인 아님 → 제거.
+        # Psych Sheet: 선두 정수는 시드 순위(1..N). 레인 아님 → 순위로 보존.
         if toks and toks[0].isdigit():
+            seed_rank = int(toks[0])
             toks = toks[1:]
 
     # 이름 조립: 첫 토큰이 "Last," 형태(콤마 포함)여야 함
@@ -296,6 +299,7 @@ def _parse_entry_row(tokens: list[str], treat_leading_as_lane: bool = True) -> O
         team=team,
         seed_time=seed,
         gender=gender,
+        seed_rank=seed_rank,
         flags=flags,
     )
 
