@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-15T19:52:59+00:00",
+  "generated_at": "2026-07-15T05:51:29+00:00",
   "swimmer_count": 2,
   "swimmers": [
     {
@@ -13,19 +13,35 @@
         "NOVA"
       ],
       "age": 13,
-      "meet_count": 2,
+      "meet_count": 3,
       "event_count": 6,
-      "improved_count": 1,
+      "improved_count": 0,
       "events": [
         {
           "key": "100|breaststroke|lc meter",
           "label": "100 LC Meter Breaststroke",
-          "best_seconds": 74.99,
-          "best_time": "1:14.99",
-          "first_seconds": 75.7,
-          "improved": true,
-          "drop_seconds": 0.71,
+          "best_seconds": 74.62,
+          "best_time": "1:14.62",
+          "first_seconds": 74.62,
+          "improved": false,
+          "drop_seconds": 0.0,
           "history": [
+            {
+              "meet_slug": "2026-scs-elite",
+              "meet_name": "2026 SCS Elite",
+              "date_iso": null,
+              "dates": null,
+              "seconds": 74.62,
+              "time": "1:14.62",
+              "label": "100 LC Meter Breaststroke",
+              "standards": [],
+              "age": 13,
+              "is_pb": false,
+              "tied": false,
+              "is_best": true,
+              "delta_prev": null,
+              "delta_first": 0.0
+            },
             {
               "meet_slug": "2026-nova-lc-ditch-meet",
               "meet_name": "CA 2026 NOVA LC Ditch Meet",
@@ -39,8 +55,8 @@
               "is_pb": false,
               "tied": false,
               "is_best": false,
-              "delta_prev": null,
-              "delta_first": 0.0
+              "delta_prev": 1.08,
+              "delta_first": 1.08
             },
             {
               "meet_slug": "2026-scs-june-ag-invite",
@@ -85,24 +101,40 @@
                 }
               ],
               "age": 13,
-              "is_pb": true,
+              "is_pb": false,
               "tied": false,
-              "is_best": true,
+              "is_best": false,
               "delta_prev": -0.71,
-              "delta_first": -0.71
+              "delta_first": 0.37
             }
           ],
-          "meets": 2
+          "meets": 3
         },
         {
           "key": "100|butterfly|lc meter",
           "label": "100 LC Meter Butterfly",
-          "best_seconds": 67.64,
-          "best_time": "1:07.64",
-          "first_seconds": 67.64,
+          "best_seconds": 66.02,
+          "best_time": "1:06.02",
+          "first_seconds": 66.02,
           "improved": false,
           "drop_seconds": 0.0,
           "history": [
+            {
+              "meet_slug": "2026-scs-elite",
+              "meet_name": "2026 SCS Elite",
+              "date_iso": null,
+              "dates": null,
+              "seconds": 66.02,
+              "time": "1:06.02",
+              "label": "100 LC Meter Butterfly",
+              "standards": [],
+              "age": 13,
+              "is_pb": false,
+              "tied": false,
+              "is_best": true,
+              "delta_prev": null,
+              "delta_first": 0.0
+            },
             {
               "meet_slug": "2026-scs-june-ag-invite",
               "meet_name": "2026 SCS June AG Invite",
@@ -148,12 +180,12 @@
               "age": 13,
               "is_pb": false,
               "tied": false,
-              "is_best": true,
-              "delta_prev": null,
-              "delta_first": 0.0
+              "is_best": false,
+              "delta_prev": 1.62,
+              "delta_first": 1.62
             }
           ],
-          "meets": 1
+          "meets": 2
         },
         {
           "key": "200|breaststroke|lc meter",
@@ -164,6 +196,22 @@
           "improved": false,
           "drop_seconds": 0.0,
           "history": [
+            {
+              "meet_slug": "2026-scs-elite",
+              "meet_name": "2026 SCS Elite",
+              "date_iso": null,
+              "dates": null,
+              "seconds": 166.15,
+              "time": "2:46.15",
+              "label": "200 LC Meter Breaststroke",
+              "standards": [],
+              "age": 13,
+              "is_pb": false,
+              "tied": false,
+              "is_best": true,
+              "delta_prev": null,
+              "delta_first": 0.0
+            },
             {
               "meet_slug": "2026-scs-june-ag-invite",
               "meet_name": "2026 SCS June AG Invite",
@@ -192,23 +240,39 @@
               ],
               "age": 13,
               "is_pb": false,
-              "tied": false,
+              "tied": true,
               "is_best": true,
-              "delta_prev": null,
+              "delta_prev": 0.0,
               "delta_first": 0.0
             }
           ],
-          "meets": 1
+          "meets": 2
         },
         {
           "key": "200|im|lc meter",
           "label": "200 LC Meter IM",
-          "best_seconds": 155.21,
-          "best_time": "2:35.21",
-          "first_seconds": 155.21,
+          "best_seconds": 149.79,
+          "best_time": "2:29.79",
+          "first_seconds": 149.79,
           "improved": false,
           "drop_seconds": 0.0,
           "history": [
+            {
+              "meet_slug": "2026-scs-elite",
+              "meet_name": "2026 SCS Elite",
+              "date_iso": null,
+              "dates": null,
+              "seconds": 149.79,
+              "time": "2:29.79",
+              "label": "200 LC Meter IM",
+              "standards": [],
+              "age": 13,
+              "is_pb": false,
+              "tied": false,
+              "is_best": true,
+              "delta_prev": null,
+              "delta_first": 0.0
+            },
             {
               "meet_slug": "2026-scs-june-ag-invite",
               "meet_name": "2026 SCS June AG Invite",
@@ -254,12 +318,12 @@
               "age": 13,
               "is_pb": false,
               "tied": false,
-              "is_best": true,
-              "delta_prev": null,
-              "delta_first": 0.0
+              "is_best": false,
+              "delta_prev": 5.42,
+              "delta_first": 5.42
             }
           ],
-          "meets": 1
+          "meets": 2
         },
         {
           "key": "50|breaststroke|lc meter",
@@ -270,6 +334,22 @@
           "improved": false,
           "drop_seconds": 0.0,
           "history": [
+            {
+              "meet_slug": "2026-scs-elite",
+              "meet_name": "2026 SCS Elite",
+              "date_iso": null,
+              "dates": null,
+              "seconds": 34.6,
+              "time": "34.60",
+              "label": "50 LC Meter Breaststroke",
+              "standards": [],
+              "age": 13,
+              "is_pb": false,
+              "tied": false,
+              "is_best": true,
+              "delta_prev": null,
+              "delta_first": 0.0
+            },
             {
               "meet_slug": "2026-scs-june-ag-invite",
               "meet_name": "2026 SCS June AG Invite",
@@ -298,23 +378,39 @@
               ],
               "age": 13,
               "is_pb": false,
-              "tied": false,
+              "tied": true,
               "is_best": true,
-              "delta_prev": null,
+              "delta_prev": 0.0,
               "delta_first": 0.0
             }
           ],
-          "meets": 1
+          "meets": 2
         },
         {
           "key": "50|butterfly|lc meter",
           "label": "50 LC Meter Butterfly",
-          "best_seconds": 30.39,
-          "best_time": "30.39",
-          "first_seconds": 30.39,
+          "best_seconds": 29.39,
+          "best_time": "29.39",
+          "first_seconds": 29.39,
           "improved": false,
           "drop_seconds": 0.0,
           "history": [
+            {
+              "meet_slug": "2026-scs-elite",
+              "meet_name": "2026 SCS Elite",
+              "date_iso": null,
+              "dates": null,
+              "seconds": 29.39,
+              "time": "29.39",
+              "label": "50 LC Meter Butterfly",
+              "standards": [],
+              "age": 13,
+              "is_pb": false,
+              "tied": false,
+              "is_best": true,
+              "delta_prev": null,
+              "delta_first": 0.0
+            },
             {
               "meet_slug": "2026-scs-june-ag-invite",
               "meet_name": "2026 SCS June AG Invite",
@@ -344,12 +440,12 @@
               "age": 13,
               "is_pb": false,
               "tied": false,
-              "is_best": true,
-              "delta_prev": null,
-              "delta_first": 0.0
+              "is_best": false,
+              "delta_prev": 1.0,
+              "delta_first": 1.0
             }
           ],
-          "meets": 1
+          "meets": 2
         }
       ]
     },
@@ -364,8 +460,8 @@
         "NOVA"
       ],
       "age": 11,
-      "meet_count": 2,
-      "event_count": 7,
+      "meet_count": 3,
+      "event_count": 8,
       "improved_count": 0,
       "events": [
         {
@@ -416,12 +512,28 @@
         {
           "key": "100|butterfly|lc meter",
           "label": "100 LC Meter Butterfly",
-          "best_seconds": 80.79,
-          "best_time": "1:20.79",
-          "first_seconds": 80.79,
+          "best_seconds": 77.07,
+          "best_time": "1:17.07",
+          "first_seconds": 77.07,
           "improved": false,
           "drop_seconds": 0.0,
           "history": [
+            {
+              "meet_slug": "2026-scs-elite",
+              "meet_name": "2026 SCS Elite",
+              "date_iso": null,
+              "dates": null,
+              "seconds": 77.07,
+              "time": "1:17.07",
+              "label": "100 LC Meter Butterfly",
+              "standards": [],
+              "age": 11,
+              "is_pb": false,
+              "tied": false,
+              "is_best": true,
+              "delta_prev": null,
+              "delta_first": 0.0
+            },
             {
               "meet_slug": "2026-nova-lc-ditch-meet",
               "meet_name": "CA 2026 NOVA LC Ditch Meet",
@@ -434,9 +546,9 @@
               "age": 11,
               "is_pb": false,
               "tied": false,
-              "is_best": true,
-              "delta_prev": null,
-              "delta_first": 0.0
+              "is_best": false,
+              "delta_prev": 3.72,
+              "delta_first": 3.72
             },
             {
               "meet_slug": "2026-scs-june-ag-invite",
@@ -466,13 +578,13 @@
               ],
               "age": 11,
               "is_pb": false,
-              "tied": true,
-              "is_best": true,
+              "tied": false,
+              "is_best": false,
               "delta_prev": 0.0,
-              "delta_first": 0.0
+              "delta_first": 3.72
             }
           ],
-          "meets": 2
+          "meets": 3
         },
         {
           "key": "100|freestyle|lc meter",
@@ -505,12 +617,28 @@
         {
           "key": "200|freestyle|lc meter",
           "label": "200 LC Meter Freestyle",
-          "best_seconds": 148.49,
-          "best_time": "2:28.49",
-          "first_seconds": 148.49,
+          "best_seconds": 147.24,
+          "best_time": "2:27.24",
+          "first_seconds": 147.24,
           "improved": false,
           "drop_seconds": 0.0,
           "history": [
+            {
+              "meet_slug": "2026-scs-elite",
+              "meet_name": "2026 SCS Elite",
+              "date_iso": null,
+              "dates": null,
+              "seconds": 147.24,
+              "time": "2:27.24",
+              "label": "200 LC Meter Freestyle",
+              "standards": [],
+              "age": 11,
+              "is_pb": false,
+              "tied": false,
+              "is_best": true,
+              "delta_prev": null,
+              "delta_first": 0.0
+            },
             {
               "meet_slug": "2026-scs-june-ag-invite",
               "meet_name": "2026 SCS June AG Invite",
@@ -540,12 +668,12 @@
               "age": 11,
               "is_pb": false,
               "tied": false,
-              "is_best": true,
-              "delta_prev": null,
-              "delta_first": 0.0
+              "is_best": false,
+              "delta_prev": 1.25,
+              "delta_first": 1.25
             }
           ],
-          "meets": 1
+          "meets": 2
         },
         {
           "key": "200|im|lc meter",
@@ -556,6 +684,22 @@
           "improved": false,
           "drop_seconds": 0.0,
           "history": [
+            {
+              "meet_slug": "2026-scs-elite",
+              "meet_name": "2026 SCS Elite",
+              "date_iso": null,
+              "dates": null,
+              "seconds": 169.16,
+              "time": "2:49.16",
+              "label": "200 LC Meter IM",
+              "standards": [],
+              "age": 11,
+              "is_pb": false,
+              "tied": false,
+              "is_best": true,
+              "delta_prev": null,
+              "delta_first": 0.0
+            },
             {
               "meet_slug": "2026-scs-june-ag-invite",
               "meet_name": "2026 SCS June AG Invite",
@@ -582,6 +726,34 @@
                   "delta_seconds": -26.43
                 }
               ],
+              "age": 11,
+              "is_pb": false,
+              "tied": true,
+              "is_best": true,
+              "delta_prev": 0.0,
+              "delta_first": 0.0
+            }
+          ],
+          "meets": 2
+        },
+        {
+          "key": "400|freestyle|lc meter",
+          "label": "400 LC Meter Freestyle",
+          "best_seconds": 310.86,
+          "best_time": "5:10.86",
+          "first_seconds": 310.86,
+          "improved": false,
+          "drop_seconds": 0.0,
+          "history": [
+            {
+              "meet_slug": "2026-scs-elite",
+              "meet_name": "2026 SCS Elite",
+              "date_iso": null,
+              "dates": null,
+              "seconds": 310.86,
+              "time": "5:10.86",
+              "label": "400 LC Meter Freestyle",
+              "standards": [],
               "age": 11,
               "is_pb": false,
               "tied": false,
@@ -640,12 +812,28 @@
         {
           "key": "50|butterfly|lc meter",
           "label": "50 LC Meter Butterfly",
-          "best_seconds": 35.04,
-          "best_time": "35.04",
-          "first_seconds": 35.04,
+          "best_seconds": 33.65,
+          "best_time": "33.65",
+          "first_seconds": 33.65,
           "improved": false,
           "drop_seconds": 0.0,
           "history": [
+            {
+              "meet_slug": "2026-scs-elite",
+              "meet_name": "2026 SCS Elite",
+              "date_iso": null,
+              "dates": null,
+              "seconds": 33.65,
+              "time": "33.65",
+              "label": "50 LC Meter Butterfly",
+              "standards": [],
+              "age": 11,
+              "is_pb": false,
+              "tied": false,
+              "is_best": true,
+              "delta_prev": null,
+              "delta_first": 0.0
+            },
             {
               "meet_slug": "2026-scs-june-ag-invite",
               "meet_name": "2026 SCS June AG Invite",
@@ -675,12 +863,12 @@
               "age": 11,
               "is_pb": false,
               "tied": false,
-              "is_best": true,
-              "delta_prev": null,
-              "delta_first": 0.0
+              "is_best": false,
+              "delta_prev": 1.39,
+              "delta_first": 1.39
             }
           ],
-          "meets": 1
+          "meets": 2
         }
       ]
     }

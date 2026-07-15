@@ -11,7 +11,8 @@ from typing import Optional
 # 시간(기록) 유틸
 # ---------------------------------------------------------------------------
 
-_TIME_NUM_RE = re.compile(r"^X?(?:(\d+):)?(\d{1,2})\.(\d{2})$")
+# 끝의 코스 표시 문자(Y/L/S)는 초 계산에서 무시한다. 예) 18:00.66Y, 28.11L
+_TIME_NUM_RE = re.compile(r"^X?(?:(\d+):)?(\d{1,2})\.(\d{2})[YLS]?$", re.IGNORECASE)
 
 
 def time_to_seconds(t: Optional[str]) -> Optional[float]:

@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-06-15T19:52:59+00:00",
-  "meet_count": 2,
+  "generated_at": "2026-07-15T05:51:29+00:00",
+  "meet_count": 3,
   "meets": [
     {
       "slug": "2026-scs-june-ag-invite",
@@ -24,6 +24,18 @@
       "club": "Irvine Novaquatics, Inc.",
       "matched_swimmer_count": 2,
       "matched_entry_count": 4,
+      "has_timeline": true
+    },
+    {
+      "slug": "2026-scs-elite",
+      "name": "2026 SCS Elite",
+      "title": "2026 SCS Elite",
+      "dates": null,
+      "date_iso": null,
+      "course": "LC Meter",
+      "club": null,
+      "matched_swimmer_count": 2,
+      "matched_entry_count": 11,
       "has_timeline": true
     }
   ]

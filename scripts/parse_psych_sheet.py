@@ -47,8 +47,12 @@ HEAT_RE = re.compile(
 # 단순 "Heat 3" 또는 "Flight 2" 형태도 처리
 HEAT_SIMPLE_RE = re.compile(r"\b(?:Heat|Flight)\s+(?P<heat>\d+)\b", re.IGNORECASE)
 
+# 세션 라운드: "Psych Sheet - Friday Prelims" / "Meet Program - THURSDAY FINALS"
+SESSION_ROUND_RE = re.compile(r"\b(Prelims|Finals|Semifinals|Timed Finals)\b", re.IGNORECASE)
+
 # 시드타임: 1:23.45 / 58.12 / 12:34.56 / NT / DQ / SCR / X1:23.45(번호표시)
-TIME_RE = re.compile(r"^X?\d{0,2}:?\d{1,2}\.\d{2}$|^NT$|^NS$|^DQ$|^SCR$|^DFS$", re.IGNORECASE)
+# 끝에 코스 표시 문자(Y=yards, L=LCM, S=SCM)가 붙을 수 있다. 예) 18:00.66Y, 28.11L
+TIME_RE = re.compile(r"^X?\d{0,2}:?\d{1,2}\.\d{2}[YLS]?$|^NT$|^NS$|^DQ$|^SCR$|^DFS$", re.IGNORECASE)
 
 # 기준기록 라인: "13-14 &JAG  2:26.30" / "15&O BB 2:37.09" / "Open A 1:59.99"
 STANDARD_RE = re.compile(
@@ -193,11 +197,15 @@ def _group_rows(words: list[tuple], y_tol: float = 3.0) -> list[list[tuple]]:
 # ---------------------------------------------------------------------------
 
 
-def _parse_entry_row(tokens: list[str]) -> Optional[Entry]:
+def _parse_entry_row(tokens: list[str], treat_leading_as_lane: bool = True) -> Optional[Entry]:
     """한 행의 토큰들을 선수 엔트리로 파싱.
 
-    형태: [lane] Last, First [M] [age] [TEAM] [seed] [flags...]
+    Meet Program:  [lane] Last, First [M] [age] [TEAM] [seed] [flags...]
+    Psych Sheet:   [rank] Last, First [M] [age] [TEAM] [seed] [flags...]
     레이아웃 변형을 고려해 토큰 위치가 아니라 토큰 의미로 파싱한다.
+
+    ``treat_leading_as_lane`` 이 True 면 선두 정수(≤10)를 레인으로 본다(Meet Program).
+    False(Psych Sheet)면 선두 정수는 시드 순위이므로 레인이 아닌, 그냥 제거한다.
     """
     if not tokens:
         return None
@@ -205,9 +213,14 @@ def _parse_entry_row(tokens: list[str]) -> Optional[Entry]:
     toks = list(tokens)
 
     lane = None
-    if toks and toks[0].isdigit() and len(toks[0]) <= 2 and int(toks[0]) <= 10:
-        lane = int(toks[0])
-        toks = toks[1:]
+    if treat_leading_as_lane:
+        if toks and toks[0].isdigit() and len(toks[0]) <= 2 and int(toks[0]) <= 10:
+            lane = int(toks[0])
+            toks = toks[1:]
+    else:
+        # Psych Sheet: 선두 정수는 시드 순위(1..N). 레인 아님 → 제거.
+        if toks and toks[0].isdigit():
+            toks = toks[1:]
 
     # 이름 조립: 첫 토큰이 "Last," 형태(콤마 포함)여야 함
     if not toks or "," not in "".join(toks[:1]):
@@ -364,6 +377,11 @@ def parse_pdf(path: str) -> dict:
     current_heat: Optional[Heat] = None
     # event_num -> Event (중복 등장 시 heats 병합)
     by_num: dict[int, Event] = {}
+    # Psych Sheet(레인/조 배정 없이 시드순 나열) 여부. 실제 Heat 헤더가
+    # 하나도 없고 엔트리만 나오면 psych 로 간주하고 이벤트당 암묵 heat 를 만든다.
+    saw_real_heat = False
+    is_psych = False
+    current_round: Optional[str] = None  # 세션 헤더에서 추출한 라운드
 
     for page in doc:
         words = page.get_text("words")  # (x0,y0,x1,y1,word,block,line,wordno)
@@ -386,6 +404,12 @@ def parse_pdf(path: str) -> dict:
                 if not line:
                     continue
 
+                # 세션 헤더("Psych Sheet - Friday Prelims")에서 라운드 추출.
+                if ("Psych Sheet" in line or "Meet Program" in line or "Session Report" in line):
+                    rm = SESSION_ROUND_RE.search(line)
+                    if rm:
+                        current_round = rm.group(1).title()
+
                 # Event 헤더?
                 ev = _parse_event_header(line)
                 if ev is not None:
@@ -401,6 +425,7 @@ def parse_pdf(path: str) -> dict:
                 # Heat 헤더?
                 hm = HEAT_RE.search(line)
                 if hm and current_event is not None:
+                    saw_real_heat = True
                     current_heat = Heat(
                         heat=int(hm.group("heat")),
                         heat_of=int(hm.group("of")),
@@ -410,6 +435,7 @@ def parse_pdf(path: str) -> dict:
                     continue
                 hs = HEAT_SIMPLE_RE.search(line)
                 if hs and current_event is not None and not hm:
+                    saw_real_heat = True
                     current_heat = Heat(
                         heat=int(hs.group("heat")), heat_of=None, round=None
                     )
@@ -437,8 +463,16 @@ def parse_pdf(path: str) -> dict:
                     continue
 
                 # 선수 엔트리 행?
-                if current_heat is not None and "," in line:
-                    entry = _parse_entry_row(tokens)
+                if current_event is not None and "," in line:
+                    if current_heat is None:
+                        # Heat 헤더가 아직(또는 전혀) 없는데 엔트리가 나옴 → Psych Sheet.
+                        # 실제 Heat 헤더를 본 적 없을 때만 이벤트당 암묵 heat 를 만든다.
+                        if saw_real_heat:
+                            continue
+                        is_psych = True
+                        current_heat = Heat(heat=None, heat_of=None, round=current_round)
+                        current_event.heats.append(current_heat)
+                    entry = _parse_entry_row(tokens, treat_leading_as_lane=not is_psych)
                     if entry is not None:
                         current_heat.entries.append(entry)
                         continue
